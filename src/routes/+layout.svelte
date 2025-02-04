@@ -1,7 +1,9 @@
 <script lang="ts">
-	import "../app.css";
+  import "../app.css";
 
-	let { children } = $props();
+  let { children } = $props();
 </script>
 
-{@render children()}
+<main class="container gap-12 py-8">
+  {@render children()}
+</main>

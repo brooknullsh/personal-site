@@ -1,7 +1,15 @@
 <script lang="ts">
+  import type { Snippet } from "svelte";
   import TitleBar from "./title-bar.svelte";
 
-  let { children, title, description, published } = $props();
+  type Props = {
+    children: Snippet;
+    title: string;
+    description: string;
+    published: string;
+  };
+
+  let { children, title, description, published }: Props = $props();
 
   published = new Date(published).toLocaleDateString(undefined, { dateStyle: "full" });
 </script>

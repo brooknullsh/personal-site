@@ -6,4 +6,5 @@
   <title>Home | brooknullsh</title>
 </svelte:head>
 
+<Button class="w-max" href="/blog">Go to /blog</Button>
 <Button class="w-max" href="/blog/hello-world">Go to /blog/hello-world</Button>

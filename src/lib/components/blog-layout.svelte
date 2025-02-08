@@ -18,9 +18,7 @@
   <title>{title} | brooknullsh</title>
 </svelte:head>
 
-<TitleBar {title} {published} />
-
-<hr />
+<TitleBar {title} subtitle={published} />
 
 <p class="text-muted-foreground">{description}</p>
 

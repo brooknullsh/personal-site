@@ -1,7 +1,7 @@
 ---
 layout: blog
 
-title: Hello, world!
+title: 👋 Hello, world!
 description: This is an example.
 
 published: 02/05/25

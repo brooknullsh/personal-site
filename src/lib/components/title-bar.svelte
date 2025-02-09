@@ -28,25 +28,27 @@
 <section
   class="sticky top-0 flex w-full items-center justify-between rounded bg-white/10 backdrop-blur-md dark:bg-black/10"
 >
-  <div class="flex flex-col gap-2">
-    <h1 class="text-3xl font-bold">{title}</h1>
-    <p class="text-xs text-muted-foreground">{subtitle}</p>
+  <div class="flex w-1/2 flex-col gap-2">
+    <h1 class="truncate text-3xl font-bold" {title}>{title}</h1>
+    <p class="truncate text-xs text-muted-foreground" title={subtitle}>{subtitle}</p>
   </div>
 
-  <Root type="single" bind:value={theme}>
-    <Trigger class="w-max">{theme}</Trigger>
-    <Content>
-      <Group>
-        <GroupHeading>Theme</GroupHeading>
-        <Item value="dark">dark</Item>
-        <Item value="light">light</Item>
-      </Group>
-    </Content>
-  </Root>
+  <div class="flex w-1/2 justify-end gap-2">
+    <Root type="single" bind:value={theme}>
+      <Trigger class="w-max">{theme}</Trigger>
+      <Content>
+        <Group>
+          <GroupHeading>Theme</GroupHeading>
+          <Item value="dark">dark</Item>
+          <Item value="light">light</Item>
+        </Group>
+      </Content>
+    </Root>
 
-  {#if children}
-    {@render children()}
-  {/if}
+    {#if children}
+      {@render children()}
+    {/if}
+  </div>
 </section>
 
 <hr />

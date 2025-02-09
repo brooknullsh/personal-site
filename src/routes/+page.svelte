@@ -15,9 +15,9 @@
 
 <section class="flex flex-wrap gap-4">
   {#each data.allMetadata as { slug, title, description }}
-    <Root class="flex h-44 w-96 flex-col justify-between">
+    <Root class="flex h-64 w-96 flex-col justify-between">
       <Header>
-        <Title>{title}</Title>
+        <Title class="truncate">{title}</Title>
         <Description>{description}</Description>
       </Header>
       <Footer class="flex justify-end">

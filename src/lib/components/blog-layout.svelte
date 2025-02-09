@@ -1,6 +1,7 @@
 <script lang="ts">
   import type { Snippet } from "svelte";
   import TitleBar from "./title-bar.svelte";
+  import { Button } from "./ui/button";
 
   type Props = {
     children: Snippet;
@@ -18,7 +19,9 @@
   <title>{title} | brooknullsh</title>
 </svelte:head>
 
-<TitleBar {title} subtitle={published} />
+<TitleBar {title} subtitle={published}>
+  <Button class="text-2xl" href="/" variant="outline">🏡</Button>
+</TitleBar>
 
 <p class="text-muted-foreground">{description}</p>
 

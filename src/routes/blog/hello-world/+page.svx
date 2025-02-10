@@ -1,10 +1,30 @@
 ---
 layout: blog
 
-title: 👋 Hello, world!
+title: Hello, world!
 description: This is an example.
 
 published: 02/05/25
 ---
 
 Hello, world!
+
+- This
+- Is
+- An
+- Unordered
+- List
+
+1. This
+2. Is
+3. An
+4. Ordered
+5. List
+
+This is **bold**, *italic* and ***italic bold***.
+
+```rust
+fn main() {
+  println!("Hello, world!");
+}
+```

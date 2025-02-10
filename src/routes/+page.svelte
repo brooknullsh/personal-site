@@ -11,9 +11,9 @@
   <title>Home | brooknullsh</title>
 </svelte:head>
 
-<TitleBar title="🏡 Home" subtitle="Hello, world!" />
+<TitleBar title="Home" subtitle="Hello, world!" />
 
-<section class="flex flex-wrap gap-4">
+<section class="container flex flex-wrap gap-4">
   {#each data.allMetadata as { slug, title, description }}
     <Root class="flex h-64 w-96 flex-col justify-between">
       <Header>

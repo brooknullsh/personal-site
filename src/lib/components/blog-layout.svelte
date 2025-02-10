@@ -1,4 +1,6 @@
 <script lang="ts">
+  import "./blog.css";
+
   import type { Snippet } from "svelte";
   import TitleBar from "./title-bar.svelte";
   import { Button } from "./ui/button";
@@ -23,6 +25,7 @@
   <Button class="text-2xl" href="/" variant="outline">🏡</Button>
 </TitleBar>
 
-<p class="text-muted-foreground">{description}</p>
-
-{@render children()}
+<section class="container flex flex-col gap-4">
+  <p class="text-muted-foreground">{description}</p>
+  {@render children()}
+</section>

@@ -26,7 +26,7 @@
 </script>
 
 <section
-  class="sticky top-0 flex w-full items-center justify-between rounded bg-white/10 backdrop-blur-md dark:bg-black/10"
+  class="sticky top-0 flex h-20 w-full items-center justify-between bg-white/10 px-8 backdrop-blur-md dark:bg-black/10"
 >
   <div class="flex w-1/2 flex-col gap-2">
     <h1 class="truncate text-3xl font-bold" {title}>{title}</h1>
@@ -45,10 +45,6 @@
       </Content>
     </Root>
 
-    {#if children}
-      {@render children()}
-    {/if}
+    {@render children?.()}
   </div>
 </section>
-
-<hr />

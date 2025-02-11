@@ -25,9 +25,7 @@
   $effect(updateTheme);
 </script>
 
-<section
-  class="sticky top-0 flex h-20 w-full items-center justify-between bg-white/10 px-8 backdrop-blur-md dark:bg-black/10"
->
+<nav class="sticky top-0 flex h-20 items-center justify-between bg-card/50 px-8 backdrop-blur-sm">
   <div class="flex w-1/2 flex-col gap-2">
     <h1 class="truncate text-3xl font-bold" {title}>{title}</h1>
     <p class="truncate text-xs text-muted-foreground" title={subtitle}>{subtitle}</p>
@@ -47,4 +45,4 @@
 
     {@render children?.()}
   </div>
-</section>
+</nav>

@@ -17,7 +17,7 @@
   {#each data.allMetadata as { slug, title, description }}
     <Root class="flex h-64 w-96 flex-col justify-between">
       <Header>
-        <Title class="truncate">{title}</Title>
+        <Title class="truncate" {title}>{title}</Title>
         <Description>{description}</Description>
       </Header>
       <Footer class="flex justify-end">

@@ -16,9 +16,18 @@
     theme = localStorage.getItem("theme") || system;
   };
 
+  const adjustElementClass = (element: HTMLElement) => {
+    const previousTheme = theme === "dark" ? "light" : "dark";
+    element.classList.remove(`code-block-${previousTheme}`);
+    element.classList.add(`code-block-${theme}`);
+  };
+
   const updateTheme = () => {
     document.documentElement.setAttribute("class", theme);
     localStorage.setItem("theme", theme);
+
+    document.querySelectorAll("pre").forEach(adjustElementClass);
+    document.querySelectorAll("code").forEach(adjustElementClass);
   };
 
   onMount(readTheme);

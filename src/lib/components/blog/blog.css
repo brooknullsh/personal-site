@@ -1,13 +1,22 @@
-/* Element Styling */
+/* General Styling */
 
-ul {
-  list-style-type: disc;
-  list-style-position: inside;
-}
+#blog-content {
+  a {
+    @apply text-blue-400 hover:underline;
+  }
 
-ol {
-  list-style-type: decimal;
-  list-style-position: inside;
+  ul {
+    @apply list-inside list-disc;
+  }
+
+  ol {
+    @apply list-inside list-decimal;
+  }
+
+  pre,
+  code {
+    @apply rounded;
+  }
 }
 
 /* Syntax Highlighting */

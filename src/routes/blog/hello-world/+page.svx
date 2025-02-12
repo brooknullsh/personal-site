@@ -7,6 +7,11 @@ description: This is an example.
 published: 02/05/25
 ---
 
+<script>
+  import { Button } from "$lib/components/ui/button";
+  import Callout from "$lib/components/blog/callout.svelte";
+</script>
+
 Hello, world!
 
 - This
@@ -28,3 +33,17 @@ fn main() {
   println!("Hello, world!");
 }
 ```
+
+This link points to [Vercel](https://vercel.com) (where this site is currently hosted)
+
+<Callout type="info">
+  This is an example information callout.
+</Callout>
+
+<Callout type="warn">
+  This is an example warning callout.
+</Callout>
+
+<Callout type="alert">
+  This is an example alert callout.
+</Callout>

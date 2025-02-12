@@ -2,8 +2,8 @@
   import "./blog.css";
 
   import type { Snippet } from "svelte";
-  import TitleBar from "./title-bar.svelte";
-  import { Button } from "./ui/button";
+  import TitleBar from "../title-bar.svelte";
+  import { Button } from "../ui/button";
 
   type Props = {
     children: Snippet;
@@ -25,7 +25,7 @@
   <Button class="text-2xl" href="/" variant="outline">🏡</Button>
 </TitleBar>
 
-<section class="container flex flex-col gap-4">
+<section class="container flex flex-col gap-4" id="blog-content">
   <p class="text-muted-foreground">{description}</p>
   {@render children()}
 </section>

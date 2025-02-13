@@ -1,6 +1,7 @@
 <script lang="ts">
   import { onMount, type Snippet } from "svelte";
   import { Root, Trigger, Content, Group, GroupHeading, Item } from "$lib/components/ui/select";
+  import { Separator } from "./ui/separator";
 
   type Props = {
     children?: Snippet;
@@ -42,16 +43,20 @@
 
   <div class="flex w-1/2 justify-end gap-2">
     <Root type="single" bind:value={theme}>
-      <Trigger class="w-max">{theme}</Trigger>
+      <Trigger class="w-max">{theme.charAt(0).toUpperCase() + theme.slice(1)}</Trigger>
       <Content>
-        <Group>
+        <Group class="flex flex-col gap-1">
           <GroupHeading>Theme</GroupHeading>
-          <Item value="dark">dark</Item>
-          <Item value="light">light</Item>
+          <Separator />
+          <Item value="dark">Dark</Item>
+          <Item value="light">Light</Item>
         </Group>
       </Content>
     </Root>
 
-    {@render children?.()}
+    {#if children}
+      <Separator orientation="vertical" />
+      {@render children()}
+    {/if}
   </div>
 </nav>

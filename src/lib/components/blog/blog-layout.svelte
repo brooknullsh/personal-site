@@ -13,16 +13,26 @@
   };
 
   let { children, title, description, published }: Props = $props();
+  let homeButton = $state<HTMLAnchorElement | null>(null);
 
   published = new Date(published).toLocaleDateString(undefined, { dateStyle: "full" });
+
+  const handleKeyUp = ({ key }: KeyboardEvent) => {
+    if (!homeButton) return;
+    if (key.toLowerCase() === "h") homeButton.click();
+  };
 </script>
 
 <svelte:head>
   <title>{title} | brooknullsh</title>
 </svelte:head>
 
+<svelte:window onkeyup={handleKeyUp} />
+
 <TitleBar {title} subtitle={published}>
-  <Button class="text-2xl" href="/" variant="outline">🏡</Button>
+  <Button bind:ref={homeButton} href="/" variant="outline">
+    🏡 <span class="text-muted-foreground">[h]</span>
+  </Button>
 </TitleBar>
 
 <section class="container flex flex-col gap-4" id="blog-content">

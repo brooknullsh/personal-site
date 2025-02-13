@@ -31,7 +31,7 @@
 
 <TitleBar {title} subtitle={published}>
   <Button bind:ref={homeButton} href="/" variant="outline">
-    🏡 <span class="text-muted-foreground">[h]</span>
+    🏡<span class="text-muted-foreground">[h]</span>
   </Button>
 </TitleBar>
 

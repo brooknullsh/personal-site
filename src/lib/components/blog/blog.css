@@ -1,6 +1,14 @@
 /* General Styling */
 
 #blog-content {
+  h1 {
+    @apply text-3xl font-bold;
+  }
+
+  h2 {
+    @apply text-xl font-semibold;
+  }
+
   a {
     @apply text-blue-400 hover:underline;
   }
@@ -16,6 +24,10 @@
   pre,
   code {
     @apply rounded;
+  }
+
+  :not(pre) > code {
+    @apply rounded border border-primary/10 bg-muted p-[0.10rem] text-muted-foreground;
   }
 }
 
@@ -64,13 +76,6 @@ pre[class*="code-block-dark"] {
   padding: 1em;
   margin: 0.5em 0;
   overflow: auto;
-  background: #1e1e1e;
-}
-
-:not(pre) > code[class*="code-block-dark"] {
-  padding: 0.1em 0.3em;
-  border-radius: 0.3em;
-  color: #db4c69;
   background: #1e1e1e;
 }
 
@@ -225,14 +230,6 @@ pre[class*="code-block-light"] {
   overflow: auto;
   border: 1px solid #dddddd;
   background-color: white;
-}
-
-:not(pre) > code[class*="code-block-light"] {
-  padding: 0.2em;
-  padding-top: 1px;
-  padding-bottom: 1px;
-  background: #f8f8f8;
-  border: 1px solid #dddddd;
 }
 
 pre:has(.code-block-light) {

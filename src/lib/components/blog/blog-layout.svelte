@@ -18,8 +18,7 @@
   published = new Date(published).toLocaleDateString(undefined, { dateStyle: "full" });
 
   const handleKeyUp = ({ key }: KeyboardEvent) => {
-    if (!homeButton) return;
-    if (key.toLowerCase() === "h") homeButton.click();
+    if (key.toLowerCase() === "h") homeButton?.click();
   };
 </script>
 

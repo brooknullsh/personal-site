@@ -1,7 +1,7 @@
 <script lang="ts">
   import { onMount, type Snippet } from "svelte";
   import { Root, Trigger, Content, Group, GroupHeading, Item } from "$lib/components/ui/select";
-  import { Separator } from "./ui/separator";
+  import { Separator } from "$lib/components/ui/separator";
 
   type Props = {
     children?: Snippet;

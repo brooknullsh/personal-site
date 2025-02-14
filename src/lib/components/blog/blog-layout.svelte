@@ -2,8 +2,8 @@
   import "./blog.css";
 
   import type { Snippet } from "svelte";
-  import TitleBar from "../title-bar.svelte";
-  import { Button } from "../ui/button";
+  import TitleBar from "$lib/components/title-bar.svelte";
+  import { Button } from "$lib/components/ui/button";
 
   type Props = {
     children: Snippet;

@@ -6,7 +6,7 @@
   let { children } = $props();
 </script>
 
-<main class="flex min-h-[90vh] flex-col gap-4 py-4">
+<main class="flex min-h-[95vh] flex-col gap-4 py-4">
   {@render children()}
 </main>
 

@@ -2,53 +2,202 @@
 layout: blog
 
 title: Hello, world!
-description: This is an example.
+description: Building a Markdown blog in SvelteKit with theme switching, blog metadata & keyboard shortcuts.
 
-published: 02/05/25
+published: 02/16/25
 ---
 
 <script>
   import Callout from "$lib/components/blog/callout.svelte";
 </script>
 
-# Title
+# Technology Stack
 
 ---
 
-## Subtitle
+- [Vercel](https://vercel.com)
+- [SvelteKit](https://svelte.dev)
+- [TailwindCSS](https://tailwindcss.com)
+- [shadcn-svelte](https://www.shadcn-svelte.com)
+- [mdsvex](https://mdsvex.pngwn.io)
 
-- This
-- Is
-- An
-- Unordered
-- List
+# The Reasoning For It All
 
-1. This
-2. Is
-3. An
-4. Ordered
-5. List
+---
 
-This is **bold**, *italic*, ***italic bold*** and a ~~strikethrough~~.
+A popular choice to write up thoughts or code snippets is [&#120143 (Twitter)](https://x.com) or [Medium](https://medium.com) where you don't
+have to build out `Markdown` logic yet again, but why use those options when you can build a worse platform for 10x the work? I would be lying to your
+sweet soul if I didn't also mention that building out this site quenches my thirst for web development which I currently am unable to within working hours.
 
-```rust
-fn main() {
-  println!("Hello, world!");
-}
-```
+This conveniently is also my first deployed [Svelte](https://svelte.dev) app, coming from [NextJS](https://nextjs.org) where I learned the core of my web
+development skills. `Svelte` has been a massive eye opener for me, I loved `NextJS` and [React](https://react.dev) which are both incredibly powerful tools but
+the simplicity of `Svelte` & it's closeness to `JavaScript` made me the "purist" I never thought I'd be.
 
-This is some `inline-code`.
+# Core Features
 
-This link points to [Vercel](https://vercel.com) (where this site is currently hosted)
-
-<Callout type="info">
-  This is an example information callout.
-</Callout>
+---
 
 <Callout type="warn">
-  This is an example warning callout.
+  All code examples have been extracted from this site's source code, so they may not work for you out of the box
 </Callout>
 
-<Callout type="alert">
-  This is an example alert callout.
+## Callout
+
+May as well let the first thing to talk about be the thing you can see in your viewport above. I always liked the [GitHub Markdown flavour](https://github.github.com/gfm/)
+callouts that are colourful and clear, at first I looked into a [rehype-plugin](https://github.com/rehypejs/rehype/blob/main/doc/plugins.md#list-of-plugins) but
+couldn't get it working and thought it'd be an easy enough thing to do myself.
+
+The only thing that provided any difficulty is the same thing that catches me off-guard every time... dynamic styling classes with reactive changes. Thankfully, the `cn`
+method that you get within `$lib/utils.ts` when you install `shadcn-svelte` makes this a little easier.
+
+<img
+  id="blog-media"
+  src="https://media.giphy.com/media/YKpBDaB7N2AwXhkcNM/giphy.gif?cid=790b7611hcyxcpo8640elxel1ieu2vpakaldqjqaax2z2v6t&ep=v1_gifs_search&rid=giphy.gif&ct=g"
+  alt="hideous"
+/>
+
+```svelte
+<script lang="ts">
+  import type { Snippet } from "svelte";
+  import { cn } from "$lib/utils";
+
+  type Props = {
+    children: Snippet;
+    type: "info" | "warn" | "alert";
+  };
+
+  let { children, type }: Props = $props();
+</script>
+
+<div
+  class={cn(
+    "flex w-full gap-2 rounded border-l-4 p-4",
+    type === "info" && "border-blue-500 bg-blue-500/10",
+    type === "warn" && "border-yellow-500 bg-yellow-500/10",
+    type === "alert" && "border-red-500 bg-red-500/10",
+  )}
+>
+  <p
+    class={cn(
+      type === "info" && "text-blue-500",
+      type === "warn" && "text-yellow-500",
+      type === "alert" && "text-red-500",
+    )}
+  >
+    {type === "info" ? "🙋‍♂️" : type === "warn" ? "⚠️" : "🚨"}
+    {@render children()}
+  </p>
+</div>
+```
+
+<Callout type="info">
+  If any of you have easier ways to write this code, I'm always open to learn so let me know at any of my social links
 </Callout>
+
+## Theme Switching
+
+Supporting themes has been a solved problem for a while, but at least for `Svelte`, I struggled to find consistent resources on the topic
+that also solved the flashing problem of the stale HTML styling served server-side. I eventually found [this repository](https://github.com/ScriptRaccoon/sveltekit-darkmode-toggler-localstorage)
+where a static `JavaScript` file was used to read & set the theme within `localStorage`.
+
+Thanks to that file, we can "guarantee" that the `localStorage` & document attribute value will be set when the `HTML` body loads so reading & changing
+the theme client-side is just as easy.
+
+```js
+const storedTheme = localStorage.getItem("theme");
+
+if (storedTheme) {
+  document.documentElement.setAttribute("class", storedTheme);
+} else updateTheme();
+
+const updateTheme = () => {
+  const system = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+
+  document.documentElement.setAttribute("class", system);
+  localStorage.setItem("theme", system);
+};
+```
+
+## Blog Metadata
+
+None of these blogs are stored in a database unless we're talking about a [GitHub repository](https://github.com/brooknullsh/personal-site), so
+reading them & their metadata meant actually reading the files themselves. Thankfully, the `import.meta.glob` method saved the day where I can pull in all
+the files within a `+page.server.ts` file at the root of my project and call what is eventually a `Svelte` component to read the metadata.
+
+When doing something similar in `NextJS`, the difficulty came as the routes ended up being generated & moved at build time so the dynamic importing broke
+after a build. I was expecting something similar here, but at least the `glob` method provides a fix or the pre-rendering in `Svelte` doesn't operate the same.
+
+```ts
+import type { PageServerLoad } from "./$types";
+
+export const load: PageServerLoad = async () => {
+  const blogs = import.meta.glob("./blog/*/*.svx");
+
+  const parsedMetadata = Object.entries(blogs).map(async ([filePath, component]) => ({
+    slug: filePath.split("/").at(2),
+    ...(await component()).metadata,
+  }));
+
+  return { allMetadata: await Promise.all(parsedMetadata) };
+};
+```
+
+## Keyboard Shortcuts
+
+You may notice, if you press "h" you will return to the homepage... welcome back those crazy few who didn't read ahead before pressing keys at the request
+of a stranger. Ironically, this is not because I'm a heavy [Vim](https://www.vim.org) user but instead because during development I wanted to bounce between
+pages quicker than I could drag my fingers across my trackpad.
+
+This is easy with the `svelte:window` component, which you can read more about [here](https://svelte.dev/docs/svelte/svelte-window).
+
+```svelte
+<script lang="ts">
+  /* ... */
+
+  let homeButton = $state<HTMLAnchorElement | null>(null);
+
+  const handleKeyUp = ({ key }: KeyboardEvent) => {
+    if (key === "h") homeButton?.click();
+  };
+</script>
+
+<svelte:window onkeyup={handleKeyUp} />
+
+<Button bind:ref={homeButton}>
+  🏡<span>[h]</span>
+</Button>
+```
+
+<img
+  id="blog-media"
+  src="https://media.giphy.com/media/kz6cm1kKle2MYkHtJF/giphy.gif?cid=ecf05e47lbel280fu544s4xibg8mujtsuaqizionfop0n177&ep=v1_gifs_search&rid=giphy.gif&ct=g"
+  alt="typing"
+/>
+
+On your short trip back to the homepage, you may have noticed that there are some shortcuts attached to the cards which have very similar logic behind them.
+Although, the markup is generated by looping over the blog metadata objects which means I don't have direct access to the button references.
+
+So instead, during the loop I add references of the buttons I want to the stateful object keyed by their index meaning later I can access that object
+by the key pressed.
+
+```svelte
+<script lang="ts">
+  /* ... */
+
+  let viewButtons = $state<Record<string, HTMLAnchorElement | null>>({
+    "0": null,
+    "1": null,
+    "2": null,
+  });
+
+  const handleKeyUp = ({ key }: KeyboardEvent) => viewButtons[key]?.click();
+</script>
+
+<svelte:window onkeyup={handleKeyUp} />
+
+{#each data as { /* ... */ }, index}
+  <Button bind:ref={viewButtons[index.toString()]}>
+    View<span>[{index}]</span>
+  </Button>
+{/each}
+```

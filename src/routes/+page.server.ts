@@ -10,8 +10,8 @@ type BlogMetadata = {
 export const load: PageServerLoad = async () => {
   const blogs = import.meta.glob<{ metadata: BlogMetadata }>("./blog/*/*.svx");
 
-  const parsedMetadata = Object.entries(blogs).map(async ([fileName, component]) => ({
-    slug: fileName.split("/").at(2),
+  const parsedMetadata = Object.entries(blogs).map(async ([filePath, component]) => ({
+    slug: filePath.split("/").at(2),
     ...(await component()).metadata,
   }));
 

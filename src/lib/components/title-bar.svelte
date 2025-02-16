@@ -35,7 +35,9 @@
   $effect(updateTheme);
 </script>
 
-<nav class="sticky top-0 flex h-20 items-center justify-between bg-card/50 px-8 backdrop-blur-sm">
+<nav
+  class="sticky top-0 z-50 flex h-20 items-center justify-between bg-card/50 px-8 backdrop-blur-lg"
+>
   <div class="flex w-1/2 flex-col gap-2">
     <h1 class="truncate text-3xl font-bold" {title}>{title}</h1>
     <p class="truncate text-xs text-muted-foreground" title={subtitle}>{subtitle}</p>

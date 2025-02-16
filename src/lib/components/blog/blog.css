@@ -27,7 +27,11 @@
   }
 
   :not(pre) > code {
-    @apply rounded border border-primary/10 bg-muted p-[0.10rem] text-muted-foreground;
+    @apply rounded border border-primary/10 bg-muted p-[0.10rem];
+  }
+
+  #blog-media {
+    @apply m-auto h-auto w-1/2 min-w-96 rounded;
   }
 }
 

@@ -5,8 +5,8 @@
 
 <footer class="flex h-[5vh] min-h-12 items-center justify-center">
   <Button href="https://github.com/brooknullsh" variant="link">GitHub</Button>
-  <Separator orientation="vertical" />
+  <Separator class="min-h-8" orientation="vertical" />
   <Button class="text-xl" href="https://x.com/brooknullsh" variant="link">&#120143</Button>
-  <Separator orientation="vertical" />
+  <Separator class="min-h-8" orientation="vertical" />
   <Button href="https://instagram.com/brooknullsh" variant="link">Instagram</Button>
 </footer>

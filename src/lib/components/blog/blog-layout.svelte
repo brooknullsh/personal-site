@@ -18,12 +18,14 @@
   published = new Date(published).toLocaleDateString(undefined, { dateStyle: "full" });
 
   const handleKeyUp = ({ key }: KeyboardEvent) => {
-    if (key.toLowerCase() === "h") homeButton?.click();
+    if (key === "h") homeButton?.click();
   };
 </script>
 
 <svelte:head>
   <title>{title} | brooknullsh</title>
+  <meta name="description" content={description} />
+  <meta name="author" content="Brook Nash" />
 </svelte:head>
 
 <svelte:window onkeyup={handleKeyUp} />
@@ -34,7 +36,7 @@
   </Button>
 </TitleBar>
 
-<section class="container flex flex-col gap-4" id="blog-content">
+<section class="container flex flex-col gap-8" id="blog-content">
   <p class="text-muted-foreground">{description}</p>
   {@render children()}
 </section>

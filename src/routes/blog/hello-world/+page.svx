@@ -90,10 +90,6 @@ method that you get within `$lib/utils.ts` when you install `shadcn-svelte` make
 </div>
 ```
 
-<Callout type="info">
-  If any of you have easier ways to write this code, I'm always open to learn so let me know at any of my social links
-</Callout>
-
 ## Theme Switching
 
 Supporting themes has been a solved problem for a while, but at least for `Svelte`, I struggled to find consistent resources on the topic
@@ -126,6 +122,10 @@ the files within a `+page.server.ts` file at the root of my project and call wha
 
 When doing something similar in `NextJS`, the difficulty came as the routes ended up being generated & moved at build time so the dynamic importing broke
 after a build. I was expecting something similar here, but at least the `glob` method provides a fix or the pre-rendering in `Svelte` doesn't operate the same.
+
+<Callout type="info">
+  If you're smarter than me & know why reading the file system works this way, reach me at my socials in the footer
+</Callout>
 
 ```ts
 import type { PageServerLoad } from "./$types";
@@ -184,11 +184,11 @@ by the key pressed.
 <script lang="ts">
   /* ... */
 
-  let viewButtons = $state<Record<string, HTMLAnchorElement | null>>({
+  const viewButtons: Record<string, HTMLAnchorElement | null> = {
     "0": null,
     "1": null,
     "2": null,
-  });
+  };
 
   const handleKeyUp = ({ key }: KeyboardEvent) => viewButtons[key]?.click();
 </script>

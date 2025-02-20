@@ -5,11 +5,12 @@
   import type { PageData } from "./$types";
 
   let { data }: { data: PageData } = $props();
-  let viewButtons = $state<Record<string, HTMLAnchorElement | null>>({
+
+  const viewButtons: Record<string, HTMLAnchorElement | null> = {
     "0": null,
     "1": null,
     "2": null,
-  });
+  };
 
   const handleKeyUp = ({ key }: KeyboardEvent) => viewButtons[key]?.click();
 </script>

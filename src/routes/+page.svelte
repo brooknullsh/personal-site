@@ -6,11 +6,11 @@
 
   let { data }: { data: PageData } = $props();
 
-  const viewButtons: Record<string, HTMLAnchorElement | null> = {
+  const viewButtons = $state<Record<string, HTMLAnchorElement | null>>({
     "0": null,
     "1": null,
     "2": null,
-  };
+  });
 
   const handleKeyUp = ({ key }: KeyboardEvent) => viewButtons[key]?.click();
 </script>

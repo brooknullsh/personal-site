@@ -26,29 +26,30 @@ published: 02/16/25
 ---
 
 A popular choice to write up thoughts or code snippets is [&#120143 (Twitter)](https://x.com) or [Medium](https://medium.com) where you don't
-have to build out `Markdown` logic yet again, but why use those options when you can build a worse platform for 10x the work? I would be lying to your
-sweet soul if I didn't also mention that building out this site quenches my thirst for web development which I currently am unable to within working hours.
+have to build out Markdown logic yet again, but why use those options when you can build a worse platform for 10x the work? I would be lying to your
+sweet soul if I didn't also mention that building out this site **quenches my thirst for web development** which I currently am unable to within working hours.
 
-This conveniently is also my first deployed [Svelte](https://svelte.dev) app, coming from [NextJS](https://nextjs.org) where I learned the core of my web
-development skills. `Svelte` has been a massive eye opener for me, I loved `NextJS` and [React](https://react.dev) which are both incredibly powerful tools but
-the simplicity of `Svelte` & it's closeness to `JavaScript` made me the "purist" I never thought I'd be.
+This conveniently is also my first deployed [Svelte](https://svelte.dev) app, coming from [Next](https://nextjs.org) where I learned the core of my web
+development skills. Svelte has been a massive eye opener for me, I loved Next and [React](https://react.dev) which are both incredibly powerful tools but
+**the simplicity of Svelte & it's closeness to JavaScript** made me the "purist" I never thought I'd be.
 
 # Core Features
 
 ---
 
 <Callout type="warn">
-  All code examples have been extracted from this site's source code, so they may not work for you out of the box
+  All code examples are the bare minimum implementation, they're liable for change and may not work out of the box
 </Callout>
 
 ## Callout
 
-May as well let the first thing to talk about be the thing you can see in your viewport above. I always liked the [GitHub Markdown flavour](https://github.github.com/gfm/)
-callouts that are colourful and clear, at first I looked into a [rehype-plugin](https://github.com/rehypejs/rehype/blob/main/doc/plugins.md#list-of-plugins) but
-couldn't get it working and thought it'd be an easy enough thing to do myself.
+May as well let the first thing to talk about be the thing you can see in your viewport above. I always liked the
+[GitHub Markdown flavour](https://github.github.com/gfm/) callouts that are colourful and clear, at first I looked into a
+[rehype-plugin](https://github.com/rehypejs/rehype/blob/main/doc/plugins.md#list-of-plugins) but couldn't get it working and thought it'd be an easy enough
+thing to do myself.
 
-The only thing that provided any difficulty is the same thing that catches me off-guard every time... dynamic styling classes with reactive changes. Thankfully, the `cn`
-method that you get within `$lib/utils.ts` when you install `shadcn-svelte` makes this a little easier.
+The only thing that provided any difficulty is the same thing that catches me off-guard every time... **styling classes with reactive changes**.
+Thankfully, the `cn` method that you get within `$lib/utils.ts` when you install `shadcn-svelte` makes this a little easier.
 
 <img
   id="blog-media"
@@ -92,11 +93,12 @@ method that you get within `$lib/utils.ts` when you install `shadcn-svelte` make
 
 ## Theme Switching
 
-Supporting themes has been a solved problem for a while, but at least for `Svelte`, I struggled to find consistent resources on the topic
-that also solved the flashing problem of the stale HTML styling served server-side. I eventually found [this repository](https://github.com/ScriptRaccoon/sveltekit-darkmode-toggler-localstorage)
-where a static `JavaScript` file was used to read & set the theme within `localStorage`.
+Supporting themes has been a solved problem for a while, but at least for Svelte, I struggled to find consistent resources on the topic
+that also **solved the flashing problem** of the stale HTML styling served server-side. I eventually found
+[this repository](https://github.com/ScriptRaccoon/sveltekit-darkmode-toggler-localstorage) where a static JavaScript file was used to read & set
+the theme within local storage.
 
-Thanks to that file, we can "guarantee" that the `localStorage` & document attribute value will be set when the `HTML` body loads so reading & changing
+Thanks to that file, we can "guarantee" that the local storage & document attribute value will be set when the HTML body loads so reading & changing
 the theme client-side is just as easy.
 
 ```js
@@ -118,10 +120,10 @@ const updateTheme = () => {
 
 None of these blogs are stored in a database unless we're talking about a [GitHub repository](https://github.com/brooknullsh/personal-site), so
 reading them & their metadata meant actually reading the files themselves. Thankfully, the `import.meta.glob` method saved the day where I can pull in all
-the files within a `+page.server.ts` file at the root of my project and call what is eventually a `Svelte` component to read the metadata.
+the files within a `+page.server.ts` file at the root of my project and call what is eventually a Svelte component to read the metadata.
 
-When doing something similar in `NextJS`, the difficulty came as the routes ended up being generated & moved at build time so the dynamic importing broke
-after a build. I was expecting something similar here, but at least the `glob` method provides a fix or the pre-rendering in `Svelte` doesn't operate the same.
+When doing something similar in Next, the difficulty came as the routes ended up being **generated & moved at build time** so the dynamic importing no longer
+worked. I was expecting something similar here, but at least the `glob` method provides a fix or the pre-rendering in Svelte doesn't operate the same.
 
 <Callout type="info">
   If you're smarter than me & know why reading the file system works this way, reach me at my socials in the footer
@@ -134,7 +136,7 @@ export const load: PageServerLoad = async () => {
   const blogs = import.meta.glob("./blog/*/*.svx");
 
   const parsedMetadata = Object.entries(blogs).map(async ([filePath, component]) => ({
-    slug: filePath.split("/").at(2),
+    /* ... */
     ...(await component()).metadata,
   }));
 
@@ -145,8 +147,8 @@ export const load: PageServerLoad = async () => {
 ## Keyboard Shortcuts
 
 You may notice, if you press "h" you will return to the homepage... welcome back those crazy few who didn't read ahead before pressing keys at the request
-of a stranger. Ironically, this is not because I'm a heavy [Vim](https://www.vim.org) user but instead because during development I wanted to bounce between
-pages quicker than I could drag my fingers across my trackpad.
+of a stranger. Ironically, this is not because I'm a heavy [Vim](https://www.vim.org) user but instead because during development **I wanted to bounce between
+pages quicker** than I could drag my fingers across my trackpad.
 
 This is easy with the `svelte:window` component, which you can read more about [here](https://svelte.dev/docs/svelte/svelte-window).
 
@@ -177,7 +179,7 @@ This is easy with the `svelte:window` component, which you can read more about [
 On your short trip back to the homepage, you may have noticed that there are some shortcuts attached to the cards which have very similar logic behind them.
 Although, the markup is generated by looping over the blog metadata objects which means I don't have direct access to the button references.
 
-So instead, during the loop I add references of the buttons I want to the stateful object keyed by their index meaning later I can access that object
+So instead, during the loop I add references of the buttons I want to the **stateful object** keyed by their index meaning later I can access that object
 by the key pressed.
 
 ```svelte

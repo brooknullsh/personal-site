@@ -1,4 +1,6 @@
-import type { PageServerLoad } from "./$types";
+import type { LayoutServerLoad } from "./$types";
+
+export const prerender = true;
 
 type BlogMetadata = {
   layout: string;
@@ -7,7 +9,7 @@ type BlogMetadata = {
   published: string;
 };
 
-export const load: PageServerLoad = async () => {
+export const load: LayoutServerLoad = async () => {
   const blogs = import.meta.glob<{ metadata: BlogMetadata }>("./blog/*/*.svx");
 
   const parsedMetadata = Object.entries(blogs).map(async ([filePath, component]) => ({

@@ -4,15 +4,17 @@
   import type { Snippet } from "svelte";
   import TitleBar from "$lib/components/title-bar.svelte";
   import { Button } from "$lib/components/ui/button";
+  import { Badge } from "../ui/badge";
 
   type Props = {
     children: Snippet;
     title: string;
     description: string;
+    tags: string[];
     published: string;
   };
 
-  let { children, title, description, published }: Props = $props();
+  let { children, title, description, tags, published }: Props = $props();
   let homeButton = $state<HTMLAnchorElement | null>(null);
 
   published = new Date(published).toLocaleDateString(undefined, { dateStyle: "full" });
@@ -26,6 +28,7 @@
   <title>{title} | brooknullsh</title>
   <meta name="description" content={description} />
   <meta name="author" content="Brook Nash" />
+  <meta name="keywords" content={tags.join(",")} />
 </svelte:head>
 
 <svelte:window onkeyup={handleKeyUp} />
@@ -38,5 +41,12 @@
 
 <section class="container flex flex-col gap-8" id="blog-content">
   <p class="text-muted-foreground">{description}</p>
+
+  <div class="flex flex-wrap items-center justify-center gap-2">
+    {#each tags as tag}
+      <Badge>{tag}</Badge>
+    {/each}
+  </div>
+
   {@render children()}
 </section>

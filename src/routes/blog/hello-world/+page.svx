@@ -3,6 +3,7 @@ layout: blog
 
 title: Hello, world!
 description: Building a Markdown blog in SvelteKit with theme switching, blog metadata & keyboard shortcuts.
+tags: ["svelte", "vercel", "tailwind", "shadcn"]
 
 published: 02/16/25
 ---

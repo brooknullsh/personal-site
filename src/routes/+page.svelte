@@ -6,27 +6,13 @@
   import { Button } from "$lib/components/ui/button";
   import { Root, Header, Title, Description, Footer } from "$lib/components/ui/card";
   import { Input } from "$lib/components/ui/input";
+  import { Badge } from "$lib/components/ui/badge";
 
   let { data }: { data: LayoutData } = $props();
 
   let searchValue = $state("");
-
-  const sortBlogs = (blogs: LayoutData["allMetadata"]) => {
-    return blogs.sort((a, b) => new Date(b.published).getTime() - new Date(a.published).getTime());
-  };
-
-  const blogData = $derived.by(() => {
-    if (!searchValue) return sortBlogs(data.allMetadata);
-
-    const blogMatches = data.allMetadata.filter(({ title }) => {
-      return title.toLowerCase().includes(searchValue.toLowerCase().trim());
-    });
-
-    return sortBlogs(blogMatches);
-  });
-
   let searchInput = $state<HTMLInputElement | null>(null);
-  const viewButtons = $state<Record<string, HTMLAnchorElement | null>>({
+  let viewButtons = $state<Record<string, HTMLAnchorElement | null>>({
     "0": null,
     "1": null,
     "2": null,
@@ -36,6 +22,21 @@
     viewButtons[key]?.click();
     if (key === "s") searchInput?.focus();
   };
+
+  const sortBlogs = (blogs: LayoutData["allMetadata"]) => {
+    return blogs.sort((a, b) => new Date(b.published).getTime() - new Date(a.published).getTime());
+  };
+
+  const blogData = $derived.by(() => {
+    if (!searchValue) return sortBlogs(data.allMetadata);
+
+    const blogMatches = data.allMetadata.filter(({ title, tags }) => {
+      const cleanSearchValue = searchValue.toLowerCase().trim();
+      return title.toLowerCase().includes(cleanSearchValue) || tags.includes(cleanSearchValue);
+    });
+
+    return sortBlogs(blogMatches);
+  });
 
   onMount(() => {
     searchValue = new URL(window.location.href).searchParams.get("search") || "";
@@ -62,20 +63,27 @@
 </TitleBar>
 
 <section class="container flex flex-wrap justify-center gap-4">
-  {#each blogData as { slug, title, description }, index}
-    <Root class="flex h-64 w-96 flex-col justify-between">
+  {#each blogData as { slug, title, description, tags }, index}
+    <Root class="flex h-56 w-96 flex-col justify-between">
       <Header>
         <Title class="truncate" {title}>{title}</Title>
         <Description>{description}</Description>
       </Header>
-      <Footer class="flex justify-end">
-        {#if index < 3}
-          <Button bind:ref={viewButtons[index.toString()]} class="w-max" href={`/blog/${slug}`}>
-            View<span class="text-muted-foreground">[{index}]</span>
-          </Button>
-        {:else}
-          <Button class="w-max" href={`/blog/${slug}`}>View</Button>
-        {/if}
+      <Footer class="flex justify-between">
+        <div class="flex w-1/2 gap-2">
+          {#each tags.slice(0, 2) as tag}
+            <Badge variant="secondary">{tag}</Badge>
+          {/each}
+        </div>
+        <div class="flex w-1/2 justify-end">
+          {#if index < 3}
+            <Button bind:ref={viewButtons[index.toString()]} class="w-max" href={`/blog/${slug}`}>
+              View<span class="text-muted-foreground">[{index}]</span>
+            </Button>
+          {:else}
+            <Button class="w-max" href={`/blog/${slug}`}>View</Button>
+          {/if}
+        </div>
       </Footer>
     </Root>
   {:else}

@@ -36,11 +36,11 @@
 </script>
 
 <nav
-  class="sticky top-0 z-50 flex h-20 items-center justify-between bg-card/50 px-8 backdrop-blur-lg"
+  class="bg-card/50 sticky top-0 z-50 flex h-20 items-center justify-between px-8 backdrop-blur-lg"
 >
   <div class="flex w-1/2 flex-col gap-2">
     <h1 class="truncate text-3xl font-bold" {title}>{title}</h1>
-    <p class="truncate text-xs text-muted-foreground" title={subtitle}>{subtitle}</p>
+    <p class="text-muted-foreground truncate text-xs" title={subtitle}>{subtitle}</p>
   </div>
 
   <div class="flex w-1/2 justify-end gap-2">

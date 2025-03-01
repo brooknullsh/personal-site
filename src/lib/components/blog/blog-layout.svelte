@@ -40,7 +40,7 @@
 </TitleBar>
 
 <section class="container flex flex-col gap-8" id="blog-content">
-  <p class="text-muted-foreground">{description}</p>
+  <p class="text-muted-foreground text-center">{description}</p>
 
   <div class="flex flex-wrap items-center justify-center gap-2">
     {#each tags as tag}

@@ -10,17 +10,42 @@ published: 02/16/25
 
 <script>
   import Callout from "$lib/components/blog/callout.svelte";
+  import LinkCard from "$lib/components/blog/link-card.svelte";
 </script>
 
 # Technology Stack
 
 ---
 
-- [Vercel](https://vercel.com)
-- [SvelteKit](https://svelte.dev)
-- [TailwindCSS](https://tailwindcss.com)
-- [shadcn-svelte](https://www.shadcn-svelte.com)
-- [mdsvex](https://mdsvex.pngwn.io)
+<LinkCard
+  linkUrl="https://vercel.com"
+  title="Vercel"
+  description="My hosting provider, makes deploying Svelte apps incredibly easy"
+/>
+
+<LinkCard
+  linkUrl="https://svelte.dev"
+  title="Svelte"
+  description="Svelte & SvelteKit are my preferred web technology"
+/>
+
+<LinkCard
+  linkUrl="https://tailwindcss.com"
+  title="TailwindCSS"
+  description="Idiomatic & painless way of writing CSS"
+/>
+
+<LinkCard
+  linkUrl="https://shadcn-svelte.com"
+  title="ShadcnSvelte"
+  description="Self-owned UI components ported to Svelte"
+/>
+
+<LinkCard
+  linkUrl="https://mdsvex.pngwn.io"
+  title="Mdsvex"
+  description="Rendering markdown files as Svelte pages"
+/>
 
 # The Reasoning For It All
 

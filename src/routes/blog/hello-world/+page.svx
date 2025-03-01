@@ -13,14 +13,10 @@ published: 02/16/25
   import LinkCard from "$lib/components/blog/link-card.svelte";
 </script>
 
-# Technology Stack
-
----
-
 <LinkCard
   linkUrl="https://vercel.com"
   title="Vercel"
-  description="My hosting provider, makes deploying Svelte apps incredibly easy"
+  description="Hosting Svelte apps is incredibly easy"
 />
 
 <LinkCard

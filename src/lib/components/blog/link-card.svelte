@@ -14,7 +14,7 @@
 </script>
 
 <a
-  class="hover:border-primary flex h-36 w-full items-center rounded border !no-underline"
+  class="hover:bg-secondary/50 flex h-36 w-full items-center rounded border !no-underline"
   href={linkUrl}
 >
   <img
@@ -23,8 +23,8 @@
     alt={title}
   />
 
-  <div class="flex h-full w-full flex-col gap-2 p-4">
-    <h2 class="text-primary text-end">
+  <div class="flex h-full w-full flex-col gap-2 p-4 text-right">
+    <h2 class="text-primary">
       {title} <span class="text-muted-foreground">&#8599;</span>
     </h2>
     <hr />

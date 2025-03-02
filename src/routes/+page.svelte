@@ -7,6 +7,7 @@
   import { Root, Header, Title, Description, Footer } from "$lib/components/ui/card";
   import { Input } from "$lib/components/ui/input";
   import { Badge } from "$lib/components/ui/badge";
+  import { toast } from "svelte-sonner";
 
   let { data }: { data: LayoutData } = $props();
 
@@ -21,20 +22,21 @@
   const handleKeyUp = ({ key }: KeyboardEvent) => {
     viewButtons[key]?.click();
     if (key === "s") searchInput?.focus();
+    if (key === "Escape" && document.activeElement === searchInput) searchInput?.blur();
   };
 
   const sortBlogs = (blogs: LayoutData["allMetadata"]) => {
     return blogs.sort((a, b) => new Date(b.published).getTime() - new Date(a.published).getTime());
   };
 
+  const findBySearch = ({ title, tags }: LayoutData["allMetadata"][number]) => {
+    const cleanSearchValue = searchValue.toLowerCase().trim();
+    return title.toLowerCase().includes(cleanSearchValue) || tags.includes(cleanSearchValue);
+  };
+
   const blogData = $derived.by(() => {
     if (!searchValue) return sortBlogs(data.allMetadata);
-
-    const blogMatches = data.allMetadata.filter(({ title, tags }) => {
-      const cleanSearchValue = searchValue.toLowerCase().trim();
-      return title.toLowerCase().includes(cleanSearchValue) || tags.includes(cleanSearchValue);
-    });
-
+    const blogMatches = data.allMetadata.filter(findBySearch);
     return sortBlogs(blogMatches);
   });
 
@@ -44,6 +46,8 @@
 
   $effect(() => {
     goto(searchValue ? `?search=${searchValue}` : "/", { keepFocus: true });
+    if (blogData.length) return;
+    toast.warning("No blogs were found", { description: "Try another query" });
   });
 </script>
 
@@ -92,6 +96,6 @@
       </Footer>
     </Root>
   {:else}
-    <p>No blogs were found :(</p>
+    <p>No blogs were found 😔</p>
   {/each}
 </section>

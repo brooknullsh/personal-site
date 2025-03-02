@@ -8,6 +8,7 @@
   import { Input } from "$lib/components/ui/input";
   import { Badge } from "$lib/components/ui/badge";
   import { toast } from "svelte-sonner";
+  import { isMobile } from "$lib/stores";
 
   let { data }: { data: LayoutData } = $props();
 
@@ -60,7 +61,7 @@
 <TitleBar title="🏡 Home" subtitle="Hello, world!">
   <Input
     class="w-full sm:w-1/4"
-    placeholder="Search [s]"
+    placeholder={`Search${$isMobile ? "" : " [s]"}`}
     bind:ref={searchInput}
     bind:value={searchValue}
   />
@@ -80,7 +81,7 @@
           {/each}
         </div>
         <div class="flex w-1/2 justify-end">
-          {#if index < 3}
+          {#if index < 3 && !$isMobile}
             <Button
               bind:ref={viewButtons[index.toString()]}
               class="w-max"

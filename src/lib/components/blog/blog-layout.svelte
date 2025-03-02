@@ -5,6 +5,7 @@
   import TitleBar from "$lib/components/title-bar.svelte";
   import { Button } from "$lib/components/ui/button";
   import { Badge } from "../ui/badge";
+  import { isMobile } from "$lib/stores";
 
   type Props = {
     children: Snippet;
@@ -35,7 +36,10 @@
 
 <TitleBar {title} subtitle={published}>
   <Button bind:ref={homeButton} href="/" variant="outline">
-    🏡<span class="text-muted-foreground">[h]</span>
+    🏡
+    {#if !$isMobile}
+      <span class="text-muted-foreground">[h]</span>
+    {/if}
   </Button>
 </TitleBar>
 

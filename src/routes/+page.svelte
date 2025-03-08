@@ -77,7 +77,7 @@
       <Footer class="flex justify-between">
         <div class="flex w-1/2 gap-2">
           {#each tags.slice(0, 2) as tag}
-            <Badge>{tag}</Badge>
+            <Badge variant="secondary">{tag}</Badge>
           {/each}
         </div>
         <div class="flex w-1/2 justify-end">
@@ -85,13 +85,13 @@
             <Button
               bind:ref={viewButtons[index.toString()]}
               class="w-max"
-              variant="secondary"
+              variant="default"
               href={`/blog/${slug}`}
             >
               View<span class="text-muted-foreground">[{index}]</span>
             </Button>
           {:else}
-            <Button class="w-max" variant="secondary" href={`/blog/${slug}`}>View</Button>
+            <Button class="w-max" variant="default" href={`/blog/${slug}`}>View</Button>
           {/if}
         </div>
       </Footer>

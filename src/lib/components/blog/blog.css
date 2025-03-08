@@ -81,8 +81,9 @@ code[class*="code-block-dark"] *::selection {
 pre[class*="code-block-dark"] {
   padding: 1em;
   margin: 0.5em 0;
+  @apply border;
   overflow: auto;
-  background: #1e1e1e;
+  background: none;
 }
 
 pre:has(.code-block-dark) {
@@ -233,8 +234,8 @@ code[class*="code-block-light"] ::selection {
 pre[class*="code-block-light"] {
   padding: 1em;
   margin: 0.5em 0;
+  @apply border;
   overflow: auto;
-  border: 1px solid #dddddd;
   background-color: white;
 }
 

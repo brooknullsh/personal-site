@@ -50,7 +50,7 @@
 
   <div class="flex flex-wrap items-center justify-center gap-2">
     {#each tags as tag}
-      <Badge>{tag}</Badge>
+      <Badge variant="secondary">{tag}</Badge>
     {/each}
   </div>
 

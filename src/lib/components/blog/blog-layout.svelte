@@ -13,12 +13,14 @@
     description: string;
     tags: string[];
     published: string;
+    lastEdited: string;
   };
 
-  let { children, title, description, tags, published }: Props = $props();
+  let { children, title, description, tags, published, lastEdited }: Props = $props();
   let homeButton = $state<HTMLAnchorElement | null>(null);
 
   published = new Date(published).toLocaleDateString(undefined, { dateStyle: "full" });
+  lastEdited = new Date(lastEdited).toLocaleDateString(undefined, { dateStyle: "full" });
 
   const handleKeyUp = ({ key }: KeyboardEvent) => {
     if (key === "h") homeButton?.click();
@@ -52,5 +54,6 @@
     {/each}
   </div>
 
+  <p class="text-muted-foreground text-center">✍️ {lastEdited}</p>
   {@render children()}
 </section>

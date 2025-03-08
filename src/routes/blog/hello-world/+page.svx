@@ -6,6 +6,7 @@ description: Building a Markdown blog in SvelteKit with theme switching, blog me
 tags: ["svelte", "vercel", "tailwind", "shadcn"]
 
 published: 02/16/25
+lastEdited: 03/08/25
 ---
 
 <script>

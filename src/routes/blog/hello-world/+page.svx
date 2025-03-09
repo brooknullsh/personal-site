@@ -2,7 +2,7 @@
 layout: blog
 
 title: Hello World
-description: Building a Markdown blog in SvelteKit with theme switching, blog metadata & keyboard shortcuts.
+description: Building a Markdown blog in SvelteKit with theme switching, custom components & keyboard shortcuts.
 tags: ["svelte", "vercel", "tailwind", "shadcn", "web"]
 
 published: 02/16/25
@@ -72,9 +72,9 @@ different levels of importance.
 </div>
 ```
 
-Disgusting, right? I've never been able to really dive into dynamic classes in tailwind and figure out the
+Disgusting, right? I've never been able to really dive into dynamic classes in `tailwindcss` and figure out the
 cleanest option so this mess will do. You can't use an interpolated string to alter the colour like for
-`text-${colour}-500` at runtime and instead have to return a whole string for tailwind to process the class
+`text-${colour}-500` at runtime and instead have to return a whole string for `tailwindcss` to process the class
 lists at build time.
 
 Using the `cn` method combining `tw-merge` and `clsx` works also, but for my own sake, I'd prefer to have
@@ -87,12 +87,46 @@ simple classes, let me know at any of my socials in the footer.
   description="Idiomatic & painless way of writing CSS"
 />
 
+## Metadata
+
+It's all good and well writing the blogs using `Mdsvex` which is Svelte flavoured `Markdown` within `.svx`
+files... but how do we read them?
+
+<LinkCard
+  linkUrl="https://mdsvex.pngwn.io"
+  title="Mdsvex"
+  description="Rendering markdown files as Svelte pages"
+/>
+
+A handy part about the `Mdsvex` library is it natively supports `frontmatter` which allows us to export
+metadata within each blog file. I then have a `+layout.server.ts` at the root of my project that extracts said
+metadata objects.
+
+```ts
+import type { LayoutServerLoad } from "./$types";
+
+export const load: LayoutServerLoad = async () => {
+  const blogs = import.meta.glob("*.svx");
+
+  const parsedMetadata = Object.entries(blogs).map(async ([filePath, component]) => ({
+    ...(await component()).metadata,
+  }));
+
+  /* ... */
+};
+```
+
+If you try and read the files using the `import` method dynamically, you will face issues with the build output
+obfuscating the file names etc. so the `import.meta.glob` is a workaround.
+
 ## Theme
 
 Supporting theme switching between dark and light mode is as basic of a feature as it comes but there is
 at least one fun element of it. Avoiding the horrid "flash" of light that the server sends to the client
-before it has the context of your chosen theme. I was able to do this by adding a `JavaScript` file as a
-static resource which was [inspired by this repository](https://github.com/ScriptRaccoon/sveltekit-darkmode-toggler-localstorage).
+before it has the context of your chosen theme.
+
+I was able to do this by adding a `JavaScript` file as a static resource which
+[this repository](https://github.com/ScriptRaccoon/sveltekit-darkmode-toggler-localstorage) inspired.
 
 ```js
 const storedTheme = localStorage.getItem("theme");
@@ -167,7 +201,7 @@ their index meaning later I can access that object by the key pressed.
 
 <svelte:window onkeyup={handleKeyUp} />
 
-{#each blogData, index}
+{#each data, index}
   <Button bind:ref={viewButtons[index.toString()]}>
     View<span>[{index}]</span>
   </Button>

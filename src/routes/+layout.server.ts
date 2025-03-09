@@ -8,6 +8,7 @@ type BlogMetadata = {
   description: string;
   tags: string[];
   published: string;
+  lastEdited: string;
 };
 
 export const load: LayoutServerLoad = async () => {

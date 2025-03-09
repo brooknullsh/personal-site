@@ -1,12 +1,12 @@
 ---
 layout: blog
 
-title: Hello, world!
+title: Hello World
 description: Building a Markdown blog in SvelteKit with theme switching, blog metadata & keyboard shortcuts.
-tags: ["svelte", "vercel", "tailwind", "shadcn"]
+tags: ["svelte", "vercel", "tailwind", "shadcn", "web"]
 
 published: 02/16/25
-lastEdited: 03/08/25
+lastEdited: 03/09/25
 ---
 
 <script>
@@ -14,11 +14,18 @@ lastEdited: 03/08/25
   import LinkCard from "$lib/components/blog/link-card.svelte";
 </script>
 
-<LinkCard
-  linkUrl="https://vercel.com"
-  title="Vercel"
-  description="Hosting Svelte apps is incredibly easy"
-/>
+# Why Build Your Own?
+
+---
+
+Building your own blog/site to store all of your own useless thoughts and code snippets has been done
+over and over again. So why do it now in 2025 (as of writing) instead of using any of the pre-built,
+popular and featured alternatives, like [&#120143](https://x.com) or [Medium](https://medium.com)?
+
+- My working hours are entirely unrelated to web development and I (ashamedly) miss it so this gives
+me an excuse to jump back in
+- Although working locally on a few Svelte projects, I have yet deployed one live and knowing the ease
+of doing it through Vercel made it all the more intriguing
 
 <LinkCard
   linkUrl="https://svelte.dev"
@@ -27,102 +34,67 @@ lastEdited: 03/08/25
 />
 
 <LinkCard
+  linkUrl="https://vercel.com"
+  title="Vercel"
+  description="Hosting Svelte apps is incredibly easy"
+/>
+
+# Features
+
+---
+
+<Callout type="warn">
+  Code examples may be simplified & trimmed so they won't work out of the box
+</Callout>
+
+## Callout
+
+May as well begin with the feature still within your viewport, I've always enjoyed the look of callouts
+and particularly the style of GitHub callouts. Useful for highlighting small blocks of information to
+different levels of importance.
+
+```svelte
+<script lang="ts">
+  const containerStyle = () => {
+    if (type === "info") return "border-blue-500/10 bg-blue-500/5";
+    else if (type === "warn") return "border-yellow-500/10 bg-yellow-500/5";
+    else return "border-red-500/10 bg-red-500/5";
+  };
+
+  const textStyle = () => {
+    if (type === "info") return "text-blue-500";
+    else if (type === "warn") return "text-yellow-500";
+    else return "text-red-500";
+  };
+</script>
+
+<div class={`${textStyle()} ${containerStyle()}`}>
+  <span>{icon}</span>
+  <p>{@render children()}</p>
+</div>
+```
+
+Disgusting, right? I've never been able to really dive into dynamic classes in tailwind and figure out the
+cleanest option so this mess will do. You can't use an interpolated string to alter the colour like for
+`text-${colour}-500` at runtime and instead have to return a whole string for tailwind to process the class
+lists at build time.
+
+Using `cn("...", type === "info" && "text-blue-500")` works also, but for my own sake, I'd prefer to have
+chained conditionals in the script instead of the markup. If any of you know of better ways to write these
+simple classes, let me know at any of my socials in the footer.
+
+<LinkCard
   linkUrl="https://tailwindcss.com"
   title="TailwindCSS"
   description="Idiomatic & painless way of writing CSS"
 />
 
-<LinkCard
-  linkUrl="https://shadcn-svelte.com"
-  title="ShadcnSvelte"
-  description="Self-owned UI components ported to Svelte"
-/>
+## Theme
 
-<LinkCard
-  linkUrl="https://mdsvex.pngwn.io"
-  title="Mdsvex"
-  description="Rendering markdown files as Svelte pages"
-/>
-
-# The Reasoning For It All
-
----
-
-A popular choice to write up thoughts or code snippets is [&#120143 (Twitter)](https://x.com) or [Medium](https://medium.com) where you don't
-have to build out Markdown logic yet again, but why use those options when you can build a worse platform for 10x the work? I would be lying to your
-sweet soul if I didn't also mention that building out this site **quenches my thirst for web development** which I currently am unable to within working hours.
-
-This conveniently is also my first deployed [Svelte](https://svelte.dev) app, coming from [Next](https://nextjs.org) where I learned the core of my web
-development skills. Svelte has been a massive eye opener for me, I loved Next and [React](https://react.dev) which are both incredibly powerful tools but
-**the simplicity of Svelte & it's closeness to JavaScript** made me the "purist" I never thought I'd be.
-
-# Core Features
-
----
-
-<Callout type="warn">
-  All code examples are the bare minimum implementation, they're liable for change and may not work out of the box
-</Callout>
-
-## Callout
-
-May as well let the first thing to talk about be the thing you can see in your viewport above. I always liked the
-[GitHub Markdown flavour](https://github.github.com/gfm/) callouts that are colourful and clear, at first I looked into a
-[rehype-plugin](https://github.com/rehypejs/rehype/blob/main/doc/plugins.md#list-of-plugins) but couldn't get it working and thought it'd be an easy enough
-thing to do myself.
-
-The only thing that provided any difficulty is the same thing that catches me off-guard every time... **styling classes with reactive changes**.
-Thankfully, the `cn` method that you get within `$lib/utils.ts` when you install `shadcn-svelte` makes this a little easier.
-
-<img
-  id="blog-media"
-  src="https://media.giphy.com/media/YKpBDaB7N2AwXhkcNM/giphy.gif?cid=790b7611hcyxcpo8640elxel1ieu2vpakaldqjqaax2z2v6t&ep=v1_gifs_search&rid=giphy.gif&ct=g"
-  alt="hideous"
-/>
-
-```svelte
-<script lang="ts">
-  import type { Snippet } from "svelte";
-  import { cn } from "$lib/utils";
-
-  type Props = {
-    children: Snippet;
-    type: "info" | "warn" | "alert";
-  };
-
-  let { children, type }: Props = $props();
-</script>
-
-<div
-  class={cn(
-    "flex w-full gap-2 rounded border-l-4 p-4",
-    type === "info" && "border-blue-500 bg-blue-500/10",
-    type === "warn" && "border-yellow-500 bg-yellow-500/10",
-    type === "alert" && "border-red-500 bg-red-500/10",
-  )}
->
-  <p
-    class={cn(
-      type === "info" && "text-blue-500",
-      type === "warn" && "text-yellow-500",
-      type === "alert" && "text-red-500",
-    )}
-  >
-    {type === "info" ? "🙋‍♂️" : type === "warn" ? "⚠️" : "🚨"}
-    {@render children()}
-  </p>
-</div>
-```
-
-## Theme Switching
-
-Supporting themes has been a solved problem for a while, but at least for Svelte, I struggled to find consistent resources on the topic
-that also **solved the flashing problem** of the stale HTML styling served server-side. I eventually found
-[this repository](https://github.com/ScriptRaccoon/sveltekit-darkmode-toggler-localstorage) where a static JavaScript file was used to read & set
-the theme within local storage.
-
-Thanks to that file, we can "guarantee" that the local storage & document attribute value will be set when the HTML body loads so reading & changing
-the theme client-side is just as easy.
+Supporting theme switching between dark and light mode is as basic of a feature as it comes but there is
+at least one fun element of it. Avoiding the horrid "flash" of light that the server sends to the client
+before it has the context of your chosen theme. I was able to do this by adding a `JavaScript` file as a
+static resource which was [inspired by this repository](https://github.com/ScriptRaccoon/sveltekit-darkmode-toggler-localstorage).
 
 ```js
 const storedTheme = localStorage.getItem("theme");
@@ -139,77 +111,53 @@ const updateTheme = () => {
 };
 ```
 
-## Blog Metadata
-
-None of these blogs are stored in a database unless we're talking about a [GitHub repository](https://github.com/brooknullsh/personal-site), so
-reading them & their metadata meant actually reading the files themselves. Thankfully, the `import.meta.glob` method saved the day where I can pull in all
-the files within a `+page.server.ts` file at the root of my project and call what is eventually a Svelte component to read the metadata.
-
-When doing something similar in Next, the difficulty came as the routes ended up being **generated & moved at build time** so the dynamic importing no longer
-worked. I was expecting something similar here, but at least the `glob` method provides a fix or the pre-rendering in Svelte doesn't operate the same.
-
-<Callout type="info">
-  If you're smarter than me & know why reading the file system works this way, reach me at my socials in the footer
-</Callout>
-
-```ts
-import type { PageServerLoad } from "./$types";
-
-export const load: PageServerLoad = async () => {
-  const blogs = import.meta.glob("./blog/*/*.svx");
-
-  const parsedMetadata = Object.entries(blogs).map(async ([filePath, component]) => ({
-    /* ... */
-    ...(await component()).metadata,
-  }));
-
-  return { allMetadata: await Promise.all(parsedMetadata) };
-};
+```html
+<body>
+  <script src="%sveltekit.assets%/theme.js"></script>
+</body>
 ```
+
+The setting of the document class attribute is relevant to the `shadcn/ui` component library, or more
+particularly the Svelte fork and it allows the components to read the current theme.
+
+<LinkCard
+  linkUrl="https://shadcn-svelte.com"
+  title="Shadcn (Svelte)"
+  description="Self-owned UI components ported to Svelte"
+/>
 
 ## Keyboard Shortcuts
 
-You may notice, if you press "h" you will return to the homepage... welcome back those crazy few who didn't read ahead before pressing keys at the request
-of a stranger. Ironically, this is not because I'm a heavy [Vim](https://www.vim.org) user but instead because during development **I wanted to bounce between
-pages quicker** than I could drag my fingers across my trackpad.
-
-This is easy with the `svelte:window` component, which you can read more about [here](https://svelte.dev/docs/svelte/svelte-window).
+You may notice, if you press "h" you will return to the homepage... welcome back those crazy few who
+didn't read ahead before pressing keys at the request of a stranger. This is not because I'm a heavy
+[Vim](https://www.vim.org) user but instead because during development I wanted to bounce between pages
+quicker than I could drag my fingers across my track pad.
 
 ```svelte
 <script lang="ts">
-  /* ... */
-
-  let homeButton = $state<HTMLAnchorElement | null>(null);
-
   const handleKeyUp = ({ key }: KeyboardEvent) => {
-    if (key === "h") homeButton?.click();
+    if (key === "h") /* ... */
   };
 </script>
 
 <svelte:window onkeyup={handleKeyUp} />
-
-<Button bind:ref={homeButton}>
-  🏡<span>[h]</span>
-</Button>
 ```
 
-<img
-  id="blog-media"
-  src="https://media.giphy.com/media/kz6cm1kKle2MYkHtJF/giphy.gif?cid=ecf05e47lbel280fu544s4xibg8mujtsuaqizionfop0n177&ep=v1_gifs_search&rid=giphy.gif&ct=g"
-  alt="typing"
-/>
+On your short trip back to the homepage, you may have noticed that there are some shortcuts attached
+to the cards which have very similar logic behind them. Although, the markup is generated by looping
+over the blog metadata objects which means I don't have direct access to the button references.
 
-On your short trip back to the homepage, you may have noticed that there are some shortcuts attached to the cards which have very similar logic behind them.
-Although, the markup is generated by looping over the blog metadata objects which means I don't have direct access to the button references.
+<Callout type="info">
+  I've not included the logic here for only binding the first three cards with a shortcut
+</Callout>
 
-So instead, during the loop I add references of the buttons I want to the **stateful object** keyed by their index meaning later I can access that object
-by the key pressed.
+So instead, during the loop I add references of the buttons I want to the stateful object keyed by
+their index meaning later I can access that object by the key pressed.
+
 
 ```svelte
 <script lang="ts">
-  /* ... */
-
-  const viewButtons = $state<Record<string, HTMLAnchorElement | null>>({
+  let viewButtons = $state<Record<string, HTMLAnchorElement | null>>({
     "0": null,
     "1": null,
     "2": null,
@@ -220,7 +168,7 @@ by the key pressed.
 
 <svelte:window onkeyup={handleKeyUp} />
 
-{#each data as { /* ... */ }, index}
+{#each blogData, index}
   <Button bind:ref={viewButtons[index.toString()]}>
     View<span>[{index}]</span>
   </Button>

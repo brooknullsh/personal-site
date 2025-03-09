@@ -4,11 +4,12 @@
   import { onMount } from "svelte";
   import TitleBar from "$lib/components/title-bar.svelte";
   import { Button } from "$lib/components/ui/button";
-  import { Root, Header, Title, Description, Footer } from "$lib/components/ui/card";
+  import { Root, Header, Title, Description, Content, Footer } from "$lib/components/ui/card";
   import { Input } from "$lib/components/ui/input";
   import { Badge } from "$lib/components/ui/badge";
   import { toast } from "svelte-sonner";
   import { isMobile } from "$lib/stores";
+  import { formatDate } from "$lib/utils";
 
   let { data }: { data: LayoutData } = $props();
 
@@ -68,12 +69,13 @@
 </TitleBar>
 
 <section class="container flex flex-wrap justify-center gap-4">
-  {#each blogData as { slug, title, description, tags }, index}
-    <Root class="flex h-56 w-96 flex-col justify-between">
+  {#each blogData as { slug, title, description, published, tags }, index}
+    <Root class="flex h-72 w-96 flex-col justify-between">
       <Header>
         <Title class="truncate" {title}>{title}</Title>
-        <Description>{description}</Description>
+        <Description>{formatDate(published)}</Description>
       </Header>
+      <Content>{description}</Content>
       <Footer class="flex justify-between">
         <div class="flex w-1/2 gap-2">
           {#each tags.slice(0, 2) as tag}

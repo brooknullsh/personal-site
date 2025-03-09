@@ -4,23 +4,22 @@
   import type { Snippet } from "svelte";
   import TitleBar from "$lib/components/title-bar.svelte";
   import { Button } from "$lib/components/ui/button";
-  import { Badge } from "../ui/badge";
+  import { Badge } from "$lib/components/ui/badge";
   import { isMobile } from "$lib/stores";
+  import { formatDate } from "$lib/utils";
 
   type Props = {
     children: Snippet;
     title: string;
     description: string;
     tags: string[];
-    published: string;
     lastEdited: string;
   };
 
-  let { children, title, description, tags, published, lastEdited }: Props = $props();
+  let { children, title, description, tags, lastEdited }: Props = $props();
   let homeButton = $state<HTMLAnchorElement | null>(null);
 
-  published = new Date(published).toLocaleDateString(undefined, { dateStyle: "full" });
-  lastEdited = new Date(lastEdited).toLocaleDateString(undefined, { dateStyle: "full" });
+  lastEdited = formatDate(lastEdited);
 
   const handleKeyUp = ({ key }: KeyboardEvent) => {
     if (key === "h") homeButton?.click();
@@ -36,7 +35,7 @@
 
 <svelte:window onkeyup={handleKeyUp} />
 
-<TitleBar {title} subtitle={published}>
+<TitleBar {title} subtitle={`Last Edited: ${lastEdited}`}>
   <Button bind:ref={homeButton} href="/" variant="outline">
     🏡
     {#if !$isMobile}
@@ -54,6 +53,5 @@
     {/each}
   </div>
 
-  <p class="text-muted-foreground text-center">✍️ {lastEdited}</p>
   {@render children()}
 </section>

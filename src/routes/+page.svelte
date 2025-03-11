@@ -84,16 +84,11 @@
         </div>
         <div class="flex w-1/2 justify-end">
           {#if index < 3 && !$isMobile}
-            <Button
-              bind:ref={viewButtons[index.toString()]}
-              class="w-max"
-              variant="default"
-              href={`/blog/${slug}`}
-            >
+            <Button bind:ref={viewButtons[index.toString()]} class="w-max" href={`/blog/${slug}`}>
               View<span class="text-muted-foreground">[{index}]</span>
             </Button>
           {:else}
-            <Button class="w-max" variant="default" href={`/blog/${slug}`}>View</Button>
+            <Button class="w-max" href={`/blog/${slug}`}>View</Button>
           {/if}
         </div>
       </Footer>

@@ -1,8 +1,8 @@
 <script lang="ts">
-  import { onMount } from "svelte";
+  import { onMount, type Snippet } from "svelte";
 
-  type Props = { linkUrl: string; title: string; description?: string };
-  let { linkUrl, title, description }: Props = $props();
+  type Props = { linkUrl: string; title: string; children: Snippet };
+  let { linkUrl, title, children }: Props = $props();
 
   let imageUrl = $state("");
 
@@ -29,7 +29,7 @@
     </h2>
     <hr />
     <p class="text-muted-foreground text-xs sm:text-sm">
-      {description}
+      {@render children()}
     </p>
   </div>
 </a>

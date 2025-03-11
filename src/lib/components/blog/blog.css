@@ -23,11 +23,6 @@
     @apply list-inside list-decimal;
   }
 
-  pre,
-  code {
-    @apply rounded;
-  }
-
   :not(pre) > code {
     @apply border-primary/10 bg-muted rounded border p-[0.10rem];
   }
@@ -81,7 +76,7 @@ code[class*="code-block-dark"] *::selection {
 pre[class*="code-block-dark"] {
   padding: 1em;
   margin: 0.5em 0;
-  @apply border;
+  @apply -mt-8 rounded-b border-x border-b; /* The margin is to position the block against the header */
   overflow: auto;
   background: none;
 }
@@ -234,7 +229,7 @@ code[class*="code-block-light"] ::selection {
 pre[class*="code-block-light"] {
   padding: 1em;
   margin: 0.5em 0;
-  @apply border;
+  @apply -mt-8 rounded-b border-x border-b; /* The margin is to position the block against the header */
   overflow: auto;
   background-color: white;
 }

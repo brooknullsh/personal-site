@@ -12,6 +12,7 @@ lastEdited: 03/09/25
 <script>
   import Callout from "$lib/components/blog/callout.svelte";
   import LinkCard from "$lib/components/blog/link-card.svelte";
+  import CodeHeader from "$lib/components/blog/code-header.svelte";
 </script>
 
 # Why Build Your Own?
@@ -25,17 +26,13 @@ popular and featured alternatives, like [&#120143 (Twitter)](https://x.com) or [
 - My working hours are entirely unrelated to web development and I (ashamedly) miss it
 - Although working locally on a few Svelte projects, I have yet deployed one with Vercel
 
-<LinkCard
-  linkUrl="https://svelte.dev"
-  title="Svelte"
-  description="Svelte & SvelteKit are my preferred web technology"
-/>
+<LinkCard linkUrl="https://svelte.dev" title="Svelte">
+  Svelte & SvelteKit are my preferred web technology
+</LinkCard>
 
-<LinkCard
-  linkUrl="https://vercel.com"
-  title="Vercel"
-  description="Hosting Svelte apps is incredibly easy"
-/>
+<LinkCard linkUrl="https://vercel.com" title="Vercel">
+  Hosting Svelte apps is incredibly easy
+</LinkCard>
 
 # Features
 
@@ -50,6 +47,8 @@ popular and featured alternatives, like [&#120143 (Twitter)](https://x.com) or [
 May as well begin with the feature still within your viewport, I've always enjoyed the look of callouts
 and particularly the style of GitHub callouts. Useful for highlighting small blocks of information to
 different levels of importance.
+
+<CodeHeader fileName="example.svelte" />
 
 ```svelte
 <script lang="ts">
@@ -81,26 +80,25 @@ Using the `cn` method combining `tw-merge` and `clsx` works also, but for my own
 chained conditionals in the script instead of the markup. If any of you know of better ways to write these
 simple classes, let me know at any of my socials in the footer.
 
-<LinkCard
-  linkUrl="https://tailwindcss.com"
-  title="TailwindCSS"
-  description="Idiomatic & painless way of writing CSS"
-/>
+
+<LinkCard linkUrl="https://tailwindcss.com" title="TailwindCSS">
+  Idiomatic & painless way of writing CSS
+</LinkCard>
 
 ## Metadata
 
 It's all good and well writing the blogs using `Mdsvex` which is Svelte flavoured `Markdown` within `.svx`
 files... but how do we read them?
 
-<LinkCard
-  linkUrl="https://mdsvex.pngwn.io"
-  title="Mdsvex"
-  description="Rendering markdown files as Svelte pages"
-/>
+<LinkCard linkUrl="https://mdsvex.pngwn.io" title="Mdsvex">
+  Rendering markdown files as Svelte pages
+</LinkCard>
 
 A handy part about the `Mdsvex` library is it natively supports `frontmatter` which allows us to export
 metadata within each blog file. I then have a `+layout.server.ts` at the root of my project that extracts said
 metadata objects.
+
+<CodeHeader fileName="+layout.server.ts" />
 
 ```ts
 import type { LayoutServerLoad } from "./$types";
@@ -128,6 +126,8 @@ before it has the context of your chosen theme.
 I was able to do this by adding a `JavaScript` file as a static resource which
 [this repository](https://github.com/ScriptRaccoon/sveltekit-darkmode-toggler-localstorage) inspired.
 
+<CodeHeader fileName="example.js" />
+
 ```js
 const storedTheme = localStorage.getItem("theme");
 
@@ -147,6 +147,8 @@ const updateTheme = () => {
   Remember to put the script reference at the very top of the markup body
 </Callout>
 
+<CodeHeader fileName="index.html" />
+
 ```html
 <body>
   <script src="%sveltekit.assets%/theme.js"></script>
@@ -157,11 +159,9 @@ const updateTheme = () => {
 The setting of the document class attribute is relevant to the `shadcn/ui` component library, or more
 particularly the Svelte fork and it allows the components to read the current theme.
 
-<LinkCard
-  linkUrl="https://shadcn-svelte.com"
-  title="Shadcn (Svelte)"
-  description="Self-owned UI components ported to Svelte"
-/>
+<LinkCard linkUrl="https://shadcn-svelte.com" title="Shadcn (Svelte)">
+  Self-owned UI components ported to Svelte
+</LinkCard>
 
 ## Keyboard Shortcuts
 
@@ -169,6 +169,8 @@ You may notice, if you press "h" you will return to the homepage... welcome back
 didn't read ahead before pressing keys at the request of a stranger. This is not because I'm a heavy
 [Vim](https://www.vim.org) user but instead because during development I wanted to bounce between pages
 quicker than I could drag my fingers across my track pad.
+
+<CodeHeader fileName="example.svelte" />
 
 ```svelte
 <script lang="ts">
@@ -187,6 +189,7 @@ over the blog metadata objects which means I don't have direct access to the but
 So instead, during the loop I add references of the buttons I want to the stateful object keyed by
 their index meaning later I can access that object by the key pressed.
 
+<CodeHeader fileName="example.svelte" />
 
 ```svelte
 <script lang="ts">

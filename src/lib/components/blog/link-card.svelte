@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { onMount, type Snippet } from "svelte";
+  import { type Snippet, onMount } from "svelte";
 
   type Props = { linkUrl: string; title: string; children: Snippet };
   let { linkUrl, title, children }: Props = $props();
@@ -13,22 +13,18 @@
   });
 </script>
 
-<a
-  class="hover:bg-secondary/50 flex h-36 w-full items-center rounded border !no-underline"
-  href={linkUrl}
->
+<a class="hover:bg-secondary/50 flex h-36 w-full items-center rounded border" href={linkUrl}>
   <img
     class="h-full w-full overflow-hidden rounded-l object-cover sm:w-1/2"
     src={imageUrl || "/favicon.jpeg"}
     alt={title}
   />
-
-  <div class="flex h-full w-full flex-col gap-2 p-4 text-right">
-    <h2 class="text-primary">
+  <div class="flex h-full w-full flex-col gap-2 p-2 text-right">
+    <h4 class="text-xl font-bold">
       {title} <span class="text-muted-foreground">&#8599;</span>
-    </h2>
+    </h4>
     <hr />
-    <p class="text-muted-foreground text-xs sm:text-sm">
+    <p class="text-muted-foreground text-xs">
       {@render children()}
     </p>
   </div>

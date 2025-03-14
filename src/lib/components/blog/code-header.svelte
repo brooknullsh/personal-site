@@ -18,7 +18,7 @@
 </script>
 
 <div
-  class="flex items-center justify-between rounded-t border-x border-y px-2 py-1"
+  class="flex items-center justify-between pl-3 border border-b-0 rounded-t bg-secondary/50"
   bind:this={headerElement}
 >
   <p class="text-muted-foreground">{fileName}</p>
@@ -27,7 +27,7 @@
     onclick={async () => {
       if (!codeContent) return;
       await navigator.clipboard.writeText(codeContent);
-      toast.success("Code copied successfully", { description: `From: ${fileName}` });
+      toast.success("Success", { description: `Snippet "${fileName}" copied` });
     }}
   >
     <svg

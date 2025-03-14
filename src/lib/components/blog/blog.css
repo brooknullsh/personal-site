@@ -1,17 +1,15 @@
 @reference "../../../app.css";
 
-/* General Styling */
-
 #blog-content {
-  h1 {
-    @apply text-2xl font-bold;
+  h2 {
+    @apply text-3xl font-bold;
   }
 
-  h2 {
+  h3 {
     @apply text-xl font-semibold;
   }
 
-  a {
+  p > a {
     @apply text-blue-400 hover:underline;
   }
 
@@ -24,31 +22,27 @@
   }
 
   :not(pre) > code {
-    @apply border-primary/10 bg-muted rounded border p-[0.10rem];
-  }
-
-  #blog-media {
-    @apply m-auto h-auto w-1/2 min-w-96 rounded;
+    @apply bg-secondary text-primary/75 rounded p-0.5 text-sm;
   }
 }
 
-/* Syntax Highlighting */
-
-/* Dark Theme */
-/* https://github.com/PrismJS/prism-themes/blob/master/themes/prism-vsc-dark-plus.css */
+pre[class*="code-block-dark"],
+pre[class*="code-block-light"] {
+  @apply bg-secondary/25 -mt-8 overflow-auto rounded-b border p-2;
+}
 
 pre[class*="code-block-dark"],
 code[class*="code-block-dark"] {
   color: #d4d4d4;
-  font-size: 13px;
+  font-size: 0.9em;
   text-shadow: none;
-  font-family: Menlo, Monaco, Consolas, "Andale Mono", "Ubuntu Mono", "Courier New", monospace;
+  font-family: "Geist Mono", monospace, sans-serif;
   direction: ltr;
   text-align: left;
   white-space: pre;
   word-spacing: normal;
   word-break: normal;
-  line-height: 1.5;
+  line-height: 1.3em;
   -moz-tab-size: 4;
   -o-tab-size: 4;
   tab-size: 4;
@@ -74,14 +68,6 @@ code[class*="code-block-dark"] *::selection {
 }
 
 pre[class*="code-block-dark"] {
-  padding: 1em;
-  margin: 0.5em 0;
-  @apply -mt-8 rounded-b border-x border-b; /* The margin is to position the block against the header */
-  overflow: auto;
-  background: none;
-}
-
-pre:has(.code-block-dark) {
   .namespace {
     opacity: 0.7;
   }
@@ -183,22 +169,130 @@ pre:has(.code-block-dark) {
   .token.italic {
     font-style: italic;
   }
-}
 
-/* Light Theme */
-/* https://github.com/PrismJS/prism-themes/blob/master/themes/prism-vs.css */
+  .token.constant {
+    color: #9cdcfe;
+  }
+
+  .token.class-name,
+  .token.maybe-class-name {
+    color: #4ec9b0;
+  }
+
+  .token.console {
+    color: #9cdcfe;
+  }
+
+  .token.parameter {
+    color: #9cdcfe;
+  }
+
+  .token.interpolation {
+    color: #9cdcfe;
+  }
+
+  .token.punctuation.interpolation-punctuation {
+    color: #569cd6;
+  }
+
+  .token.boolean {
+    color: #569cd6;
+  }
+
+  .token.property,
+  .token.variable,
+  .token.imports .token.maybe-class-name,
+  .token.exports .token.maybe-class-name {
+    color: #9cdcfe;
+  }
+
+  .token.selector {
+    color: #d7ba7d;
+  }
+
+  .token.escape {
+    color: #d7ba7d;
+  }
+
+  .token.tag {
+    color: #569cd6;
+  }
+
+  .token.tag .token.punctuation {
+    color: #808080;
+  }
+
+  .token.cdata {
+    color: #808080;
+  }
+
+  .token.attr-name {
+    color: #9cdcfe;
+  }
+
+  .token.attr-value,
+  .token.attr-value .token.punctuation {
+    color: #ce9178;
+  }
+
+  .token.attr-value .token.punctuation.attr-equals {
+    color: #d4d4d4;
+  }
+
+  .token.entity {
+    color: #569cd6;
+  }
+
+  .token.namespace {
+    color: #4ec9b0;
+  }
+
+  code[class*="language-javascript"],
+  code[class*="language-jsx"],
+  code[class*="language-typescript"],
+  code[class*="language-tsx"] {
+    color: #9cdcfe;
+  }
+
+  code[class*="language-css"] {
+    color: #ce9178;
+  }
+
+  code[class*="language-html"] {
+    color: #d4d4d4;
+  }
+
+  .language-regex .token.anchor {
+    color: #dcdcaa;
+  }
+
+  .language-html .token.punctuation {
+    color: #808080;
+  }
+
+  code[class*="language-"] {
+    position: relative;
+    z-index: 1;
+  }
+
+  .line-highlight.line-highlight {
+    background: #f7ebc6;
+    box-shadow: inset 5px 0 0 #f7d87c;
+    z-index: 0;
+  }
+}
 
 code[class*="code-block-light"],
 pre[class*="code-block-light"] {
   color: #393a34;
-  font-family: Menlo, Monaco, Consolas, "Andale Mono", "Ubuntu Mono", "Courier New", monospace;
-  font-size: 13px;
+  font-family: "Geist Mono", monospace, sans-serif;
   direction: ltr;
   text-align: left;
   white-space: pre;
   word-spacing: normal;
   word-break: normal;
-  line-height: 1.5;
+  font-size: 0.9em;
+  line-height: 1.3em;
   -moz-tab-size: 4;
   -o-tab-size: 4;
   tab-size: 4;
@@ -206,10 +300,6 @@ pre[class*="code-block-light"] {
   -moz-hyphens: none;
   -ms-hyphens: none;
   hyphens: none;
-}
-
-pre > code[class*="code-block-light"] {
-  font-size: 1em;
 }
 
 pre[class*="code-block-light"]::-moz-selection,
@@ -227,14 +317,6 @@ code[class*="code-block-light"] ::selection {
 }
 
 pre[class*="code-block-light"] {
-  padding: 1em;
-  margin: 0.5em 0;
-  @apply -mt-8 rounded-b border-x border-b; /* The margin is to position the block against the header */
-  overflow: auto;
-  background-color: white;
-}
-
-pre:has(.code-block-light) {
   .token.comment,
   .token.prolog,
   .token.doctype,

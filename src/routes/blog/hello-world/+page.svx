@@ -2,11 +2,11 @@
 layout: blog
 
 title: Hello World
-description: Building a Markdown blog in SvelteKit with theme switching, custom components & keyboard shortcuts.
-tags: ["svelte", "vercel", "tailwind", "shadcn", "web"]
+description: An overview of the components for this site.
+tags: ["svelte", "typescript", "tailwindcss", "vercel"]
 
 published: 02/16/25
-lastEdited: 03/09/25
+lastEdited: 03/14/25
 ---
 
 <script>
@@ -15,198 +15,46 @@ lastEdited: 03/09/25
   import CodeHeader from "$lib/components/blog/code-header.svelte";
 </script>
 
-# Why Build Your Own?
+## This Is A Title
 
----
+### This Is A Subtitle
 
-Building your own blog/site to store all of your own useless thoughts and code snippets has been done
-over and over again. So why do it now in 2025 (as of writing) instead of using any of the pre-built,
-popular and featured alternatives, like [&#120143 (Twitter)](https://x.com) or [Medium](https://medium.com)?
+This is a paragraph of text.
 
-- My working hours are entirely unrelated to web development and I (ashamedly) miss it
-- Although working locally on a few Svelte projects, I have yet deployed one with Vercel
+`This is inline code`.
 
-<LinkCard linkUrl="https://svelte.dev" title="Svelte">
-  Svelte & SvelteKit are my preferred web technology
-</LinkCard>
+*This is an italic paragraph of text*.
 
-<LinkCard linkUrl="https://vercel.com" title="Vercel">
-  Hosting Svelte apps is incredibly easy
-</LinkCard>
+**This is a bold paragraph of text**.
 
-# Features
+[This is a link](https://google.com).
 
----
+- Unordered One
+- Unordered Two
 
-<Callout type="warn">
-  Code examples may be simplified & trimmed so they won't work out of the box
-</Callout>
-
-## Callout
-
-May as well begin with the feature still within your viewport, I've always enjoyed the look of callouts
-and particularly the style of GitHub callouts. Useful for highlighting small blocks of information to
-different levels of importance.
-
-<CodeHeader fileName="example.svelte" />
-
-```svelte
-<script lang="ts">
-  const containerStyle = () => {
-    if (type === "info") return "border-blue-500/10 bg-blue-500/5";
-    else if (type === "warn") return "border-yellow-500/10 bg-yellow-500/5";
-    else return "border-red-500/10 bg-red-500/5";
-  };
-
-  const textStyle = () => {
-    if (type === "info") return "text-blue-500";
-    else if (type === "warn") return "text-yellow-500";
-    else return "text-red-500";
-  };
-</script>
-
-<div class={`${textStyle()} ${containerStyle()}`}>
-  <span>{icon}</span>
-  <p>{@render children()}</p>
-</div>
-```
-
-Disgusting, right? I've never been able to really dive into dynamic classes in `tailwindcss` and figure out the
-cleanest option so this mess will do. You can't use an interpolated string to alter the colour like for
-`text-${colour}-500` at runtime and instead have to return a whole string for `tailwindcss` to process the class
-lists at build time.
-
-Using the `cn` method combining `tw-merge` and `clsx` works also, but for my own sake, I'd prefer to have
-chained conditionals in the script instead of the markup. If any of you know of better ways to write these
-simple classes, let me know at any of my socials in the footer.
-
-
-<LinkCard linkUrl="https://tailwindcss.com" title="TailwindCSS">
-  Idiomatic & painless way of writing CSS
-</LinkCard>
-
-## Metadata
-
-It's all good and well writing the blogs using `Mdsvex` which is Svelte flavoured `Markdown` within `.svx`
-files... but how do we read them?
-
-<LinkCard linkUrl="https://mdsvex.pngwn.io" title="Mdsvex">
-  Rendering markdown files as Svelte pages
-</LinkCard>
-
-A handy part about the `Mdsvex` library is it natively supports `frontmatter` which allows us to export
-metadata within each blog file. I then have a `+layout.server.ts` at the root of my project that extracts said
-metadata objects.
-
-<CodeHeader fileName="+layout.server.ts" />
-
-```ts
-import type { LayoutServerLoad } from "./$types";
-
-export const load: LayoutServerLoad = async () => {
-  const blogs = import.meta.glob("*.svx");
-
-  const parsedMetadata = Object.entries(blogs).map(async ([filePath, component]) => ({
-    ...(await component()).metadata,
-  }));
-
-  /* ... */
-};
-```
-
-If you try and read the files using the `import` method dynamically, you will face issues with the build output
-obfuscating the file names etc. so the `import.meta.glob` is a workaround.
-
-## Theme
-
-Supporting theme switching between dark and light mode is as basic of a feature as it comes but there is
-at least one fun element of it. Avoiding the horrid "flash" of light that the server sends to the client
-before it has the context of your chosen theme.
-
-I was able to do this by adding a `JavaScript` file as a static resource which
-[this repository](https://github.com/ScriptRaccoon/sveltekit-darkmode-toggler-localstorage) inspired.
-
-<CodeHeader fileName="example.js" />
-
-```js
-const storedTheme = localStorage.getItem("theme");
-
-if (storedTheme) {
-  document.documentElement.setAttribute("class", storedTheme);
-} else updateTheme();
-
-const updateTheme = () => {
-  const system = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
-
-  document.documentElement.setAttribute("class", system);
-  localStorage.setItem("theme", system);
-};
-```
+1. Ordered One
+2. Ordered Two
 
 <Callout type="info">
-  Remember to put the script reference at the very top of the markup body
+  This is an <strong>info</strong> callout
 </Callout>
 
-<CodeHeader fileName="index.html" />
+<Callout type="warn">
+  This is a <strong>warn</strong> callout
+</Callout>
 
-```html
-<body>
-  <script src="%sveltekit.assets%/theme.js"></script>
-  <!-- ... -->
-</body>
+<Callout type="alert">
+  This is an <strong>alert</strong> callout
+</Callout>
+
+<CodeHeader fileName="main.ts" />
+
+```ts
+function main() {
+  return "Hello, world!";
+}
 ```
 
-The setting of the document class attribute is relevant to the `shadcn/ui` component library, or more
-particularly the Svelte fork and it allows the components to read the current theme.
-
-<LinkCard linkUrl="https://shadcn-svelte.com" title="Shadcn (Svelte)">
-  Self-owned UI components ported to Svelte
+<LinkCard linkUrl="https://svelte.dev" title="Svelte">
+  Versatile and lightweight web development framework
 </LinkCard>
-
-## Keyboard Shortcuts
-
-You may notice, if you press "h" you will return to the homepage... welcome back those crazy few who
-didn't read ahead before pressing keys at the request of a stranger. This is not because I'm a heavy
-[Vim](https://www.vim.org) user but instead because during development I wanted to bounce between pages
-quicker than I could drag my fingers across my track pad.
-
-<CodeHeader fileName="example.svelte" />
-
-```svelte
-<script lang="ts">
-  const handleKeyUp = ({ key }: KeyboardEvent) => {
-    if (key === "h") /* ... */
-  };
-</script>
-
-<svelte:window onkeyup={handleKeyUp} />
-```
-
-On your short trip back to the homepage, you may have noticed that there are some shortcuts attached
-to the cards which have very similar logic behind them. Although, the markup is generated by looping
-over the blog metadata objects which means I don't have direct access to the button references.
-
-So instead, during the loop I add references of the buttons I want to the stateful object keyed by
-their index meaning later I can access that object by the key pressed.
-
-<CodeHeader fileName="example.svelte" />
-
-```svelte
-<script lang="ts">
-  let viewButtons = $state<Record<string, HTMLAnchorElement | null>>({
-    "0": null,
-    "1": null,
-    "2": null,
-  });
-
-  const handleKeyUp = ({ key }: KeyboardEvent) => viewButtons[key]?.click();
-</script>
-
-<svelte:window onkeyup={handleKeyUp} />
-
-{#each data, index}
-  <Button bind:ref={viewButtons[index.toString()]}>
-    View<span>[{index}]</span>
-  </Button>
-{/each}
-```

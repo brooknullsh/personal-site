@@ -1,10 +1,10 @@
 <script lang="ts">
-  import { onMount, type Snippet } from "svelte";
-  import { Root, Trigger, Content, Group, GroupHeading, Item } from "$lib/components/ui/select";
+  import { Content, Group, GroupHeading, Item, Root, Trigger } from "$lib/components/ui/select";
   import { Separator } from "$lib/components/ui/separator";
+  import { type Snippet, onMount } from "svelte";
 
   type Props = {
-    children?: Snippet;
+    children: Snippet;
     title: string;
     subtitle: string;
   };
@@ -12,42 +12,45 @@
   let { children, title, subtitle }: Props = $props();
   let theme = $state("");
 
-  const readTheme = () => {
+  function readTheme() {
     const system = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
     theme = localStorage.getItem("theme") || system;
-  };
+  }
 
-  const adjustElementClass = (element: HTMLElement) => {
+  function adjustElementClass(element: HTMLElement) {
     const previousTheme = theme === "dark" ? "light" : "dark";
     element.classList.remove(`code-block-${previousTheme}`);
     element.classList.add(`code-block-${theme}`);
-  };
+  }
 
-  const updateTheme = () => {
+  function updateTheme() {
     document.documentElement.setAttribute("class", theme);
     localStorage.setItem("theme", theme);
 
     document.querySelectorAll("pre").forEach(adjustElementClass);
     document.querySelectorAll("code").forEach(adjustElementClass);
-  };
+  }
 
   onMount(readTheme);
   $effect(updateTheme);
 </script>
 
 <nav
-  class="bg-card/50 sticky top-0 z-50 flex h-20 items-center justify-between px-8 backdrop-blur-lg"
+  class="bg-dark/10 sticky top-0 z-50 flex h-20 items-center justify-between px-8 backdrop-blur-lg"
 >
   <div class="flex w-1/2 flex-col gap-2">
     <h1 class="truncate text-3xl font-bold" {title}>{title}</h1>
-    <p class="text-muted-foreground truncate text-xs" title={subtitle}>{subtitle}</p>
+    <p class="text-muted-foreground truncate text-sm" title={subtitle}>
+      {subtitle}
+    </p>
   </div>
-
-  <div class="flex w-1/2 justify-end gap-2">
+  <div class="flex justify-end gap-2">
     <Root type="single" bind:value={theme}>
-      <Trigger class="w-max">{theme.charAt(0).toUpperCase() + theme.slice(1)}</Trigger>
+      <Trigger class="w-min">
+        {theme.charAt(0).toUpperCase() + theme.slice(1)}
+      </Trigger>
       <Content>
-        <Group class="flex flex-col gap-1">
+        <Group>
           <GroupHeading>Theme</GroupHeading>
           <Separator />
           <Item value="dark">Dark</Item>
@@ -55,10 +58,7 @@
         </Group>
       </Content>
     </Root>
-
-    {#if children}
-      <Separator orientation="vertical" />
-      {@render children()}
-    {/if}
+    <Separator orientation="vertical" />
+    {@render children()}
   </div>
 </nav>

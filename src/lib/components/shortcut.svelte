@@ -1,11 +1,18 @@
 <script lang="ts">
-  import { isMobile } from "$lib/stores";
+  import { onMount } from "svelte";
 
   type Props = { key: string };
   let { key }: Props = $props();
+
+  let isMobile = $state(true);
+
+  onMount(() => {
+    const userAgent = navigator.userAgent.toLowerCase();
+    isMobile = /iphone|ipad|ipod|android/i.test(userAgent);
+  });
 </script>
 
-{#if !$isMobile}
+{#if !isMobile}
   <div class="flex items-center">
     <span
       class="bg-secondary/50 border h-min rounded-sm px-1 flex items-center text-xs text-muted-foreground"

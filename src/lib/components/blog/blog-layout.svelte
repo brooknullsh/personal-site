@@ -5,7 +5,6 @@
   import { Badge } from "$lib/components/ui/badge";
   import { Button } from "$lib/components/ui/button";
   import { formatDate } from "$lib/utils";
-  import "./blog.css";
   import House from "lucide-svelte/icons/house";
   import type { Snippet } from "svelte";
 

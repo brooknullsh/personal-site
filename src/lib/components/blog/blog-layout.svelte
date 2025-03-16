@@ -1,11 +1,12 @@
 <script lang="ts">
+  import { Separator } from "$lib/components//ui/select";
+  import Shortcut from "$lib/components/shortcut.svelte";
   import TitleBar from "$lib/components/title-bar.svelte";
   import { Badge } from "$lib/components/ui/badge";
   import { Button } from "$lib/components/ui/button";
-  import { isMobile } from "$lib/stores";
   import { formatDate } from "$lib/utils";
-  import { Separator } from "../ui/select";
   import "./blog.css";
+  import House from "lucide-svelte/icons/house";
   import type { Snippet } from "svelte";
 
   type Props = {
@@ -39,10 +40,8 @@
 
 <TitleBar {title} subtitle={published}>
   <Button bind:ref={homeButton} href="/" variant="outline">
-    🏡
-    {#if !$isMobile}
-      <span class="text-muted-foreground">- h -</span>
-    {/if}
+    <House />
+    <Shortcut key="h" />
   </Button>
 </TitleBar>
 

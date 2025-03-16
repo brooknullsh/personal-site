@@ -1,12 +1,12 @@
 <script lang="ts">
   import { goto } from "$app/navigation";
+  import Shortcut from "$lib/components/shortcut.svelte";
   import TitleBar from "$lib/components/title-bar.svelte";
   import { Badge } from "$lib/components/ui/badge";
   import { Button } from "$lib/components/ui/button";
   import { Content, Description, Footer, Header, Root, Title } from "$lib/components/ui/card";
   import { Input } from "$lib/components/ui/input";
-  import { isMobile } from "$lib/stores";
-  import { formatDate, sortBlogs } from "$lib/utils";
+  import { formatDate, sortBlogs, type BlogMetadata } from "$lib/utils";
   import type { LayoutData } from "./$types";
   import { onMount } from "svelte";
   import { toast } from "svelte-sonner";
@@ -20,12 +20,13 @@
     "2": null,
   });
 
+  function blogSearch(searchValue: string, { title, tags }: BlogMetadata) {
+    return title.toLowerCase().includes(searchValue) || tags.includes(searchValue);
+  }
+
   function setBlogData(searchValue: string) {
     searchValue = searchValue.toLowerCase().trim();
-    const blogs = data.allMetadata.filter(({ title, tags }) => {
-      title = title.toLowerCase();
-      return title.includes(searchValue) || tags.includes(searchValue);
-    });
+    const blogs = data.allMetadata.filter((metadata) => blogSearch(searchValue, metadata));
 
     if (blogs.length) {
       data.allMetadata = sortBlogs(blogs);
@@ -71,8 +72,9 @@
     class="w-full sm:w-72"
     bind:ref={searchInput}
     oninput={handleSearchInput}
-    placeholder={`Search ${$isMobile ? "" : "- s -"}`}
+    placeholder="Search..."
   />
+  <Shortcut key="s" />
 </TitleBar>
 
 <section class="container flex flex-wrap justify-center gap-4 py-4">
@@ -89,11 +91,11 @@
             <Badge variant="secondary">{tag}</Badge>
           {/each}
         </div>
-        <div>
-          <Button bind:ref={viewButtons[index.toString()]} href={`/blog/${slug}`}>
+        <div class="flex items-center gap-2">
+          <Button bind:ref={viewButtons[index.toString()]} variant="outline" href={`/blog/${slug}`}>
             View
-            {#if !$isMobile}
-              <span class="text-muted-foreground">- {index.toString()} -</span>
+            {#if index < 3}
+              <Shortcut key={index.toString()} />
             {/if}
           </Button>
         </div>

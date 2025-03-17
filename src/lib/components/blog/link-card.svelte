@@ -7,7 +7,7 @@
   let imageUrl = $state("");
 
   onMount(async () => {
-    const res = await fetch(`/get-metadata?target=${linkUrl}`);
+    const res = await fetch(`/api/get-metadata?target=${linkUrl}`);
     const { imageUrl: url } = await res.json();
     imageUrl = url;
   });

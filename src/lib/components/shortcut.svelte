@@ -15,7 +15,7 @@
 {#if !isMobile}
   <div class="flex items-center">
     <span
-      class="bg-secondary/50 border h-min rounded-sm px-1 flex items-center text-xs text-muted-foreground"
+      class="bg-secondary border h-min rounded-sm px-1 flex items-center text-xs text-muted-foreground"
     >
       &lsaquo;{key}&rsaquo;
     </span>

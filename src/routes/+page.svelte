@@ -79,7 +79,7 @@
 
 <section class="container flex flex-wrap justify-center gap-4 py-4">
   {#each data.allMetadata as { slug, title, description, published, tags }, index}
-    <Root class="flex h-max w-96 flex-col justify-between">
+    <Root class="flex h-62 w-96 flex-col justify-between">
       <Header>
         <Title class="truncate" {title}>{title}</Title>
         <Description>{formatDate(published)}</Description>
@@ -88,11 +88,11 @@
       <Footer class="flex justify-between">
         <div class="flex gap-2">
           {#each tags.slice(0, 2) as tag}
-            <Badge variant="secondary">{tag}</Badge>
+            <Badge variant="outline">{tag}</Badge>
           {/each}
         </div>
         <div class="flex items-center gap-2">
-          <Button bind:ref={viewButtons[index.toString()]} variant="outline" href={`/blog/${slug}`}>
+          <Button bind:ref={viewButtons[index.toString()]} href={`/blog/${slug}`}>
             View
             {#if index < 3}
               <Shortcut key={index.toString()} />

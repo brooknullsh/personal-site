@@ -79,7 +79,7 @@
 
 <section class="container flex flex-wrap justify-center gap-4 py-4">
   {#each data.allMetadata as { slug, title, description, published, tags }, index}
-    <Root class="flex h-62 w-96 flex-col justify-between">
+    <Root class="flex h-62 w-96 flex-col justify-between bg-card/10 backdrop-blur-xs">
       <Header>
         <Title class="truncate" {title}>{title}</Title>
         <Description>{formatDate(published)}</Description>

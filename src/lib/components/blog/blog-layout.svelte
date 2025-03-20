@@ -44,7 +44,10 @@
   </Button>
 </TitleBar>
 
-<section class="container flex flex-col gap-8 py-4" id="blog-content">
+<section
+  class="container bg-background/10 backdrop-blur-xs flex flex-col gap-8 py-4"
+  id="blog-content"
+>
   <p class="text-muted-foreground text-center italic">{description}</p>
   <div class="flex flex-wrap items-center justify-center gap-2">
     {#each tags as tag}

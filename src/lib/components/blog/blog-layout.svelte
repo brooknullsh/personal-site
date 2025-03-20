@@ -48,7 +48,7 @@
   <p class="text-muted-foreground text-center italic">{description}</p>
   <div class="flex flex-wrap items-center justify-center gap-2">
     {#each tags as tag}
-      <Badge variant="secondary">{tag}</Badge>
+      <Badge>{tag}</Badge>
     {/each}
   </div>
   <Separator />

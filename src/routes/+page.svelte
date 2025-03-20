@@ -88,11 +88,11 @@
       <Footer class="flex justify-between">
         <div class="flex gap-2">
           {#each tags.slice(0, 2) as tag}
-            <Badge variant="outline">{tag}</Badge>
+            <Badge>{tag}</Badge>
           {/each}
         </div>
         <div class="flex items-center gap-2">
-          <Button bind:ref={viewButtons[index.toString()]} href={`/blog/${slug}`}>
+          <Button bind:ref={viewButtons[index.toString()]} variant="outline" href={`/blog/${slug}`}>
             View
             {#if index < 3}
               <Shortcut key={index.toString()} />

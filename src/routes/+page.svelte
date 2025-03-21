@@ -82,7 +82,7 @@
     <Root class="flex h-62 w-96 flex-col justify-between bg-card/10 backdrop-blur-xs">
       <Header>
         <Title class="truncate" {title}>{title}</Title>
-        <Description>{formatDate(published)}</Description>
+        <Description>{formatDate(published, "full")}</Description>
       </Header>
       <Content>{description}</Content>
       <Footer class="flex justify-between">

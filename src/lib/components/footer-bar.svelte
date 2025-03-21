@@ -3,7 +3,7 @@
 </script>
 
 <footer class="flex h-[5vh] items-center justify-center">
-  <div class="bg-background/10 backdrop-blur-xs border rounded">
+  <div class="bg-background/10 backdrop-blur-xs border rounded-xl">
     <Button href="https://github.com/brooknullsh" variant="link">
       <svg class="fill-current" viewBox="0 0 24 24">
         <path

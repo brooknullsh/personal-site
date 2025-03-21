@@ -20,8 +20,8 @@
   let { children, title, description, tags, published, lastEdited }: Props = $props();
   let homeButton = $state<HTMLAnchorElement | null>(null);
 
-  published = formatDate(published);
-  lastEdited = formatDate(lastEdited);
+  published = formatDate(published, "short");
+  lastEdited = formatDate(lastEdited, "full");
 
   function handleKeyUp({ key }: KeyboardEvent) {
     if (key === "h") homeButton?.click();
@@ -37,7 +37,7 @@
 
 <svelte:window onkeyup={handleKeyUp} />
 
-<TitleBar {title} subtitle={published}>
+<TitleBar title={published} subtitle={`Edited: ${lastEdited}`}>
   <Button bind:ref={homeButton} href="/" variant="outline">
     <House />
     <Shortcut key="h" />
@@ -48,6 +48,7 @@
   class="container bg-background/10 backdrop-blur-xs flex flex-col gap-8 py-4"
   id="blog-content"
 >
+  <h2 class="text-center !font-light !text-6xl">{title}</h2>
   <p class="text-muted-foreground text-center italic">{description}</p>
   <div class="flex flex-wrap items-center justify-center gap-2">
     {#each tags as tag}
@@ -56,5 +57,4 @@
   </div>
   <Separator />
   {@render children()}
-  <p class="text-muted-foreground text-center">{lastEdited}</p>
 </section>

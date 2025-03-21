@@ -13,8 +13,8 @@ export type BlogMetadata = {
 
 export const cn = (...inputs: ClassValue[]) => twMerge(clsx(inputs));
 
-export function formatDate(date: string) {
-  return new Date(date).toLocaleDateString(undefined, { dateStyle: "full" });
+export function formatDate(date: string, dateStyle: Intl.DateTimeFormatOptions["dateStyle"]) {
+  return new Date(date).toLocaleDateString(undefined, { dateStyle });
 }
 
 export function sortBlogs(metadata: BlogMetadata[]) {

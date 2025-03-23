@@ -103,6 +103,19 @@
     @apply list-inside list-decimal;
   }
 
+  table {
+    @apply text-left;
+
+    thead {
+      @apply bg-secondary/50;
+    }
+
+    td,
+    th {
+      @apply border p-2;
+    }
+  }
+
   :not(pre) > code {
     @apply bg-secondary rounded p-0.5 text-sm;
   }

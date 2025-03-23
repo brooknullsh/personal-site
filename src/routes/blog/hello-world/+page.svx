@@ -6,7 +6,7 @@ description: An overview of this site.
 tags: ["svelte", "typescript", "tailwindcss", "vercel"]
 
 published: 02/16/25
-lastEdited: 03/16/25
+lastEdited: 03/23/25
 ---
 
 <script>
@@ -26,6 +26,10 @@ This is a paragraph of text.
 *This is an italic paragraph of text*.
 
 **This is a bold paragraph of text**.
+
+| Title One  | Title Two | Title Three |
+|------------|-----------|-------------|
+| Data One   | Data Two  | Data Three  |
 
 [This is a link](https://google.com).
 

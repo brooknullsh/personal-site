@@ -79,13 +79,13 @@
 </TitleBar>
 
 <section class="container flex flex-col gap-8 py-4">
-  <h1 class="text-6xl truncate">Blogs</h1>
+  <h1 class="text-4xl font-bold border-b w-max truncate">Blogs</h1>
 
   <div class="flex flex-wrap gap-4 justify-center">
     {#each data.allMetadata as { slug, title, description, published, tags }, index}
       <Root class="flex h-62 w-96 flex-col justify-between bg-card/10 backdrop-blur-xs">
         <Header>
-          <Title class="truncate" {title}>{title}</Title>
+          <Title class="truncate font-medium" {title}>{title}</Title>
           <Description>{formatDate(published, "full")}</Description>
         </Header>
         <Content>{description}</Content>

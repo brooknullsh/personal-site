@@ -39,8 +39,8 @@
   class="bg-background/10 sticky top-0 z-50 flex h-20 items-center justify-between px-8 backdrop-blur-lg"
 >
   <div class="flex w-1/2 flex-col gap-2">
-    <h1 class="truncate text-3xl font-bold" {title}>{title}</h1>
-    <p class="text-muted-foreground truncate text-sm" title={subtitle}>
+    <h2 class="truncate font-bold" {title}>{title}</h2>
+    <p class="text-muted-foreground truncate text-xs" title={subtitle}>
       {subtitle}
     </p>
   </div>

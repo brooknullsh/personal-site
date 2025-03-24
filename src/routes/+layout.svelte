@@ -8,7 +8,7 @@
 
 <Toaster theme="dark" />
 
-<div class="sticky top-0 left-0 dark:opacity-10 opacity-20 -z-50">
+<div class="sticky top-0 left-0 dark:opacity-5 opacity-10 -z-50">
   <svg class="absolute h-screen w-screen">
     <defs>
       <pattern

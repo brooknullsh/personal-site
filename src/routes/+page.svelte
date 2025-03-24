@@ -21,7 +21,8 @@
   });
 
   function blogSearch(searchValue: string, { title, tags }: BlogMetadata) {
-    return title.toLowerCase().includes(searchValue) || tags.includes(searchValue);
+    title = title.toLowerCase();
+    return title.includes(searchValue) || tags.some((tag) => tag.includes(searchValue));
   }
 
   function setBlogData(searchValue: string) {
@@ -77,29 +78,37 @@
   <Shortcut key="s" />
 </TitleBar>
 
-<section class="container flex flex-wrap justify-center gap-4 py-4">
-  {#each data.allMetadata as { slug, title, description, published, tags }, index}
-    <Root class="flex h-62 w-96 flex-col justify-between bg-card/10 backdrop-blur-xs">
-      <Header>
-        <Title class="truncate" {title}>{title}</Title>
-        <Description>{formatDate(published, "full")}</Description>
-      </Header>
-      <Content>{description}</Content>
-      <Footer class="flex justify-between">
-        <div class="flex gap-2">
-          {#each tags.slice(0, 2) as tag}
-            <Badge>{tag}</Badge>
-          {/each}
-        </div>
-        <div class="flex items-center gap-2">
-          <Button bind:ref={viewButtons[index.toString()]} variant="outline" href={`/blog/${slug}`}>
-            View
-            {#if index < 3}
-              <Shortcut key={index.toString()} />
-            {/if}
-          </Button>
-        </div>
-      </Footer>
-    </Root>
-  {/each}
+<section class="container flex flex-col gap-8 py-4">
+  <h1 class="text-6xl truncate">Blogs</h1>
+
+  <div class="flex flex-wrap gap-4 justify-center">
+    {#each data.allMetadata as { slug, title, description, published, tags }, index}
+      <Root class="flex h-62 w-96 flex-col justify-between bg-card/10 backdrop-blur-xs">
+        <Header>
+          <Title class="truncate" {title}>{title}</Title>
+          <Description>{formatDate(published, "full")}</Description>
+        </Header>
+        <Content>{description}</Content>
+        <Footer class="flex justify-between">
+          <div class="flex gap-2">
+            {#each tags.slice(0, 2) as tag}
+              <Badge>{tag}</Badge>
+            {/each}
+          </div>
+          <div class="flex items-center gap-2">
+            <Button
+              bind:ref={viewButtons[index.toString()]}
+              variant="outline"
+              href={`/blog/${slug}`}
+            >
+              View
+              {#if index < 3}
+                <Shortcut key={index.toString()} />
+              {/if}
+            </Button>
+          </div>
+        </Footer>
+      </Root>
+    {/each}
+  </div>
 </section>

@@ -21,7 +21,7 @@
   class="flex items-center justify-between pl-3 border border-b-0 rounded-t bg-secondary/50"
   bind:this={headerElement}
 >
-  <p class="text-muted-foreground">{fileName}</p>
+  <p class="text-muted-foreground text-sm">{fileName}</p>
   <Button
     variant="ghost"
     onclick={async () => {

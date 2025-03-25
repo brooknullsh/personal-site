@@ -1,5 +1,4 @@
 <script lang="ts">
-  import { page } from "$app/state";
   import { Separator } from "$lib/components//ui/select";
   import Shortcut from "$lib/components/shortcut.svelte";
   import TitleBar from "$lib/components/title-bar.svelte";
@@ -36,12 +35,11 @@
   <meta name="keywords" content={tags.join(",")} />
   <meta property="og:description" content={description} />
   <meta property="og:title" content={title} />
-  <meta property="og:url" content={page.url.href} />
+  <meta property="og:url" content="https://brooknullsh.com" />
   <meta
     property="og:image"
-    content={`${page.url.origin}/api/site-metadata?title=${title}&subtitle=${description}`}
+    content={`https://brooknullsh.com/api/site-metadata?title=${title}&subtitle=${description}`}
   />
-
   <meta name="twitter:card" property="twitter:card" content="summary_large_image" />
   <meta name="twitter:image:alt" property="twitter:title" content={title} />
   <meta name="twitter:title" property="twitter:title" content={title} />
@@ -49,7 +47,7 @@
   <meta
     name="twitter:image"
     property="twitter:image"
-    content={`${page.url.origin}/api/site-metadata?title=${title}&subtitle=${description}`}
+    content={`https://brooknullsh.com/api/site-metadata?title=${title}&subtitle=${description}`}
   />
 </svelte:head>
 

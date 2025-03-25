@@ -79,7 +79,7 @@
 </TitleBar>
 
 <section class="container flex flex-col gap-8 py-4">
-  <h1 class="text-4xl font-bold border-b w-max truncate">Blogs</h1>
+  <h1 class="text-4xl font-bold truncate">Blogs</h1>
 
   <div class="flex flex-wrap gap-4 justify-center">
     {#each data.allMetadata as { slug, title, description, published, tags }, index}

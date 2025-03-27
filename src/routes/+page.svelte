@@ -85,7 +85,12 @@
     {#each data.allMetadata as { slug, title, description, published, tags }, index}
       <Root class="flex h-62 w-96 flex-col justify-between bg-card/10 backdrop-blur-xs">
         <Header>
-          <Title class="truncate font-medium" {title}>{title}</Title>
+          <div class="flex justify-between">
+            <Title class="truncate font-medium" {title}>{title}</Title>
+            {#if index < 3}
+              <Shortcut key={index.toString()} />
+            {/if}
+          </div>
           <Description>{formatDate(published, "full")}</Description>
         </Header>
         <Content>{description}</Content>
@@ -97,14 +102,12 @@
           </div>
           <div class="flex items-center gap-2">
             <Button
+              class="text-xl"
               bind:ref={viewButtons[index.toString()]}
-              variant="outline"
+              variant="secondary"
               href={`/blog/${slug}`}
             >
-              View
-              {#if index < 3}
-                <Shortcut key={index.toString()} />
-              {/if}
+              &rsaquo;
             </Button>
           </div>
         </Footer>

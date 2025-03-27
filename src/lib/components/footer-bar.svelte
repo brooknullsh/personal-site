@@ -2,6 +2,7 @@
   import { Button } from "$lib/components/ui/button";
 </script>
 
+<!-- Inline SVGs used here instead of from "lucide-svelte" as they're deprecated -->
 <footer class="flex h-[5vh] items-center justify-center">
   <div class="bg-background/10 backdrop-blur-xs border rounded-xl">
     <Button href="https://github.com/brooknullsh" variant="link">

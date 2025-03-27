@@ -15,6 +15,9 @@ export const GET: RequestHandler = async ({ url }) => {
   const title = url.searchParams.get("title") || undefined;
   const subtitle = url.searchParams.get("subtitle") || undefined;
 
+  // There is an issue of compatibility in the "satori-html" package with the "bun"
+  // runtime so I've added a local patch suggested in the below thread.
+  // https://github.com/natemoo-re/satori-html/issues/24#issuecomment-2622700604
   const { body } = render(Component, { props: { title, subtitle } });
   const svg = await satori(toReactNode(body), {
     fonts: [{ name: "Geist Mono", data: await FONT, style: "normal" }],

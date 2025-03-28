@@ -1,6 +1,7 @@
 <script lang="ts">
   import { Content, Group, GroupHeading, Item, Root, Trigger } from "$lib/components/ui/select";
   import { Separator } from "$lib/components/ui/separator";
+  import Palette from "lucide-svelte/icons/palette";
   import { type Snippet, onMount } from "svelte";
 
   type Props = {
@@ -47,7 +48,7 @@
   <div class="flex justify-end gap-2">
     <Root type="single" bind:value={theme}>
       <Trigger class="w-min">
-        {theme.charAt(0).toUpperCase() + theme.slice(1)}
+        <Palette size={16} />
       </Trigger>
       <Content>
         <Group>

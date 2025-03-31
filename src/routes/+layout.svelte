@@ -2,8 +2,13 @@
   import FooterBar from "$lib/components/footer-bar.svelte";
   import { Toaster } from "$lib/components/ui/sonner";
   import "../app.css";
+  import { injectAnalytics } from "@vercel/analytics/sveltekit";
+  import { injectSpeedInsights } from "@vercel/speed-insights/sveltekit";
 
   let { children } = $props();
+
+  injectAnalytics();
+  injectSpeedInsights();
 </script>
 
 <Toaster theme="dark" />

@@ -3,7 +3,7 @@ layout: blog
 
 title: Hello World
 description: An overview of this site.
-tags: ["svelte", "typescript", "tailwindcss", "vercel"]
+tags: ["svelte", "typescript", "tailwindcss", "vercel", "shadcn"]
 
 published: 02/16/25
 lastEdited: 03/23/25

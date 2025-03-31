@@ -19,8 +19,15 @@
     else if (type === "warn") return "text-yellow-500";
     else return "text-red-500";
   }
+
+  function typeEmoji() {
+    return type === "info" ? "🙋‍♂️" : type === "warn" ? "⚠️" : "🚨";
+  }
 </script>
 
-<div class={`rounded border p-2 ${containerStyle()} ${textStyle()}`}>
+<div class={`rounded relative border p-2 ${containerStyle()} ${textStyle()}`}>
+  <span class="absolute -top-3 -right-3">
+    <strong>{typeEmoji()}</strong>
+  </span>
   <p>{@render children()}</p>
 </div>

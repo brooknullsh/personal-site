@@ -4,18 +4,17 @@
   "version": "0.0.1",
   "type": "module",
   "scripts": {
-    "dev": "vite dev --host --open",
-    "build": "vite build",
-    "preview": "vite preview --host --open",
     "prepare": "husky",
-    "check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
+    "build": "vite build",
     "format": "prettier --write .",
-    "lint": "prettier --check . && eslint ."
+    "dev": "vite dev --host --open",
+    "preview": "vite preview --host --open",
+    "lint": "prettier --check . && eslint .",
+    "check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json"
   },
   "devDependencies": {
     "@eslint/compat": "^1.2.7",
     "@eslint/js": "^9.22.0",
-    "@resvg/resvg-js": "^2.6.2",
     "@sveltejs/adapter-auto": "^4.0.0",
     "@sveltejs/adapter-vercel": "^5.6.3",
     "@sveltejs/kit": "^2.19.2",
@@ -26,34 +25,20 @@
     "@vercel/analytics": "^1.5.0",
     "@vercel/speed-insights": "^1.2.0",
     "autoprefixer": "^10.4.21",
-    "bits-ui": "^1.3.12",
-    "clsx": "^2.1.1",
     "eslint": "^9.22.0",
     "eslint-config-prettier": "^10.1.1",
     "eslint-plugin-svelte": "^2.46.1",
     "globals": "^15.15.0",
     "husky": "^9.1.7",
-    "lucide-svelte": "^0.475.0",
     "mdsvex": "^0.12.3",
-    "mode-watcher": "^0.5.1",
-    "open-graph-scraper": "^6.9.0",
     "prettier": "^3.5.3",
     "prettier-plugin-svelte": "^3.3.3",
     "prettier-plugin-tailwindcss": "^0.6.11",
-    "satori": "^0.12.1",
-    "satori-html": "0.3.2",
     "svelte": "^5.23.0",
     "svelte-check": "^4.1.5",
-    "svelte-sonner": "^0.3.28",
-    "tailwind-merge": "^3.0.2",
-    "tailwind-variants": "^0.3.1",
     "tailwindcss": "^4.0.14",
-    "tailwindcss-animate": "^1.0.7",
     "typescript": "^5.8.2",
     "typescript-eslint": "^8.26.1",
     "vite": "^6.2.2"
-  },
-  "patchedDependencies": {
-    "satori-html@0.3.2": "patches/satori-html@0.3.2.patch"
   }
 }

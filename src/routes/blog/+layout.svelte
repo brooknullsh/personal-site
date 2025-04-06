@@ -16,6 +16,27 @@
 <svelte:head>
   <title>{blog ? blog.metadata.title : "Blog"} | Brook Nash</title>
   <meta name="author" content="Brook Nash" />
+  {#if blog}
+    {@const { title, subtitle } = blog.metadata}
+    {@const host = "https://brooknullsh.com"}
+    <meta name="description" content={subtitle} />
+    <meta property="og:description" content={subtitle} />
+    <meta property="og:title" content={title} />
+    <meta property="og:url" content={host} />
+    <meta name="twitter:card" property="twitter:card" content="summary_large_image" />
+    <meta name="twitter:image:alt" property="twitter:title" content={title} />
+    <meta name="twitter:title" property="twitter:title" content={title} />
+    <meta name="twitter:description" property="twitter:description" content={subtitle} />
+    <meta
+      property="og:image"
+      content={`${host}/api/metadata?title=${title}&subtitle=${subtitle}`}
+    />
+    <meta
+      name="twitter:image"
+      property="twitter:image"
+      content={`${host}/api/metadata?title=${title}&subtitle=${subtitle}`}
+    />
+  {/if}
 </svelte:head>
 
 {#if blog}

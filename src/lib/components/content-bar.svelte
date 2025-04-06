@@ -1,153 +1,41 @@
 <script lang="ts">
   import { goto } from "$app/navigation";
-  import { onMount } from "svelte";
+  import Link from "$lib/components/link.svelte";
+  import ThemeToggle from "$lib/components/theme-toggle.svelte";
 
   const HOME_PATH = "/";
   const BLOG_PATH = "/blog";
 
   let isMobileContentShown = $state(false);
-  let theme = $state("");
 
   function handleRouteChange() {
     isMobileContentShown = false;
-  }
-
-  function handleThemeChange() {
-    theme = theme === "dark" ? "light" : "dark";
-  }
-
-  function readTheme() {
-    const system = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
-    theme = localStorage.getItem("theme") || system;
-  }
-
-  function updateTheme() {
-    document.documentElement.setAttribute("class", theme);
-    localStorage.setItem("theme", theme);
   }
 
   function handleKeyUp({ key }: KeyboardEvent) {
     if (key === "1") goto(HOME_PATH);
     else if (key === "2") goto(BLOG_PATH);
   }
-
-  onMount(readTheme);
-  $effect(updateTheme);
 </script>
 
 <svelte:window onkeyup={handleKeyUp} />
 
-{#snippet internalLink(href: string, text: string, key: string)}
-  <a {href} onclick={handleRouteChange}>
-    <span class="flex items-center gap-2 text-sm">
-      {#if text === "Blog"}
-        <svg
-          width="16"
-          height="16"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          stroke-width="2"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-        >
-          <path d="M12 20h9"></path>
-          <path
-            d="M16.376 3.622a1 1 0 0 1 3.002 3.002L7.368 18.635a2 2 0 0 1-.855.506l-2.872.838a.5.5
-            0 0 1-.62-.62l.838-2.872a2 2 0 0 1 .506-.854z"
-          ></path>
-          <path d="m15 5 3 3"></path>
-        </svg>
-      {:else if text === "Home"}
-        <svg
-          width="16"
-          height="16"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          stroke-width="2"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-        >
-          <path d="M19 9V6a2 2 0 0 0-2-2H7a2 2 0 0 0-2 2v3"></path>
-          <path
-            d="M3 16a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-5a2 2 0 0 0-4 0v1.5a.5.5 0 0 1-.5.5h-9a.5.5 0 0 1-.5-.5V11a2 2 0 0 0-4 0z"
-          ></path>
-          <path d="M5 18v2"></path>
-          <path d="M19 18v2"></path>
-        </svg>
-      {/if}
-      {text}
-    </span>
-    <span class="bg-muted/10 border-muted/25 hidden rounded border px-1 text-sm sm:block">
-      {key}
-    </span>
-  </a>
-{/snippet}
-
-{#snippet externalLink(href: string, text: string)}
-  <a {href}>
-    <span class="flex items-center gap-2 text-sm">
-      {#if text === "GitHub"}
-        <svg
-          width="16"
-          height="16"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          stroke-width="2"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-        >
-          <path
-            d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"
-          ></path>
-          <path d="M9 18c-4.51 2-5-2-7-2"></path>
-        </svg>
-      {:else if text === "Twitter"}
-        <svg
-          class="size-4"
-          width="44"
-          height="44"
-          viewBox="0 0 24 24"
-          stroke-width="1.5"
-          fill="none"
-          stroke="currentColor"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-        >
-          <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-          <path d="M4 4l11.733 16h4.267l-11.733 -16z"></path>
-          <path d="M4 20l6.768 -6.768m2.46 -2.46l6.772 -6.772"></path>
-        </svg>
-      {:else if text === "Instagram"}
-        <svg
-          width="16"
-          height="16"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          stroke-width="2"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-        >
-          <rect width="20" height="20" x="2" y="2" rx="5" ry="5"></rect>
-          <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
-          <line x1="17.5" x2="17.51" y1="6.5" y2="6.5"></line>
-        </svg>
-      {/if}
-      {text}
-    </span>
-    <span>&#8599</span>
-  </a>
+{#snippet shortcut(key: string)}
+  <span class="bg-muted/10 border-muted/25 hidden rounded border px-1 text-sm sm:block">
+    {key}
+  </span>
 {/snippet}
 
 {#snippet list()}
   <section class="flex h-full flex-col justify-between gap-4">
     <div class="flex flex-col gap-4">
       <div class="*:hover:bg-muted/10 flex flex-col gap-2 *:flex *:justify-between *:rounded *:p-2">
-        {@render internalLink(HOME_PATH, "Home", "1")}
-        {@render internalLink(BLOG_PATH, "Blog", "2")}
+        <Link href={HOME_PATH} text="Home" trigger={handleRouteChange}>
+          {@render shortcut("1")}
+        </Link>
+        <Link href={BLOG_PATH} text="Blog" trigger={handleRouteChange}>
+          {@render shortcut("2")}
+        </Link>
       </div>
       <div class="flex items-center gap-2 text-xs">
         <div class="border-muted/25 flex-grow border-t"></div>
@@ -155,47 +43,19 @@
         <div class="border-muted/25 flex-grow border-t"></div>
       </div>
       <div class="*:hover:bg-muted/10 flex flex-col gap-2 *:flex *:justify-between *:rounded *:p-2">
-        {@render externalLink("https://github.com/brooknullsh", "GitHub")}
-        {@render externalLink("https://x.com/brooknullsh", "Twitter")}
-        {@render externalLink("https://instagram.com/brooknullsh", "Instagram")}
+        <Link href="https://github.com/brooknullsh" text="GitHub" />
+        <Link href="https://x.com/brooknullsh" text="Twitter" />
+        <Link href="https://instagram.com/brooknullsh" text="Instagram" />
       </div>
     </div>
-    <div class="flex w-full items-center justify-between">
-      <button class="hover:bg-muted/10 rounded p-2" aria-label={theme} onclick={handleThemeChange}>
-        <svg
-          width="18"
-          height="18"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          stroke-width="2"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-        >
-          <circle cx="13.5" cy="6.5" r=".5" fill="currentColor" />
-          <circle cx="17.5" cy="10.5" r=".5" fill="currentColor" /><circle
-            cx="8.5"
-            cy="7.5"
-            r=".5"
-            fill="currentColor"
-          />
-          <circle cx="6.5" cy="12.5" r=".5" fill="currentColor" />
-          <path
-            d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10c.926 0 1.648-.746 1.648-1.688 0-.437-.18-.835-.437-1.125-.29-.289-.438-.652-.438-1.125a1.64 1.64 0 0 1 1.668-1.668h1.996c3.051 0 5.555-2.503 5.555-5.554C21.965 6.012 17.461 2 12 2z"
-          />
-        </svg>
-      </button>
-      <span class="text-muted text-sm">
-        {theme.charAt(0).toUpperCase() + theme.slice(1)}
-      </span>
-    </div>
+    <ThemeToggle />
   </section>
 {/snippet}
 
 <nav
-  class="border-muted/25 flex h-16 items-center justify-between border-b bg-white p-4
-  sm:sticky sm:top-0 sm:left-0 sm:h-screen sm:min-w-72 sm:flex-col sm:items-start sm:justify-normal
-  sm:gap-4 sm:border-r sm:bg-gray-50 dark:bg-neutral-800 sm:dark:bg-neutral-900"
+  class="border-muted/25 sm:dark:bg-dark-secondary dark:bg-dark sm:bg-light-secondary flex h-16
+  items-center justify-between border-b bg-white p-4 sm:sticky sm:top-0 sm:left-0 sm:h-screen
+  sm:min-w-72 sm:flex-col sm:items-start sm:justify-normal sm:gap-4 sm:border-r"
 >
   <section class="flex items-center gap-2 p-2">
     <img class="h-8 w-8 rounded-full" src="/favicon.ico" alt="Younger me" />
@@ -216,7 +76,9 @@
 </nav>
 
 {#if isMobileContentShown}
-  <section class="absolute z-50 w-full bg-white/75 p-4 shadow backdrop-blur dark:bg-neutral-800/75">
+  <section
+    class="dark:bg-dark-secondary absolute z-50 w-full bg-white/50 p-4 shadow backdrop-blur-lg"
+  >
     {@render list()}
   </section>
 {/if}

@@ -3,6 +3,9 @@
 
 @theme {
   --color-muted: #a1a1a1;
+  --color-dark: #171717;
+  --color-dark-secondary: #26262650;
+  --color-light-secondary: #f9fafb;
 }
 
 :root {
@@ -10,12 +13,12 @@
 }
 
 body {
-  @apply bg-white text-black dark:bg-neutral-800 dark:text-neutral-300;
+  @apply dark:bg-dark bg-white font-light text-black dark:text-white;
 }
 
 #blog-content {
   p {
-    @apply leading-8 font-light;
+    @apply leading-8;
   }
 
   strong {

@@ -1,0 +1,13 @@
+diff --git a/dist/index.js b/dist/index.js
+index 2c4ee6ed1d743d30d4f436b31c324f20ca927966..3cb7214df6c8ea79a085ed5dfab29f1637cff799 100644
+--- a/dist/index.js
++++ b/dist/index.js
+@@ -30,7 +30,7 @@ const TW_NAMES = new Set([
+     `tracking-`,
+     `z-`,
+ ]);
+-const inliner = inlineCSS({ useObjectSyntax: true });
++const inliner = inlineCSS({ useObjectSyntax: false });
+ const tw = (doc) => {
+     walkSync(doc, (node) => {
+         if (node.type !== ELEMENT_NODE)

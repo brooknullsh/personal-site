@@ -5,6 +5,7 @@ export const prerender = true;
 
 type Metadata = {
   title: string;
+  subtitle: string;
   published: string;
 };
 

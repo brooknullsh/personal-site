@@ -1,19 +1,38 @@
 <script lang="ts">
   import { goto } from "$app/navigation";
+  import { onMount } from "svelte";
 
   const HOME_PATH = "/";
   const BLOG_PATH = "/blog";
 
   let isMobileContentShown = $state(false);
+  let theme = $state("");
 
   function handleRouteChange() {
     isMobileContentShown = false;
+  }
+
+  function handleThemeChange() {
+    theme = theme === "dark" ? "light" : "dark";
+  }
+
+  function readTheme() {
+    const system = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+    theme = localStorage.getItem("theme") || system;
+  }
+
+  function updateTheme() {
+    document.documentElement.setAttribute("class", theme);
+    localStorage.setItem("theme", theme);
   }
 
   function handleKeyUp({ key }: KeyboardEvent) {
     if (key === "1") goto(HOME_PATH);
     else if (key === "2") goto(BLOG_PATH);
   }
+
+  onMount(readTheme);
+  $effect(updateTheme);
 </script>
 
 <svelte:window onkeyup={handleKeyUp} />
@@ -92,8 +111,8 @@
           height="44"
           viewBox="0 0 24 24"
           stroke-width="1.5"
-          stroke="#000000"
           fill="none"
+          stroke="currentColor"
           stroke-linecap="round"
           stroke-linejoin="round"
         >
@@ -124,28 +143,59 @@
 {/snippet}
 
 {#snippet list()}
-  <div class="flex flex-col gap-4">
-    <div class="*:hover:bg-muted/10 flex flex-col gap-2 *:flex *:justify-between *:p-2">
-      {@render internalLink(HOME_PATH, "Home", "1")}
-      {@render internalLink(BLOG_PATH, "Blog", "2")}
+  <section class="flex h-full flex-col justify-between gap-4">
+    <div class="flex flex-col gap-4">
+      <div class="*:hover:bg-muted/10 flex flex-col gap-2 *:flex *:justify-between *:rounded *:p-2">
+        {@render internalLink(HOME_PATH, "Home", "1")}
+        {@render internalLink(BLOG_PATH, "Blog", "2")}
+      </div>
+      <div class="flex items-center gap-2 text-xs">
+        <div class="border-muted/25 flex-grow border-t"></div>
+        <span class="text-muted">Social Media</span>
+        <div class="border-muted/25 flex-grow border-t"></div>
+      </div>
+      <div class="*:hover:bg-muted/10 flex flex-col gap-2 *:flex *:justify-between *:rounded *:p-2">
+        {@render externalLink("https://github.com/brooknullsh", "GitHub")}
+        {@render externalLink("https://x.com/brooknullsh", "Twitter")}
+        {@render externalLink("https://instagram.com/brooknullsh", "Instagram")}
+      </div>
     </div>
-    <div class="flex items-center gap-2 text-xs">
-      <div class="border-muted/25 flex-grow border-t"></div>
-      <span class="text-muted">Social Media</span>
-      <div class="border-muted/25 flex-grow border-t"></div>
+    <div class="flex w-full items-center justify-between">
+      <button class="hover:bg-muted/10 rounded p-2" aria-label={theme} onclick={handleThemeChange}>
+        <svg
+          width="18"
+          height="18"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
+          <circle cx="13.5" cy="6.5" r=".5" fill="currentColor" />
+          <circle cx="17.5" cy="10.5" r=".5" fill="currentColor" /><circle
+            cx="8.5"
+            cy="7.5"
+            r=".5"
+            fill="currentColor"
+          />
+          <circle cx="6.5" cy="12.5" r=".5" fill="currentColor" />
+          <path
+            d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10c.926 0 1.648-.746 1.648-1.688 0-.437-.18-.835-.437-1.125-.29-.289-.438-.652-.438-1.125a1.64 1.64 0 0 1 1.668-1.668h1.996c3.051 0 5.555-2.503 5.555-5.554C21.965 6.012 17.461 2 12 2z"
+          />
+        </svg>
+      </button>
+      <span class="text-muted text-sm">
+        {theme.charAt(0).toUpperCase() + theme.slice(1)}
+      </span>
     </div>
-    <div class="*:hover:bg-muted/10 flex flex-col gap-2 *:flex *:justify-between *:p-2">
-      {@render externalLink("https://github.com/brooknullsh", "GitHub")}
-      {@render externalLink("https://x.com/brooknullsh", "Twitter")}
-      {@render externalLink("https://instagram.com/brooknullsh", "Instagram")}
-    </div>
-  </div>
+  </section>
 {/snippet}
 
 <nav
-  class="border-muted/25 flex h-16 items-center justify-between border-b bg-white
-  p-4 sm:sticky sm:top-0 sm:left-0 sm:h-screen sm:min-w-72 sm:flex-col sm:items-start
-  sm:justify-normal sm:gap-4 sm:border-r sm:bg-gray-50"
+  class="border-muted/25 flex h-16 items-center justify-between border-b bg-white p-4
+  sm:sticky sm:top-0 sm:left-0 sm:h-screen sm:min-w-72 sm:flex-col sm:items-start sm:justify-normal
+  sm:gap-4 sm:border-r sm:bg-gray-50 dark:bg-neutral-800 sm:dark:bg-neutral-900"
 >
   <section class="flex items-center gap-2 p-2">
     <img class="h-8 w-8 rounded-full" src="/favicon.ico" alt="Younger me" />
@@ -154,7 +204,7 @@
       <p class="text-muted text-sm">Software Engineer</p>
     </span>
   </section>
-  <section class="hidden w-full sm:block">
+  <section class="hidden h-full w-full sm:block">
     {@render list()}
   </section>
   <button
@@ -166,7 +216,7 @@
 </nav>
 
 {#if isMobileContentShown}
-  <section class="absolute w-full bg-white p-4 shadow">
+  <section class="absolute z-50 w-full bg-white/75 p-4 shadow backdrop-blur dark:bg-neutral-800/75">
     {@render list()}
   </section>
 {/if}

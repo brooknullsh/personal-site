@@ -5,18 +5,19 @@
 </script>
 
 <h1 class="text-3xl font-medium sm:w-3/4">Blogs</h1>
-<div class="text-muted grid grid-cols-2">
-  <span>Published</span>
-  <span>Title</span>
-</div>
-<ul>
+
+<div class="grid grid-cols-[min-content_auto]">
+  <h2 class="text-muted pr-6 text-lg">Published</h2>
+  <h2 class="text-muted text-lg">Title</h2>
   {#each data.blogs as { metadata, slug }}
     {@const { title, published } = metadata}
-    <li class="hover:bg-muted/5 border-muted/25 grid h-12 grid-cols-2 border-t">
-      <a class="col-span-2 grid h-full grid-cols-2 items-center" href={`/blog/${slug}`}>
-        <span class="text-muted">{published}</span>
-        <span>{title}</span>
-      </a>
-    </li>
+    <a
+      class="*:border-muted/25 hover:*:bg-muted/10 contents *:flex *:h-12 *:items-center
+      *:overflow-x-auto *:border-t *:whitespace-nowrap"
+      href={`/blog/${slug}`}
+    >
+      <p class="text-muted pr-6 text-sm">{published}</p>
+      <p>{title}</p>
+    </a>
   {/each}
-</ul>
+</div>

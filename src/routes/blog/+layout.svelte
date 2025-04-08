@@ -16,10 +16,14 @@
 <svelte:head>
   <title>{blog ? blog.metadata.title : "Blog"} | Brook Nash</title>
   <meta name="author" content="Brook Nash" />
+  <meta
+    name="description"
+    content={blog ? blog.metadata.subtitle : "See all the blogs I have on offer."}
+  />
+
   {#if blog}
     {@const { title, subtitle } = blog.metadata}
     {@const host = "https://brooknullsh.com"}
-    <meta name="description" content={subtitle} />
     <meta property="og:description" content={subtitle} />
     <meta property="og:title" content={title} />
     <meta property="og:url" content={host} />
@@ -40,10 +44,15 @@
 </svelte:head>
 
 {#if blog}
-  {@const { title, published } = blog.metadata}
+  {@const { title, subtitle, published } = blog.metadata}
+
   <article class="flex flex-col gap-6" id="blog-content">
     <h1 class="text-3xl font-medium sm:w-3/4">{title}</h1>
-    <p class="text-muted">{published}</p>
+    <span>
+      <p class="text-muted font-medium">{published}</p>
+      <h3 class="text-muted">{subtitle}</h3>
+    </span>
+
     {@render children()}
   </article>
 {:else}

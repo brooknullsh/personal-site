@@ -37,11 +37,13 @@
           {@render shortcut("2")}
         </Link>
       </div>
+
       <div class="flex items-center gap-2 text-xs">
         <div class="border-muted/25 flex-grow border-t"></div>
         <span class="text-muted">Social Media</span>
         <div class="border-muted/25 flex-grow border-t"></div>
       </div>
+
       <div class="*:hover:bg-muted/10 flex flex-col gap-2 *:flex *:justify-between *:rounded *:p-2">
         <Link href="https://github.com/brooknullsh" text="GitHub" />
         <Link href="https://x.com/brooknullsh" text="Twitter" />
@@ -64,9 +66,11 @@
       <p class="text-muted text-sm">Software Engineer</p>
     </span>
   </section>
+
   <section class="hidden h-full w-full sm:block">
     {@render list()}
   </section>
+
   <button
     class="flex justify-end text-xl sm:hidden"
     onclick={() => (isMobileContentShown = !isMobileContentShown)}

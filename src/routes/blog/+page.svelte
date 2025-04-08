@@ -9,8 +9,10 @@
 <div class="grid grid-cols-[min-content_auto]">
   <h2 class="text-muted pr-6 text-lg">Published</h2>
   <h2 class="text-muted text-lg">Title</h2>
+
   {#each data.blogs as { metadata, slug }}
     {@const { title, published } = metadata}
+
     <a
       class="*:border-muted/25 hover:*:bg-muted/10 contents *:flex *:h-12 *:items-center
       *:overflow-x-auto *:border-t *:whitespace-nowrap"

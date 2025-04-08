@@ -48,6 +48,7 @@
       />
     </svg>
   </button>
+
   <span class="text-muted text-sm">
     {theme.charAt(0).toUpperCase() + theme.slice(1)}
   </span>

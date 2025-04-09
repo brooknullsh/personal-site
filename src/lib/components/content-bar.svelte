@@ -21,7 +21,9 @@
 <svelte:window onkeyup={handleKeyUp} />
 
 {#snippet shortcut(key: string)}
-  <span class="bg-muted/10 border-muted/25 hidden rounded border px-1 text-sm sm:block">
+  <span
+    class="bg-muted/10 border-muted/25 hidden w-4 items-center justify-center rounded border text-xs sm:flex"
+  >
     {key}
   </span>
 {/snippet}

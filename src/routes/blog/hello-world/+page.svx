@@ -1,7 +1,7 @@
 ---
 title: Hello, World!
-subtitle: How and why I built this site, with boring explanations.
-published: 08/04/25
+subtitle: How and why I built this site, with boring explanations and code snippets.
+published: April 8th, 2025
 ---
 
 There are several methods to document your notes, share your thoughts and display your
@@ -13,7 +13,7 @@ to &#120143 atracted me to building blog functionality myself within my personal
 ## Difficulty
 
 I haven't done web development for quite a while at my day job as a Software Engineer, so
-writing this site (as simple as it is) has **proven more difficult than I thought**. Difficult
+writing this site (as simple as it is) has proven more difficult than I thought. Difficult
 in the sense that I wasn't happy with how it turned out, not implementation challenges as
 it's a simple static site with no authentication, database nor architecture complexities.
 
@@ -25,8 +25,8 @@ this site, that chase for "perfection" gets in the way more so than it aids you.
 
 ## Purpose
 
-My main reason for this site in general, even ignoring the blog aspect of it, is to **store my
-findings, resources & awful code snippets**. "Why not use a note-taking app?" you may ask, well
+My main reason for this site in general, even ignoring the blog aspect of it, is to store my
+findings, resources & awful code snippets. "Why not use a note-taking app?" you may ask, well
 in the classic developer sense I am not happy with any of them and I do not have enough control
 over them. Judge me all you want, but these were my requirements for a note-taking app I spent
 quite a while trying to find:
@@ -48,11 +48,101 @@ other boxes.
 
 ## Technology
 
-Lastly, I want to discuss what I used to even build this damned thing in the first place which
-is the **usual modern web development** stack (or akin to it at least) because although it's not my
-day job I do still love web development and keep up-to-date with what's going on.
+Before we get to the code snippets, I want to discuss what I used to even build this damned thing
+in the first place which is the usual modern web development stack (or akin to it at least)
+because although it's not my day job I do still love web development and keep up-to-date with
+what's going on.
 
 - [SvelteKit](https://svelte.dev): Previously used [NextJS](https://nextjs.org) but I am
 enjoying the simplicity of Svelte & SvelteKit so far
 - [TailwindCSS](https://tailwindcss.com): Idiomatic class-based styles
 - [Mdsvex](https://mdsvex.pngwn.io): Easy Markdown-based routing with support for inline Svelte
+
+## Examples
+
+**Reading the Markdown files**
+
+```ts
+async function readBlogs(objects: GlobImportResult, [path, content]: GlobImportPair) {
+  const slug = readBlogSlugFromPath(path);
+  const { metadata }: { metadata: Metadata } = await objects[path]();
+
+  return { slug, metadata, content: (await content()) as string };
+}
+
+export const load: LayoutServerLoad = async () => {
+  const blogContents = import.meta.glob("*.svx", { query: "?raw", import: "default" });
+  const svelteObjects = import.meta.glob("*.svx");
+
+  const blogData = Object.entries(blogContents).map((glob) => readBlogs(svelteObjects, glob));
+  return { blogs: await Promise.all(blogData) };
+};
+```
+
+As you can see by the `LayoutServerLoad`, this is the root layout function that will pass down the
+blog data to all child routes. The entirety of this site is pre-rendered so this only runs at
+build-time. There are two glob imports (can't figure out how to boil it down to just one), the
+first importing the raw string contents of each Markdown file while the second is able to access the
+Svelte component that the ".svx" file exports.
+
+Through that Svelte component we can access the
+[Front Matter](https://jekyllrb.com/docs/front-matter/) metadata i.e. title, subtitle and publish
+date which looks like so:
+
+```yml
+---
+title: Hello, World!
+subtitle: How and why I built this site, with boring explanations and code snippets.
+published: April 8th, 2025
+---
+```
+
+The `readBlogs` function is doing two simple things:
+
+1. Get the directory name from the file path which will be used for the slug
+2. Extracting the metadata from the Svelte component
+
+Now any child route can access the data, like so:
+
+```ts
+let { data }: LayoutProps = $props();
+
+/* { slug, metadata, content } = data.blogs */
+```
+
+**Theme Switching**
+
+```js
+const storedTheme = localStorage.getItem("theme");
+
+if (storedTheme) {
+  document.documentElement.setAttribute("class", storedTheme);
+} else {
+  const system = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+
+  document.documentElement.setAttribute("class", system);
+  localStorage.setItem("theme", system);
+}
+```
+
+Just to quickly touch on this basic concept as I don't see much content out there for doing theme
+toggling in Svelte 5 without the awful flash of white on load. In this example you can see we're
+checking `localStorage` for a set value otherwise determining what it will initialise as. We should
+put this JavaScript file in the "static" directory and import it within our root HTML file, like so:
+
+```html
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- ... -->
+    <script src="%sveltekit.assets%/theme.js"></script>
+    <!-- ... -->
+  </head>
+  <body data-sveltekit-preload-data="hover">
+    <!-- ... -->
+  </body>
+</html>
+```
+
+The key here is going back to HTML basics in that the JavaScript will run before the body is rendered
+thus avoiding the flash of white, place it in the `<body>` if you wish to confirm this.

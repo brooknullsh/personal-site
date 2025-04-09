@@ -13,7 +13,7 @@
 <main class="flex-col sm:flex sm:flex-row">
   <ContentBar />
 
-  <section class="container flex flex-col gap-6 py-12">
+  <section class="container flex flex-col gap-6 overflow-x-auto py-12">
     {@render children()}
   </section>
 </main>

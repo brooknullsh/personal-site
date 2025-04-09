@@ -14,7 +14,7 @@ type GlobImportResult = Record<string, () => Promise<unknown>>;
 
 async function readBlogs(objects: GlobImportResult, [path, content]: GlobImportPair) {
   const slug = readBlogSlugFromPath(path);
-  // @ts-expect-error: Unknown type, only run at compile-time anyway
+  // @ts-expect-error: Unknown type, only run at build-time anyway
   const { metadata }: { metadata: Metadata } = await objects[path]();
 
   return { slug, metadata, content: (await content()) as string };

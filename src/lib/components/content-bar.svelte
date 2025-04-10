@@ -22,10 +22,10 @@
     if (!mobileToggleElement || !isMobileContentShown) return;
     const targetElement = target as Element;
 
-    const isNotListOrChild = () => !targetElement.matches("#list, #list *");
-    const isNotToggle = () => targetElement !== mobileToggleElement;
+    const isNotListOrChild = !targetElement.matches("#list, #list *");
+    const isNotToggle = targetElement !== mobileToggleElement;
 
-    if (isNotListOrChild() && isNotToggle()) isMobileContentShown = false;
+    if (isNotListOrChild && isNotToggle) isMobileContentShown = false;
   }
 </script>
 

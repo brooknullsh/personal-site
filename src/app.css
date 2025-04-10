@@ -29,6 +29,10 @@ body {
     @apply text-xl font-medium;
   }
 
+  h3 {
+    @apply decoration-muted/25 underline underline-offset-8;
+  }
+
   a {
     @apply text-blue-400 after:content-["_\2197"];
   }

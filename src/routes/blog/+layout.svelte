@@ -50,7 +50,7 @@
     <h1 class="text-3xl font-medium sm:w-3/4">{title}</h1>
     <span>
       <p class="text-muted font-medium">{published}</p>
-      <h3 class="text-muted">{subtitle}</h3>
+      <p class="text-muted">{subtitle}</p>
     </span>
 
     {@render children()}

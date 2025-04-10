@@ -30,7 +30,7 @@ body {
   }
 
   a {
-    @apply text-blue-400 after:content-["\2197"];
+    @apply text-blue-400 after:content-["_\2197"];
   }
 
   ul {

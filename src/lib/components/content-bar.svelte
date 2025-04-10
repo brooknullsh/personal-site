@@ -7,6 +7,7 @@
   const BLOG_PATH = "/blog";
 
   let isMobileContentShown = $state(false);
+  let mobileToggleElement: HTMLButtonElement | null = null;
 
   function handleRouteChange() {
     isMobileContentShown = false;
@@ -16,9 +17,19 @@
     if (key === "1") goto(HOME_PATH);
     else if (key === "2") goto(BLOG_PATH);
   }
+
+  function handleClick({ target }: MouseEvent) {
+    if (!mobileToggleElement || !isMobileContentShown) return;
+    const targetElement = target as Element;
+
+    const isNotListOrChild = () => !targetElement.matches("#list, #list *");
+    const isNotToggle = () => targetElement !== mobileToggleElement;
+
+    if (isNotListOrChild() && isNotToggle()) isMobileContentShown = false;
+  }
 </script>
 
-<svelte:window onkeyup={handleKeyUp} />
+<svelte:window onkeyup={handleKeyUp} onclick={handleClick} />
 
 {#snippet shortcut(key: string)}
   <span
@@ -29,7 +40,7 @@
 {/snippet}
 
 {#snippet list()}
-  <section class="flex h-full flex-col justify-between gap-4">
+  <section class="flex h-full flex-col justify-between gap-4" id="list">
     <div class="flex flex-col gap-4">
       <div class="*:hover:bg-muted/10 flex flex-col gap-2 *:flex *:justify-between *:rounded *:p-2">
         <Link href={HOME_PATH} text="Home" trigger={handleRouteChange}>
@@ -75,6 +86,7 @@
 
   <button
     class="flex justify-end text-xl sm:hidden"
+    bind:this={mobileToggleElement}
     onclick={() => (isMobileContentShown = !isMobileContentShown)}
   >
     &#8984
@@ -83,7 +95,8 @@
 
 {#if isMobileContentShown}
   <section
-    class="dark:bg-dark-secondary absolute z-50 w-full bg-white/50 p-4 shadow backdrop-blur-lg"
+    class="dark:bg-dark-secondary absolute z-50 w-full bg-white/50 p-4 shadow backdrop-blur-lg
+    sm:hidden"
   >
     {@render list()}
   </section>

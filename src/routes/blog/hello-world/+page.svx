@@ -4,12 +4,18 @@ subtitle: How and why I built this site, with boring explanations and code snipp
 published: April 8th, 2025
 ---
 
+<script>
+  import CodeHeader from "$lib/components/code-header.svelte";
+</script>
+
 There are several methods to document your notes, share your thoughts and display your
 code snippets, many of which are built aside products *e.g.* [&#120143](https://x.com) or
 built for purpose *e.g.* [Medium](https://medium.com) and [dev.to](https://dev.to).
 
 For me, ironically, having the ability to write and share content alongside other features
 similarly to &#120143 atracted me to building blog functionality myself within my personal site.
+
+<img alt="Welcome" src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExc2lwNTB5azB2ODU4aDI2cDNhcnlkamhmd21kbHphaTJhMmZkeWU3biZlcD12MV9naWZzX3NlYXJjaCZjdD1n/ASd0Ukj0y3qMM/giphy.gif" />
 
 ## Difficulty
 
@@ -73,6 +79,8 @@ enjoying the simplicity of Svelte & SvelteKit so far
 
 ### Reading the Markdown files
 
+<CodeHeader path="+layout.server.ts" />
+
 ```ts
 async function readBlogs(objects: GlobImportResult, [path, content]: GlobImportPair) {
   const slug = readBlogSlugFromPath(path);
@@ -101,6 +109,8 @@ that the ".svx" file exports.
 Through that Svelte component we can access the [Front Matter](https://jekyllrb.com/docs/front-matter/)
 metadata i.e. title, subtitle and publish date which looks like so:
 
+<CodeHeader path="+page.svx" />
+
 ```yml
 ---
 title: Hello, World!
@@ -116,6 +126,8 @@ The `readBlogs` function is doing two simple things:
 
 Now any child route can access the data, like so:
 
+<CodeHeader path="+page.svelte" />
+
 ```ts
 let { data }: LayoutProps = $props();
 
@@ -123,6 +135,8 @@ let { data }: LayoutProps = $props();
 ```
 
 ### Theme Switching
+
+<CodeHeader path="theme.js" />
 
 ```js
 const storedTheme = localStorage.getItem("theme");
@@ -141,12 +155,12 @@ Just to quickly touch on this basic concept as I don't see much content out ther
 toggling in Svelte 5 without the awful flash of white on load. In this example you can see we're
 checking `localStorage` for a set value otherwise determining what it will initialise as.
 
-We should put this JavaScript file in the "static" directory and import it within our root HTML file.
-
 <img alt="Blinding Light" src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExNW05NjRyOXI4cXU2YnR1cHdjZXQ0YmQ4MXRkNHUyMmxud2o5eWU4ZiZlcD12MV9naWZzX3NlYXJjaCZjdD1n/Y4JE51QwzefMLfknfq/giphy.gif" />
 
 The key here is going back to HTML basics in that the JavaScript will run before the body is rendered
 thus avoiding the flash of white, like so:
+
+<CodeHeader path="app.html" />
 
 ```html
 <!doctype html>

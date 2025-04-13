@@ -5,7 +5,7 @@ published: April 8th, 2025
 ---
 
 <script>
-  import CodeHeader from "$lib/components/code-header.svelte";
+import CodeHeader from "$lib/components/code-header.svelte";
 </script>
 
 There are several methods to document your notes, share your thoughts and display your
@@ -136,6 +136,9 @@ let { data }: LayoutProps = $props();
 
 ### Theme Switching
 
+Just to quickly touch on this basic concept as I don't see much content out there for doing theme
+toggling in Svelte 5 without the awful flash of white on load.
+
 <CodeHeader path="theme.js" />
 
 ```js
@@ -151,9 +154,8 @@ if (storedTheme) {
 }
 ```
 
-Just to quickly touch on this basic concept as I don't see much content out there for doing theme
-toggling in Svelte 5 without the awful flash of white on load. In this example you can see we're
-checking `localStorage` for a set value otherwise determining what it will initialise as.
+In this example you can see we're checking `localStorage` for a set value otherwise determining
+what it will initialise as.
 
 <img alt="Blinding Light" src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExNW05NjRyOXI4cXU2YnR1cHdjZXQ0YmQ4MXRkNHUyMmxud2o5eWU4ZiZlcD12MV9naWZzX3NlYXJjaCZjdD1n/Y4JE51QwzefMLfknfq/giphy.gif" />
 

@@ -13,7 +13,7 @@
 }
 
 body {
-  @apply dark:bg-dark bg-white font-light text-black dark:text-white;
+  @apply dark:bg-dark bg-white font-sans font-light text-black dark:text-white;
 }
 
 #blog-content {
@@ -51,7 +51,7 @@ body {
 }
 
 pre {
-  @apply bg-muted/10 dark:bg-muted/5 border-muted/15 overflow-auto rounded-b border p-2;
+  @apply bg-muted/10 dark:bg-muted/5 border-muted/15 overflow-auto rounded-b border p-2 text-sm;
 }
 
 :not(pre) > code {

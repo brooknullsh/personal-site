@@ -1,6 +1,12 @@
 @import "tailwindcss";
 @config '../tailwind.config.ts';
 
+@font-face {
+  font-family: GeistMono;
+  src: url("/geist-mono-regular.ttf");
+  font-weight: 400;
+}
+
 @theme {
   --color-muted: #a1a1a1;
   --color-dark: #171717;
@@ -9,11 +15,11 @@
 }
 
 :root {
-  @apply md:overscroll-none;
+  @apply text-sm font-light md:overscroll-none;
 }
 
 body {
-  @apply dark:bg-dark bg-white font-sans font-light text-black dark:text-white;
+  @apply dark:bg-dark bg-white text-black dark:text-white;
 }
 
 #blog-content {
@@ -48,14 +54,22 @@ body {
   img {
     @apply rounded;
   }
+
+  th {
+    @apply border-muted/25 border-b p-4;
+  }
+
+  td {
+    @apply bg-muted/5 border-muted/25 border-b p-4;
+  }
 }
 
 pre {
-  @apply bg-muted/10 dark:bg-muted/5 border-muted/15 overflow-auto rounded-b border p-2 text-sm;
+  @apply bg-muted/10 dark:bg-muted/5 border-muted/15 overflow-auto rounded-b border p-2 font-[GeistMono] leading-8;
 }
 
 :not(pre) > code {
-  @apply border-muted/25 bg-muted/10 rounded border px-1;
+  @apply border-muted/25 bg-muted/10 rounded border px-1 font-[GeistMono] text-sm;
 }
 
 /* https://github.com/PrismJS/prism-themes/blob/master/themes/prism-vs.css */

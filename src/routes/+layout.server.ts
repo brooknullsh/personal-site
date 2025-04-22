@@ -20,12 +20,18 @@ async function readBlogs(objects: GlobImportResult, [path, content]: GlobImportP
   return { slug, metadata, content: (await content()) as string };
 }
 
+function sortByDate(objA: Metadata, objB: Metadata) {
+  return new Date(objB.published).getTime() - new Date(objA.published).getTime();
+}
+
 export const load: LayoutServerLoad = async () => {
-  // Import all blog's string contents
-  const blogContents = import.meta.glob("./blog/*/*.svx", { query: "?raw", import: "default" });
+  // Import all blog's raw string contents
+  const blogRaw = import.meta.glob("./blog/*/*.svx", { query: "?raw", import: "default" });
   // Import all blog's Svelte objects to access the metadata (frontmatter)
   const svelteObjects = import.meta.glob("./blog/*/*.svx");
 
-  const blogData = Object.entries(blogContents).map((glob) => readBlogs(svelteObjects, glob));
-  return { blogs: await Promise.all(blogData) };
+  const blogData = await Promise.all(
+    Object.entries(blogRaw).map((glob) => readBlogs(svelteObjects, glob)),
+  );
+  return { blogs: blogData.sort((a, b) => sortByDate(a.metadata, b.metadata)) };
 };

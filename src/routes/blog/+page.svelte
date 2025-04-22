@@ -14,11 +14,11 @@
     {@const { title, published } = metadata}
 
     <a
-      class="*:border-muted/25 hover:*:bg-muted/10 contents *:flex *:h-12 *:items-center
-      *:overflow-x-auto *:border-t *:whitespace-nowrap"
+      class="*:border-muted/25 hover:*:bg-muted/10 contents *:flex *:h-12
+      *:items-center *:overflow-x-auto *:border-t *:whitespace-nowrap"
       href={`/blog/${slug}`}
     >
-      <p class="text-muted pr-6 text-sm">{published}</p>
+      <p class="pr-6 text-sm font-semibold">{published}</p>
       <p>{title}</p>
     </a>
   {/each}

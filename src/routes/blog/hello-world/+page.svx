@@ -1,7 +1,7 @@
 ---
 title: Hello, World!
 subtitle: How and why I built this site, with boring explanations and code snippets.
-published: April 8th, 2025
+published: 04/08/25
 ---
 
 <script>

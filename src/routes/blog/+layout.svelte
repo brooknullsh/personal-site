@@ -45,11 +45,12 @@
 
 {#if blog}
   {@const { title, subtitle, published } = blog.metadata}
+  {@const publishedFormatted = new Date(published).toDateString()}
 
   <article class="flex flex-col gap-6" id="blog-content">
     <h1 class="text-3xl font-medium sm:w-3/4">{title}</h1>
     <span>
-      <p class="text-muted font-medium">{published}</p>
+      <p class="text-muted font-medium">{publishedFormatted}</p>
       <p class="text-muted">{subtitle}</p>
     </span>
 

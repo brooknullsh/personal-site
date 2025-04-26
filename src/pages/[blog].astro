@@ -1,0 +1,35 @@
+---
+import { getCollection } from "astro:content";
+import RootLayout from "../layouts/Root.astro";
+import { render } from "astro:content";
+import { formatDate } from "../util";
+
+export async function getStaticPaths() {
+  const blogs = await getCollection("blogs");
+
+  return blogs.map((blog) => ({
+    params: { blog: blog.id },
+    props: blog,
+  }));
+}
+
+const blog = Astro.props;
+const { title, subtitle } = blog.data;
+const { Content } = await render(blog);
+---
+
+<RootLayout {title} {subtitle} slug={blog.id}>
+  <a class="text-blue-400 w-max" href="/">&lsaquo; Home</a>
+
+  <section class="flex flex-col gap-2">
+    <h1 class="font-semibold text-4xl">{title}</h1>
+    <p class="text-muted">{subtitle}</p>
+    <p class="text-muted text-sm">
+      {formatDate(blog.data.published, "full")}
+    </p>
+  </section>
+
+  <section class="flex flex-col gap-6" id="blog">
+    <Content />
+  </section>
+</RootLayout>

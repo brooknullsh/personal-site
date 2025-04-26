@@ -1,50 +1,17 @@
 {
   "name": "personal-site",
-  "private": true,
-  "version": "0.0.1",
   "type": "module",
+  "version": "0.0.1",
   "scripts": {
-    "prepare": "husky",
-    "build": "vite build",
-    "format": "prettier --write .",
-    "dev": "vite dev --host --open",
-    "preview": "vite preview --host --open",
-    "lint": "prettier --check . && eslint .",
-    "check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json"
+    "dev": "astro dev --open --host",
+    "build": "astro build",
+    "preview": "astro preview --open --host",
+    "astro": "astro"
   },
-  "devDependencies": {
-    "@eslint/compat": "^1.2.7",
-    "@eslint/js": "^9.22.0",
-    "@resvg/resvg-js": "^2.6.2",
-    "@sveltejs/adapter-auto": "^4.0.0",
-    "@sveltejs/adapter-vercel": "^5.6.3",
-    "@sveltejs/kit": "^2.19.2",
-    "@sveltejs/vite-plugin-svelte": "^5.0.3",
-    "@tailwindcss/postcss": "^4.0.14",
-    "@tailwindcss/vite": "^4.0.14",
-    "@trivago/prettier-plugin-sort-imports": "^5.2.2",
-    "@vercel/analytics": "^1.5.0",
-    "@vercel/speed-insights": "^1.2.0",
-    "autoprefixer": "^10.4.21",
-    "eslint": "^9.22.0",
-    "eslint-config-prettier": "^10.1.1",
-    "eslint-plugin-svelte": "^2.46.1",
-    "globals": "^15.15.0",
-    "husky": "^9.1.7",
-    "mdsvex": "^0.12.3",
-    "prettier": "^3.5.3",
-    "prettier-plugin-svelte": "^3.3.3",
-    "prettier-plugin-tailwindcss": "^0.6.11",
-    "satori": "^0.12.2",
-    "satori-html": "^0.3.2",
-    "svelte": "^5.23.0",
-    "svelte-check": "^4.1.5",
-    "tailwindcss": "^4.0.14",
-    "typescript": "^5.8.2",
-    "typescript-eslint": "^8.26.1",
-    "vite": "^6.2.2"
-  },
-  "patchedDependencies": {
-    "satori-html@0.3.2": "patches/satori-html@0.3.2.patch"
+  "dependencies": {
+    "@tailwindcss/vite": "^4.1.4",
+    "astro": "^5.7.5",
+    "astro-og-canvas": "^0.7.0",
+    "tailwindcss": "^4.1.4"
   }
 }

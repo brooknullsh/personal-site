@@ -1,0 +1,72 @@
+@import "tailwindcss";
+
+@theme {
+  --color-muted: var(--color-neutral-400);
+}
+
+/*
+  TailwindV4 no longer has a "container" class with responsive padding
+  https://github.com/tailwindlabs/tailwindcss/issues/13129#issuecomment-2474279153
+*/
+@utility container {
+  margin-inline: auto;
+  padding-inline: 1rem;
+
+  @variant sm {
+    padding-inline: 1rem;
+  }
+
+  @variant md {
+    padding-inline: 5rem;
+  }
+
+  @variant lg {
+    padding-inline: 10rem;
+  }
+
+  @variant xl {
+    padding-inline: 20rem;
+  }
+}
+
+html.dark {
+  @apply bg-black text-white;
+}
+
+#blog {
+  p {
+    @apply leading-8;
+  }
+
+  h2 {
+    @apply text-2xl font-semibold;
+  }
+
+  h3 {
+    @apply text-xl decoration-muted/25 underline underline-offset-8;
+  }
+
+  a {
+    @apply text-blue-400 after:content-["_\2197"];
+  }
+
+  ul {
+    @apply list-inside list-disc;
+  }
+
+  ol {
+    @apply list-inside list-decimal;
+  }
+
+  img {
+    @apply rounded;
+  }
+
+  pre {
+    @apply p-2 rounded dark:bg-muted/10! bg-neutral-900!;
+  }
+
+  :not(pre) > code {
+    @apply text-xs p-1 bg-muted/20 rounded;
+  }
+}

@@ -1,0 +1,53 @@
+---
+import "../root.css";
+
+const { title, subtitle, slug } = Astro.props;
+
+const HOST = "https://brooknullsh.com";
+---
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="generator" content={Astro.generator} />
+    <meta name="description" content={subtitle} />
+    <meta name="author" content="Brook Nash" />
+    <meta property="og:description" content={subtitle} />
+    <meta property="og:title" content={title} />
+    <meta property="og:url" content={HOST} />
+    <meta
+      name="twitter:card"
+      property="twitter:card"
+      content="summary_large_image"
+    />
+    <meta name="twitter:image:alt" property="twitter:title" content={title} />
+    <meta name="twitter:title" property="twitter:title" content={title} />
+    <meta
+      name="twitter:description"
+      property="twitter:description"
+      content={subtitle}
+    />
+    <meta property="og:image" content={`${HOST}/metadata/${slug}.png`} />
+    <meta
+      name="twitter:image"
+      property="twitter:image"
+      content={`${HOST}/metadata/${slug}.png`}
+    />
+    <link rel="apple-touch-icon" href="/favicon.ico" />
+    <link rel="icon" href="/favicon.ico" />
+    <title>{title} | Brook Nash</title>
+  </head>
+
+  <body>
+    <main class="container py-8 flex flex-col gap-6">
+      <slot />
+    </main>
+  </body>
+</html>
+
+<script is:inline>
+  if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
+    document.documentElement.classList.add("dark");
+  }
+</script>

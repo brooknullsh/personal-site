@@ -29,31 +29,29 @@
   }
 }
 
-@utility title {
-  @apply font-semibold text-4xl w-3/4;
+@utility header {
+  @apply border-y border-neutral-300 dark:border-neutral-600 py-1 flex justify-between items-center;
 }
 
-@utility subtitle {
-  @apply font-medium text-2xl;
+@utility box {
+  @apply border border-neutral-300 dark:border-neutral-600 p-2 text-center;
 }
 
 html.dark {
-  @apply bg-black text-white;
+  @apply bg-black text-zinc-200;
+}
+
+h2 {
+  @apply font-medium text-2xl dark:text-white;
+}
+
+p,
+ul,
+ol {
+  @apply text-sm font-light leading-8;
 }
 
 #blog {
-  p {
-    @apply leading-8;
-  }
-
-  h2 {
-    @apply subtitle;
-  }
-
-  h3 {
-    @apply text-xl decoration-muted/25 underline underline-offset-8;
-  }
-
   a {
     @apply text-blue-400 after:content-["_\2197"];
   }
@@ -64,17 +62,5 @@ html.dark {
 
   ol {
     @apply list-inside list-decimal;
-  }
-
-  img {
-    @apply rounded;
-  }
-
-  pre {
-    @apply p-2 rounded dark:bg-muted/10! bg-neutral-900!;
-  }
-
-  :not(pre) > code {
-    @apply text-xs p-1 bg-muted/20 rounded;
   }
 }

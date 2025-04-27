@@ -12,23 +12,22 @@ const blogs = await getCollection("blogs");
   subtitle="Brook Nash's personal website."
   slug="hello-world"
 >
-  <section class="flex justify-between items-center">
-    <div class="flex flex-col gap-2">
-      <h1 class="font-semibold text-4xl">Brook Nash</h1>
+  <section class="header">
+    <h1 class="dark:text-white">Brook Nash</h1>
+    <div class="flex gap-2 items-center">
       <p class="text-muted">Software Engineer</p>
+      <Image
+        class="size-6 rounded-full"
+        width="6"
+        height="6"
+        loading="eager"
+        src="/favicon.ico"
+        alt="Younger me"
+      />
     </div>
-
-    <Image
-      class="size-12 rounded-full"
-      width="12"
-      height="12"
-      loading="eager"
-      src="/favicon.ico"
-      alt="Younger me"
-    />
   </section>
 
-  <section class="flex gap-4 *:text-blue-400">
+  <section class="flex gap-6 justify-center *:text-blue-400 *:text-sm">
     <a class="flex gap-2 items-center" href="https://x.com/brooknullsh">
       <svg
         class="size-4"
@@ -73,34 +72,44 @@ const blogs = await getCollection("blogs");
     </a>
   </section>
 
-  <p class="italic">
-    "My main reason for this site in general, even ignoring the blog aspect of
-    it, is to store my findings, resources & awful code snippets. "Why not use a
-    note-taking app?" you may ask, well in the classic developer sense I am not
-    happy with any of them and I do not have enough control over them." -
-    <a class="not-italic text-blue-400" href="/hello-world">
-      Hello, World! &rsaquo;
-    </a>
-  </p>
+  <section class="box flex flex-col gap-6">
+    <p>
+      I'm a Software Engineer currently working full-time on very legacy
+      architecture in Wales, United Kingdom. Feel free to reach out through my
+      social media links.
+    </p>
 
-  <section class="flex flex-col gap-2">
-    <h2 class="subtitle">Blogs</h2>
-    <p class="text-muted">Ramblings, code snippets and less.</p>
+    <p class="italic">
+      "My main reason for this site in general, even ignoring the blog aspect of
+      it, is to store my findings, resources & awful code snippets."
+      <br />
+      <a class="not-italic text-blue-400" href="/hello-world">
+        Hello, World! &rsaquo;
+      </a>
+    </p>
+  </section>
+
+  <section class="flex justify-between items-center">
+    <h2>Blogs</h2>
+    <p class="text-muted">Ramblings, code snippets and less</p>
   </section>
 
   <section class="grid grid-cols-[min-content_auto] space-y-2">
-    <h3 class="font-medium pr-10">Published</h3>
-    <h3 class="font-medium">Title</h3>
+    <h3 class="dark:text-white mr-6">Published</h3>
+    <h3 class="dark:text-white">Title</h3>
 
     {
       blogs.map(({ id, data }) => {
         const { title, published } = data;
         return (
           <a
-            class="contents hover:*:bg-muted/15 *:flex *:items-center *:h-12 space-y-2"
+            class="contents *:border-y *:border-neutral-300 dark:*:border-neutral-600
+            group *:flex *:items-center *:h-12"
             href={id}
           >
-            <p class="text-muted">{formatDate(published, "medium")}</p>
+            <p class="text-muted group-hover:text-inherit transition-colors">
+              {formatDate(published, "medium")}
+            </p>
             <p>{title}</p>
           </a>
         );

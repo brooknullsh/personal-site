@@ -1,5 +1,7 @@
 ---
 import "../root.css";
+import Analytics from "@vercel/analytics/astro";
+import SpeedInsights from "@vercel/speed-insights/astro";
 
 const { title, subtitle, slug } = Astro.props;
 
@@ -34,6 +36,8 @@ const HOST = "https://brooknullsh.com";
       property="twitter:image"
       content={`${HOST}/metadata/${slug}.png`}
     />
+    <Analytics />
+    <SpeedInsights />
     <link rel="apple-touch-icon" href="/favicon.ico" />
     <link rel="icon" href="/favicon.ico" />
     <title>{title} | Brook Nash</title>

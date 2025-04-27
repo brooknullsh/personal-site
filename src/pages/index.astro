@@ -1,6 +1,6 @@
 ---
-import { getCollection } from "astro:content";
 import { Image } from "astro:assets";
+import { getCollection } from "astro:content";
 import RootLayout from "../layouts/Root.astro";
 import { formatDate } from "../util";
 
@@ -12,9 +12,9 @@ const blogs = await getCollection("blogs");
   subtitle="Brook Nash's personal website."
   slug="hello-world"
 >
-  <section class="header">
+  <section class="flex justify-between">
     <h1 class="dark:text-white">Brook Nash</h1>
-    <div class="flex gap-2 items-center">
+    <div class="flex items-center gap-2">
       <p class="text-muted">Software Engineer</p>
       <Image
         class="size-6 rounded-full"
@@ -27,8 +27,8 @@ const blogs = await getCollection("blogs");
     </div>
   </section>
 
-  <section class="flex gap-6 justify-center *:text-blue-400 *:text-sm">
-    <a class="flex gap-2 items-center" href="https://x.com/brooknullsh">
+  <section class="flex justify-center gap-6 *:text-sm *:text-blue-400">
+    <a class="flex items-center gap-2" href="https://x.com/brooknullsh">
       <svg
         class="size-4"
         width="44"
@@ -47,7 +47,7 @@ const blogs = await getCollection("blogs");
       Twitter &#8599
     </a>
 
-    <a class="flex gap-2 items-center" href="https://github.com/brooknullsh">
+    <a class="flex items-center gap-2" href="https://github.com/brooknullsh">
       <svg
         class="size-4"
         width="44"
@@ -72,30 +72,20 @@ const blogs = await getCollection("blogs");
     </a>
   </section>
 
-  <section class="box flex flex-col gap-6">
-    <p>
-      I'm a Software Engineer currently working full-time on very legacy
-      architecture in Wales, United Kingdom. Feel free to reach out through my
-      social media links.
-    </p>
+  <p class="text-center">
+    I'm a Software Engineer currently working full-time on very legacy
+    architecture in Wales, United Kingdom. Feel free to reach out through my
+    social media links if you spot mistakes I've made or just want to talk about
+    software.
+  </p>
 
-    <p class="italic">
-      "My main reason for this site in general, even ignoring the blog aspect of
-      it, is to store my findings, resources & awful code snippets."
-      <br />
-      <a class="not-italic text-blue-400" href="/hello-world">
-        Hello, World! &rsaquo;
-      </a>
-    </p>
-  </section>
-
-  <section class="flex justify-between items-center">
+  <section class="flex items-center justify-between">
     <h2>Blogs</h2>
     <p class="text-muted">Ramblings, code snippets and less</p>
   </section>
 
-  <section class="grid grid-cols-[min-content_auto] space-y-2">
-    <h3 class="dark:text-white mr-6">Published</h3>
+  <section class="grid grid-cols-[min-content_auto]">
+    <h3 class="mr-6 dark:text-white">Published</h3>
     <h3 class="dark:text-white">Title</h3>
 
     {
@@ -103,11 +93,10 @@ const blogs = await getCollection("blogs");
         const { title, published } = data;
         return (
           <a
-            class="contents *:border-y *:border-neutral-300 dark:*:border-neutral-600
-            group *:flex *:items-center *:h-12"
+            class="group contents *:flex *:h-12 *:items-center *:border-b *:border-neutral-300 dark:*:border-neutral-600"
             href={id}
           >
-            <p class="text-muted group-hover:text-inherit transition-colors">
+            <p class="text-muted transition-colors group-hover:text-inherit">
               {formatDate(published, "medium")}
             </p>
             <p>{title}</p>
@@ -116,4 +105,13 @@ const blogs = await getCollection("blogs");
       })
     }
   </section>
+
+  <p class="text-center italic">
+    "My main reason for this site in general, even ignoring the blog aspect of
+    it, is to store my findings, resources & awful code snippets."
+    <br />
+    <a class="text-blue-400 not-italic" href="/hello-world">
+      Hello, World! &rsaquo;
+    </a>
+  </p>
 </RootLayout>

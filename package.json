@@ -15,5 +15,11 @@
     "astro": "^5.7.5",
     "astro-og-canvas": "^0.7.0",
     "tailwindcss": "^4.1.4"
+  },
+  "devDependencies": {
+    "@trivago/prettier-plugin-sort-imports": "^5.2.2",
+    "prettier-plugin-astro": "^0.14.1",
+    "prettier-plugin-astro-organize-imports": "^0.4.11",
+    "prettier-plugin-tailwindcss": "^0.6.11"
   }
 }

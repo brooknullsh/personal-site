@@ -1,7 +1,7 @@
 ---
-import "../root.css";
 import Analytics from "@vercel/analytics/astro";
 import SpeedInsights from "@vercel/speed-insights/astro";
+import "../root.css";
 
 const { title, subtitle, slug } = Astro.props;
 
@@ -44,7 +44,7 @@ const HOST = "https://brooknullsh.com";
   </head>
 
   <body>
-    <main class="container py-8 flex flex-col gap-6">
+    <main class="container flex flex-col gap-6 py-8">
       <slot />
     </main>
   </body>

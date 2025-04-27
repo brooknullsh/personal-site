@@ -29,26 +29,18 @@
   }
 }
 
-@utility header {
-  @apply border-y border-neutral-300 dark:border-neutral-600 py-1 flex justify-between items-center;
-}
-
-@utility box {
-  @apply border border-neutral-300 dark:border-neutral-600 p-2 text-center;
-}
-
 html.dark {
   @apply bg-black text-zinc-200;
 }
 
 h2 {
-  @apply font-medium text-2xl dark:text-white;
+  @apply text-2xl font-medium dark:text-white;
 }
 
 p,
 ul,
 ol {
-  @apply text-sm font-light leading-8;
+  @apply text-sm leading-8 font-light;
 }
 
 #blog {

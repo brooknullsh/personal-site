@@ -29,6 +29,14 @@
   }
 }
 
+@utility title {
+  @apply font-semibold text-4xl w-3/4;
+}
+
+@utility subtitle {
+  @apply font-medium text-2xl;
+}
+
 html.dark {
   @apply bg-black text-white;
 }
@@ -39,7 +47,7 @@ html.dark {
   }
 
   h2 {
-    @apply text-2xl font-semibold;
+    @apply subtitle;
   }
 
   h3 {

@@ -5,11 +5,11 @@ published: 2025-04-26
 ---
 
 There are several methods to document your notes, share your thoughts and display your
-code snippets, many of which are built aside products e.g. [X (Twitter)](https://x.com) or
-built for purpose e.g. [Medium](https://medium.com) and [dev.to](https://dev.to).
-
-For me, ironically, having the ability to write and share content alongside other features
-similarly to X (Twitter) atracted me to building blog functionality myself within my personal site.
+code snippets, many of which are built aside products e.g. [𝕏 (Twitter)](https://x.com) or
+built for purpose e.g. [Medium](https://medium.com), [dev.to](https://dev.to) and various
+others. For me, ironically, having the ability to write and share content alongside other
+features similarly to 𝕏 attracted me to building blog functionality myself within my
+personal site.
 
 <img alt="Welcome" src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExc2lwNTB5azB2ODU4aDI2cDNhcnlkamhmd21kbHphaTJhMmZkeWU3biZlcD12MV9naWZzX3NlYXJjaCZjdD1n/ASd0Ukj0y3qMM/giphy.gif" />
 
@@ -62,3 +62,11 @@ still love web development and keep up-to-date with what's going on.
 
 - [Astro](https://astro.build): Previously used [Svelte](https://svelte.dev)
 - [TailwindCSS](https://tailwindcss.com): Idiomatic class-based styles
+
+## Conclusion
+
+With all that being said, I'm going to force myself to use this site as my "second brain" instead
+of my local Apple Notes so let's see if I can write more than one post... probably not. You can
+find my social links on this site somewhere, feel free to reach out to me about anything software
+related whether it's advice on getting started all the way through shouting at me for getting
+something wrong.

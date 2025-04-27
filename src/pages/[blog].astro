@@ -22,7 +22,7 @@ const { Content } = await render(blog);
   <a class="text-blue-400 w-max" href="/">&lsaquo; Home</a>
 
   <section class="flex flex-col gap-2">
-    <h1 class="font-semibold text-4xl">{title}</h1>
+    <h1 class="title">{title}</h1>
     <p class="text-muted">{subtitle}</p>
     <p class="text-muted text-sm">
       {formatDate(blog.data.published, "full")}

@@ -4,7 +4,9 @@ import { getCollection } from "astro:content";
 import RootLayout from "../layouts/Root.astro";
 import { formatDate } from "../util";
 
-const blogs = await getCollection("blogs");
+const blogs = (await getCollection("blogs")).sort(
+  (a, b) => b.data.published.getTime() - a.data.published.getTime(),
+);
 ---
 
 <RootLayout
@@ -73,10 +75,10 @@ const blogs = await getCollection("blogs");
   </section>
 
   <p class="text-center">
-    I'm a Software Engineer currently working full-time on very legacy
-    architecture in Wales, United Kingdom. Feel free to reach out through my
-    social media links if you spot mistakes I've made or just want to talk about
-    software.
+    I'm a Software Engineer currently working full-time on
+    <strong>very legacy architecture</strong> in Wales, United Kingdom. Feel free
+    to reach out through my social media links if you spot mistakes I've made or
+    just want to talk about software.
   </p>
 
   <section class="flex items-center justify-between">

@@ -29,6 +29,10 @@
   }
 }
 
+* {
+  @apply md:overscroll-none;
+}
+
 html.dark {
   @apply bg-black text-zinc-200;
 }
@@ -41,6 +45,10 @@ p,
 ul,
 ol {
   @apply text-sm leading-8 font-light;
+}
+
+strong {
+  @apply font-bold;
 }
 
 #blog {

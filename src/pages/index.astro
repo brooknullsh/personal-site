@@ -101,7 +101,7 @@ const blogs = (await getCollection("blogs")).sort(
             <p class="text-muted transition-colors group-hover:text-inherit">
               {formatDate(published, "medium")}
             </p>
-            <p>{title}</p>
+            <p class="overflow-x-auto">{title}</p>
           </a>
         );
       })

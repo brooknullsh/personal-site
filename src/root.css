@@ -37,8 +37,20 @@ html.dark {
   @apply bg-black text-zinc-200;
 }
 
+@media (prefers-color-scheme: dark) {
+  .astro-code,
+  .astro-code span {
+    color: var(--shiki-dark) !important;
+    background-color: var(--shiki-dark-bg) !important;
+  }
+}
+
 h2 {
   @apply text-2xl font-medium dark:text-white;
+}
+
+strong {
+  @apply font-bold;
 }
 
 p,
@@ -47,8 +59,12 @@ ol {
   @apply text-sm leading-8 font-light;
 }
 
-strong {
-  @apply font-bold;
+ul {
+  @apply list-inside list-disc;
+}
+
+ol {
+  @apply list-inside list-decimal;
 }
 
 #blog {
@@ -56,11 +72,11 @@ strong {
     @apply text-blue-400 after:content-["_\2197"];
   }
 
-  ul {
-    @apply list-inside list-disc;
+  img {
+    @apply rounded;
   }
 
-  ol {
-    @apply list-inside list-decimal;
+  .astro-code {
+    @apply rounded p-2;
   }
 }

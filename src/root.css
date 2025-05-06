@@ -60,16 +60,28 @@ ol {
 }
 
 #blog {
+  h3 {
+    @apply decoration-muted/50 text-lg font-medium underline underline-offset-4 dark:text-white;
+  }
+
   a {
     @apply text-blue-400 after:content-["_\2197"];
   }
 
   blockquote {
-    @apply border-muted/25 bg-muted/10 text-muted flex items-center justify-center gap-2 rounded border p-2 before:content-["🙋‍♂️_"];
+    @apply border-muted/25 bg-muted/10 text-muted relative flex items-center justify-center gap-2 rounded border p-2 text-center before:content-["🙋‍♂️_"];
+  }
+
+  blockquote::before {
+    @apply absolute -top-3 left-0;
   }
 
   img {
     @apply rounded;
+  }
+
+  code {
+    @apply font-light;
   }
 
   :not(pre) > code {
@@ -77,6 +89,6 @@ ol {
   }
 
   figcaption > .title {
-    @apply text-muted text-xs;
+    @apply text-muted text-xs tracking-wider;
   }
 }

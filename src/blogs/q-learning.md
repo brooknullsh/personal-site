@@ -26,7 +26,7 @@ If you don't have Rust and it's tooling installed, you can follow their instruct
 previously (if you object then the rest of this becomes a bit difficult) we can create a
 new project.
 
-```sh
+```sh frame="none"
 cargo new --bin q-learning --vcs none
 ```
 
@@ -43,14 +43,14 @@ fn main() {
 }
 ```
 
-```sh
+```sh frame="none"
 cargo run
 ```
 
 I then added three dependencies through `cargo` which also acts as a package manager
 but you only need `rand` for this to work, the others are just for logging.
 
-```sh
+```sh frame="none"
 cargo add rand log env_logger
 ```
 
@@ -141,7 +141,7 @@ pub fn init_table(q_table: &mut QTable) {
 }
 ```
 
-###
+## Training
 
 Now we have a clean starting state, we can train these Q values to prioritise the correct
 action.
@@ -249,6 +249,8 @@ pub fn state_reward(state: u8, next_state: u8) -> f32 {
   }
 }
 ```
+
+## Running
 
 It's interesting to tweak the reward scheme, giving more or less for certain conditions
 or even adding more to get finer granularity. Assuming I haven't missed too much, running

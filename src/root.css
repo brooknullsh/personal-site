@@ -69,11 +69,7 @@ ol {
   }
 
   blockquote {
-    @apply border-muted/25 bg-muted/10 text-muted relative flex items-center justify-center gap-2 rounded border p-2 text-center before:content-["🙋‍♂️_"];
-  }
-
-  blockquote::before {
-    @apply absolute -top-3 left-0;
+    @apply border-muted/25 bg-muted/10 text-muted relative flex items-center justify-center gap-2 rounded border p-2 text-center;
   }
 
   img {

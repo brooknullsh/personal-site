@@ -8,6 +8,12 @@ const { title, subtitle, slug } = Astro.props;
 const HOST = "https://brooknullsh.com";
 ---
 
+<script is:inline>
+  if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
+    document.documentElement.classList.add("dark");
+  }
+</script>
+
 <html lang="en">
   <head>
     <meta charset="utf-8" />
@@ -49,9 +55,3 @@ const HOST = "https://brooknullsh.com";
     </main>
   </body>
 </html>
-
-<script is:inline>
-  if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
-    document.documentElement.classList.add("dark");
-  }
-</script>

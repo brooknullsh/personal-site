@@ -37,14 +37,6 @@ html.dark {
   @apply bg-black text-zinc-200;
 }
 
-@media (prefers-color-scheme: dark) {
-  .astro-code,
-  .astro-code span {
-    color: var(--shiki-dark) !important;
-    background-color: var(--shiki-dark-bg) !important;
-  }
-}
-
 h2 {
   @apply text-2xl font-medium dark:text-white;
 }
@@ -72,11 +64,19 @@ ol {
     @apply text-blue-400 after:content-["_\2197"];
   }
 
+  blockquote {
+    @apply border-muted/25 bg-muted/10 text-muted flex items-center justify-center gap-2 rounded border p-2 before:content-["🙋‍♂️_"];
+  }
+
   img {
     @apply rounded;
   }
 
-  .astro-code {
-    @apply rounded p-2;
+  :not(pre) > code {
+    @apply bg-muted/20 border-muted/50 rounded border p-0.5 text-xs;
+  }
+
+  figcaption > .title {
+    @apply text-muted text-xs;
   }
 }

@@ -1,0 +1,36 @@
+---
+import { getCollection, render } from "astro:content";
+import RootLayout from "../layouts/Root.astro";
+import { formatDate } from "../util";
+
+export async function getStaticPaths() {
+  const notes = await getCollection("notes");
+
+  return notes.map((note) => ({
+    params: { note: note.id },
+    props: note,
+  }));
+}
+
+const note = Astro.props;
+const { title, subtitle } = note.data;
+const { Content } = await render(note);
+---
+
+<RootLayout {title} {subtitle} slug={note.id}>
+  <section class="flex items-center justify-between">
+    <a class="text-secondary font-medium" href="/">&lsaquo; Home</a>
+    <p class="text-muted text-sm">
+      {formatDate(note.data.published, "full")}
+    </p>
+  </section>
+
+  <section class="flex flex-col gap-2">
+    <h1 class="standout-text-colour text-5xl font-medium">{title}</h1>
+    <p class="text-muted text-sm">{subtitle}</p>
+  </section>
+
+  <section class="flex flex-col gap-6" id="note">
+    <Content />
+  </section>
+</RootLayout>

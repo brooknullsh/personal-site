@@ -1,19 +1,20 @@
 import { OGImageRoute } from "astro-og-canvas";
 import { getCollection } from "astro:content";
 
-const entries = await getCollection("blogs");
-const blogs = Object.fromEntries(entries.map(({ id, data }) => [id, data]));
+const entries = await getCollection("notes");
+const notes = Object.fromEntries(entries.map(({ id, data }) => [id, data]));
 
 export const { getStaticPaths, GET } = OGImageRoute({
   param: "route",
-  pages: blogs,
+  pages: notes,
   getImageOptions: (_, page) => ({
     title: page.title,
     description: page.subtitle,
     bgGradient: [[255, 255, 255]],
+    fonts: ["./src/assets/geist-mono.ttf"],
     font: {
-      title: { size: 128, weight: "Bold", color: [0, 0, 0] },
-      description: { size: 16, color: [0, 0, 0] },
+      title: { weight: "Bold", color: [0, 0, 0] },
+      description: { color: [0, 0, 0] },
     },
   }),
 });

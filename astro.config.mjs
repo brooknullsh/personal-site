@@ -8,7 +8,7 @@ export default defineConfig({
   integrations: [
     expressiveCode({
       plugins: [pluginLineNumbers()],
-      themes: ["light-plus", "dark-plus"],
+      themes: ["github-light", "github-dark"],
       frames: { showCopyToClipboardButton: false },
     }),
   ],

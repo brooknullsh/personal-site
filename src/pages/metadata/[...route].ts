@@ -12,10 +12,10 @@ export const { getStaticPaths, GET } = OGImageRoute({
     description: page.subtitle,
     bgGradient: [[255, 255, 255]],
     fonts: ["./src/assets/geist-mono.ttf"],
-    logo: { size: [36], path: "./public/favicon.png" },
+    logo: { size: [48], path: "./public/favicon.png" },
     font: {
       title: { size: 120, weight: "Bold", color: [0, 0, 0] },
-      description: { color: [0, 0, 0] },
+      description: { size: 20, color: [0, 0, 0] },
     },
   }),
 });

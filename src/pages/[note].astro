@@ -1,7 +1,6 @@
 ---
 import { getCollection, render } from "astro:content";
 import RootLayout from "../layouts/Root.astro";
-import { formatDate } from "../util";
 
 export async function getStaticPaths() {
   const notes = await getCollection("notes");
@@ -17,11 +16,24 @@ const { title, subtitle } = note.data;
 const { Content } = await render(note);
 ---
 
+<script>
+  document.addEventListener("keyup", ({ key }) => {
+    const home = document.getElementById("home");
+    if (!home || key !== "Escape") return;
+    home.click();
+  });
+</script>
+
 <RootLayout {title} {subtitle} slug={note.id}>
   <section class="flex items-center justify-between">
-    <a class="text-secondary font-medium" href="/">&lsaquo; Home</a>
+    <a class="text-secondary font-medium" id="home" href="/">
+      &lsaquo; Home
+      <span class="text-muted hidden text-xs font-normal sm:inline">
+        [esc]
+      </span>
+    </a>
     <p class="text-muted text-sm">
-      {formatDate(note.data.published, "full")}
+      {note.data.published.toLocaleDateString("en-GB", { dateStyle: "full" })}
     </p>
   </section>
 

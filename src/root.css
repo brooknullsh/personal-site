@@ -1,5 +1,10 @@
 @import "tailwindcss";
 
+@font-face {
+  font-family: "Inter";
+  src: url("./assets/inter-variable.ttf");
+}
+
 @theme {
   --color-secondary: var(--color-blue-400);
   --color-muted: var(--color-neutral-400);
@@ -76,7 +81,7 @@
 }
 
 * {
-  @apply md:overscroll-none;
+  @apply font-[Inter] md:overscroll-none;
 }
 
 html {
@@ -92,7 +97,7 @@ h3 {
 }
 
 strong {
-  @apply font-bold;
+  @apply font-semibold;
 }
 
 p,

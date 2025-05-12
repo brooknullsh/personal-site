@@ -5,12 +5,19 @@ import GitHubIcon from "../assets/github-icon.svg";
 import PlusIcon from "../assets/plus-icon.svg";
 import TwitterIcon from "../assets/twitter-icon.svg";
 import RootLayout from "../layouts/Root.astro";
-import { formatDate } from "../util";
 
 const notes = (await getCollection("notes")).sort(
   (a, b) => b.data.published.getTime() - a.data.published.getTime(),
 );
 ---
+
+<script>
+  document.addEventListener("keyup", (event) => {
+    const note = document.getElementById(`note-${event.key}`);
+    if (!note) return;
+    note.click();
+  });
+</script>
 
 <RootLayout
   title="Home"
@@ -32,9 +39,9 @@ const notes = (await getCollection("notes")).sort(
     </div>
   </section>
 
-  <div class="bg-muted/50 relative h-[1px]">
+  <div class="relative">
     <div
-      class="animate-end-to-end bg-secondary absolute -top-[2px] size-[5px] rounded-full"
+      class="animate-end-to-end bg-secondary absolute size-[5px] rounded-full"
     >
     </div>
   </div>
@@ -71,15 +78,23 @@ const notes = (await getCollection("notes")).sort(
 
   <section class="flex flex-col gap-2">
     {
-      notes.map(({ id, data }) => {
+      notes.map(({ id, data }, index) => {
         const { title, published } = data;
         return (
-          <a class="group flex items-center gap-4" href={id} {title}>
+          <a
+            class="group flex items-center gap-4"
+            id={`note-${index}`}
+            href={id}
+            {title}
+          >
             <p class="text-muted group-hover:standout-text-colour text-sm transition-colors">
-              {formatDate(published, "short")}
+              {published.toLocaleDateString("en-GB", { dateStyle: "short" })}
             </p>
             <div class="bg-muted group-hover:bg-secondary size-1 rounded-full transition-colors" />
-            <p class="standout-text-colour truncate">{title}</p>
+            <p class="standout-text-colour truncate">
+              {title}
+              <span class="text-muted hidden text-xs sm:inline">[{index}]</span>
+            </p>
           </a>
         );
       })

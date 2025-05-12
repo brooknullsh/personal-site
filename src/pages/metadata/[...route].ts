@@ -11,11 +11,11 @@ export const { getStaticPaths, GET } = OGImageRoute({
     title: page.title,
     description: page.subtitle,
     bgGradient: [[255, 255, 255]],
-    fonts: ["./src/assets/geist-mono.ttf"],
+    fonts: ["./src/assets/inter-variable.ttf"],
     logo: { size: [48], path: "./public/favicon.png" },
     font: {
       title: { size: 120, weight: "Bold", color: [0, 0, 0] },
-      description: { size: 20, color: [0, 0, 0] },
+      description: { size: 24, color: [0, 0, 0] },
     },
   }),
 });

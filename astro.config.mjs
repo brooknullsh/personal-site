@@ -4,6 +4,7 @@ import expressiveCode from "astro-expressive-code";
 import { defineConfig } from "astro/config";
 
 export default defineConfig({
+  prefetch: { prefetchAll: true, defaultStrategy: "viewport" },
   vite: { plugins: [tailwindcss()] },
   integrations: [
     expressiveCode({

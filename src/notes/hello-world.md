@@ -17,7 +17,7 @@ Some formatting like **bold** and *italic* within a paragraph.
 ```ts
 // index.ts
 
-type Something = 0 | 1 | 2 | 3;
+type Foo = 0 | 1 | 2 | 3;
 
 function main() {
   console.log("Hello, World!");

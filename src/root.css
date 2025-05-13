@@ -80,12 +80,8 @@
   @apply standout-text-colour font-medium;
 }
 
-* {
-  @apply font-[Inter] md:overscroll-none;
-}
-
 html {
-  @apply text-neutral-600 dark:bg-black dark:text-zinc-300/90;
+  @apply font-[Inter] text-neutral-600 md:overscroll-none dark:bg-black dark:text-zinc-300/90 dark:antialiased;
 }
 
 h2 {
@@ -120,7 +116,7 @@ ol {
   }
 
   blockquote {
-    @apply border-secondary border-l pl-4 font-medium;
+    @apply border-secondary bg-secondary/10 text-muted rounded-r border-l-2 pl-4 text-sm;
   }
 
   :not(pre) > code {

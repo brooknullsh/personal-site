@@ -35,9 +35,8 @@ list is here](https://developer.mozilla.org/en-US/docs/Web/API).
 ## Blocking vs. Non-blocking
 
 Because JavaScript is single-threaded, if it's execution becomes stuck on a
-long-running task, all other processes wait. This wouldn't be *too* big of a
-deal if the context wasn't a browser where the interactivity remains on that
-same thread.
+long-running task, **all other processes wait** which includes any
+interactivity.
 
 ```js
 // index.js
@@ -51,7 +50,7 @@ Once that button is pressed, the call stack execution is stuck on
 `veryExpensiveFunction` and more than likely won't be able to even remove the
 active state from the button nor perform any other logic.
 
-That is blocking code.
+**That is blocking code.**
 
 On the other hand, non-blocking code is code that doesn't need to resolve or
 complete before the proceeding lines can be executed.
@@ -86,9 +85,9 @@ video](https://www.youtube.com/watch?v=8aGhZQkoFbQ) at JSConf
 
 Setting an immediately returning callback within a `setTimeout()` is (hopefully)
 a thing of the past because a `Promise` can fit right in it's place. Similar to
-the Task Queue, promises reside on another, the Microtask Queue which has
-priority over the TQ but similarly is only processed by the Event Loop when the
-Call Stack is empty.
+the Task Queue, promises reside on another, the **Microtask Queue which has
+priority over the TQ** but similarly is only processed by the Event Loop when
+the Call Stack is empty.
 
 ```js
 // index.js
@@ -115,4 +114,48 @@ Foo
 Bar
 Far has resolved
 Boo
+```
+
+### Await
+
+The `await` keyword is the trigger for the `Promise` to be placed on the MQ once
+some checks have completed, like:
+
+1. **Execution pause:** The `async` function pauses on the `await` line
+(non-blocking)
+2. **Continue:** Due to the above being non-blocking, the synchronous code
+following the `async` function runs as normal
+3. **Resolution:** Waiting on Resolve or Reject
+4. **Complete:** Event loop picks up the task and returns execution (value or
+thrown error) to the `await` line
+
+```js
+// index.js
+
+async function veryExpensiveFunction() {
+  console.log("Boo");
+  try {
+    const response = await fetch("https://google.com");
+    console.log(response);
+  } catch (error) {
+    /* ... */
+  }
+  console.log("Far");
+}
+
+console.log("Foo");
+veryExpensiveFunction();
+console.log("Bar");
+```
+
+Although there's more code involved, the principle remains the same as the
+previous examples. This time the function is entered an executed up to the
+`await` statement where execution is returned to the synchronous code.
+
+```txt
+Foo
+Boo
+Bar
+Response (2.67 KB) /* ... */
+Far
 ```

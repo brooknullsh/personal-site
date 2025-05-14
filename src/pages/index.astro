@@ -81,17 +81,11 @@ const notes = (await getCollection("notes")).sort(
       notes.map(({ id, data }, index) => {
         const { title, published } = data;
         return (
-          <a
-            class="group flex items-center gap-4"
-            id={`note-${index}`}
-            href={id}
-            {title}
-          >
-            <p class="text-muted group-hover:standout-text-colour text-sm transition-colors">
+          <a class="group flex" id={`note-${index}`} href={id} {title}>
+            <p class="text-muted group-hover:standout-text-colour w-24 text-sm transition-colors">
               {published.toLocaleDateString("en-GB", { dateStyle: "short" })}
             </p>
-            <div class="bg-muted group-hover:bg-secondary size-1 rounded-full transition-colors" />
-            <p class="standout-text-colour truncate">
+            <p class="standout-text-colour flex-1/2 truncate">
               {title}
               <span class="text-muted hidden text-xs sm:inline">[{index}]</span>
             </p>

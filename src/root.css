@@ -77,7 +77,7 @@
 }
 
 @utility subtitle {
-  @apply standout-text-colour font-medium;
+  @apply standout-text-colour text-lg font-medium underline underline-offset-6;
 }
 
 html {
@@ -129,7 +129,7 @@ ol {
     @apply shadow-none;
 
     pre {
-      @apply rounded rounded-tl-none border-none bg-neutral-100 dark:bg-neutral-800/25;
+      @apply rounded border-none bg-neutral-100 dark:bg-neutral-800/25;
 
       code {
         @apply leading-8;
@@ -145,7 +145,7 @@ ol {
     }
 
     .title {
-      @apply text-muted rounded-t border-none bg-neutral-100 text-xs dark:bg-neutral-800/25;
+      @apply text-muted w-full border-none bg-transparent text-center text-xs;
 
       &::after {
         @apply border-none;

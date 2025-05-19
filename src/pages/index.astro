@@ -5,6 +5,7 @@ import GitHubIcon from "../assets/github-icon.svg";
 import PlusIcon from "../assets/plus-icon.svg";
 import TwitterIcon from "../assets/twitter-icon.svg";
 import RootLayout from "../layouts/Root.astro";
+import { relativeDate } from "../util";
 
 const notes = (await getCollection("notes")).sort(
   (a, b) => b.data.published.getTime() - a.data.published.getTime(),
@@ -83,7 +84,7 @@ const notes = (await getCollection("notes")).sort(
         return (
           <a class="group flex" id={`note-${index}`} href={id} {title}>
             <p class="text-muted group-hover:standout-text-colour w-24 text-sm transition-colors">
-              {published.toLocaleDateString("en-GB", { dateStyle: "short" })}
+              {relativeDate(published)}
             </p>
             <p class="standout-text-colour flex-1/2 truncate">
               {title}

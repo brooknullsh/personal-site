@@ -115,6 +115,10 @@ ol {
     @apply text-secondary after:content-["_\2197"];
   }
 
+  img {
+    @apply w-full rounded;
+  }
+
   blockquote {
     @apply border-secondary bg-secondary/10 text-muted rounded-r border-l-2 pl-4 text-sm;
   }

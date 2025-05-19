@@ -38,6 +38,8 @@ Because JavaScript is single-threaded, if it's execution becomes stuck on a
 long-running task, **all other processes wait** which includes any
 interactivity.
 
+![Blocked](https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExY3hrNHQ3MGIzYjFtbTcwNTdyZWlqenlmeGhld3JsYTd5dTcyemw0dyZlcD12MV9naWZzX3NlYXJjaCZjdD1n/7chLJeFOr49zrXnS8b/giphy.gif)
+
 ```js
 // index.js
 
@@ -105,6 +107,8 @@ Promise.resolve("has resolved").then((value) => {
 console.log("Bar");
 ```
 
+![Pinky Promise](https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExbjRmMnN0NGN5Y3oxbGw5eHZsMTZsN2puanBxMDlhb3A1YXJseDFhaCZlcD12MV9naWZzX3NlYXJjaCZjdD1n/Cu7tfLe1edy3HE7JfC/giphy.gif)
+
 Just like before, there will now be an item on the TQ but the MQ also. Once both
 `console.log` calls have run and complete, the Event Loop will process all of
 the items in the MQ until then moving on to the TQ.
@@ -149,7 +153,7 @@ console.log("Bar");
 ```
 
 Although there's more code involved, the principle remains the same as the
-previous examples. This time the function is entered an executed up to the
+previous examples. This time the function is entered and executed up to the
 `await` statement where execution is returned to the synchronous code.
 
 ```txt

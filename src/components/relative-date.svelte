@@ -1,5 +1,7 @@
-export function relativeDate(date: Date) {
-  const diffInSeconds = Math.round((date.getTime() - Date.now()) / 1000);
+<script lang="ts">
+  let props: { date: Date } = $props();
+
+  const diffInSeconds = Math.round((props.date.getTime() - Date.now()) / 1000);
 
   const levels = [
     60, // 1 minute
@@ -24,5 +26,10 @@ export function relativeDate(date: Date) {
   const level = closest ? levels[closest - 1] : 1;
 
   const rtf = new Intl.RelativeTimeFormat("en");
-  return rtf.format(Math.ceil(diffInSeconds / level), keys[closest]);
-}
+  const formattedDate = rtf.format(
+    Math.ceil(diffInSeconds / level),
+    keys[closest],
+  );
+</script>
+
+<span>{formattedDate}</span>

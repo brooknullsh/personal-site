@@ -18,8 +18,8 @@ code where I can visualise what a Q value is against an action for a state.
 ```js
 {
   "state": {
-    "actionA": 0.0 /* Q value */,
-    "actionB": 0.0 /* Q value */
+    "actionA": 0.0, /* Q value */
+    "actionB": 0.0  /* Q value */
   }
 }
 ```

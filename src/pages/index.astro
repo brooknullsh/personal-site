@@ -4,8 +4,8 @@ import { getCollection } from "astro:content";
 import GitHubIcon from "../assets/github-icon.svg";
 import PlusIcon from "../assets/plus-icon.svg";
 import TwitterIcon from "../assets/twitter-icon.svg";
+import RelativeDate from "../components/relative-date.svelte";
 import RootLayout from "../layouts/Root.astro";
-import { relativeDate } from "../util";
 
 const notes = (await getCollection("notes")).sort(
   (a, b) => b.data.published.getTime() - a.data.published.getTime(),
@@ -90,7 +90,7 @@ const notes = (await getCollection("notes")).sort(
           >
             <p class="standout-text-colour max-w-3/4 truncate">{title}</p>
             <p class="text-muted group-hover:standout-text-colour text-sm transition-colors">
-              {relativeDate(published)}
+              <RelativeDate date={published} client:only="svelte" />
               <span class="text-muted hidden text-xs sm:inline">[{index}]</span>
             </p>
           </a>

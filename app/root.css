@@ -1,0 +1,133 @@
+@import "tailwindcss";
+
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
+  --tertiary: #fafafa;
+  --secondary: #51a2ff;
+  --muted: #a1a1a1;
+
+  --sh-class: #6fafbd;
+  --sh-identifier: #d5b778;
+  --sh-sign: #3f3f3f;
+  --sh-property: #bcbec4;
+  --sh-entity: #d5b778;
+  --sh-jsxliterals: #3f3f3f;
+  --sh-string: #6aab73;
+  --sh-keyword: #cf8e6d;
+  --sh-comment: #7a7e85;
+}
+
+/*
+  TailwindV4 no longer has a "container" class with responsive padding
+  https://github.com/tailwindlabs/tailwindcss/issues/13129#issuecomment-2474279153
+*/
+@utility container {
+  margin-inline: auto;
+  padding-inline: 1rem;
+
+  @variant sm {
+    padding-inline: 1rem;
+  }
+
+  @variant md {
+    padding-inline: 5rem;
+  }
+
+  @variant lg {
+    padding-inline: 10rem;
+  }
+
+  @variant xl {
+    padding-inline: 22rem;
+  }
+}
+
+@theme {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-tertiary: var(--tertiary);
+  --color-secondary: var(--secondary);
+  --color-muted: var(--muted);
+
+  --animate-end-to-end: end-to-end 3s ease-in-out alternate infinite;
+}
+
+@keyframes end-to-end {
+  0% {
+    left: 0%;
+  }
+
+  100% {
+    left: calc(100% - 5px);
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #000000;
+    --foreground: #ededed;
+    --tertiary: #0a0a0a;
+
+    --sh-sign: #bcbec4;
+    --sh-jsxliterals: #bcbec4;
+  }
+}
+
+html {
+  @apply antialiased;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+}
+
+h3 {
+  @apply text-xl font-semibold tracking-tighter;
+}
+
+ul {
+  @apply list-inside list-disc;
+}
+
+ol {
+  @apply list-inside list-decimal;
+}
+
+img {
+  @apply w-full rounded;
+}
+
+pre {
+  @apply bg-tertiary overflow-x-auto rounded p-4 text-sm;
+}
+
+:not(pre) > code {
+  @apply bg-tertiary rounded p-1 text-sm;
+
+  span {
+    @apply !text-muted;
+  }
+}
+
+pre > code {
+  counter-reset: sh-line-number;
+
+  .sh__line::before {
+    counter-increment: sh-line-number 1;
+    content: counter(sh-line-number);
+
+    @apply text-muted mr-4 inline-flex w-4 justify-end;
+  }
+}
+
+article {
+  h2 {
+    @apply text-xl font-semibold tracking-tighter;
+  }
+
+  a {
+    @apply text-secondary after:content-["_\2197"];
+  }
+}

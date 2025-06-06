@@ -1,8 +1,5 @@
-# Build output
-dist/
+/node_modules
+/.next
+/build
 
-# Generated types
-.astro/
-
-# Dependencies
-node_modules/
+next-env.d.ts

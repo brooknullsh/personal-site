@@ -16,17 +16,12 @@ const SUBTITLE = "A place on the internet I can use for my own."
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
-  title: {
-    template: `%s - ${TITLE}`,
-    default: `Home - ${TITLE}`,
-  },
+  title: { template: `%s - ${TITLE}`, default: `Home - ${TITLE}` },
   description: SUBTITLE,
   openGraph: {
     title: TITLE,
     description: SUBTITLE,
-    url: SITE_URL,
-    siteName: TITLE,
-    images: [`${SITE_URL}/og?title=${TITLE}&subtitle=${SUBTITLE}`],
+    images: [{ url: `${SITE_URL}/og?title=${encodeURIComponent(TITLE)}` }],
   },
 }
 

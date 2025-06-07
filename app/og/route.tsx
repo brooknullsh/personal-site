@@ -2,11 +2,9 @@ import { ImageResponse } from "next/og"
 import { NextRequest, NextResponse } from "next/server"
 
 export async function GET(req: NextRequest) {
-  const url = new URL(req.url)
-  const title = url.searchParams.get("title")
-  const subtitle = url.searchParams.get("subtitle")
+  const title = new URL(req.url).searchParams.get("title")
 
-  if (!title || !subtitle) {
+  if (!title) {
     return new NextResponse(undefined, { status: 400 })
   }
 
@@ -14,7 +12,6 @@ export async function GET(req: NextRequest) {
     (
       <div tw="flex flex-col justify-center items-center h-full w-full">
         <p tw="text-6xl text-black">{title}</p>
-        <p tw="text-xl text-neutral-400">{subtitle}</p>
         <p tw="text-blue-400">[ brooknullsh.com ]</p>
       </div>
     ),

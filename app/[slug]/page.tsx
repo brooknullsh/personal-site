@@ -22,18 +22,12 @@ export async function generateMetadata({
   }
 
   const { title, subtitle } = noteBySlug.metadata
-  const url = "https://brooknullsh.com"
+  const url = `https://brooknullsh.com/og?title=${encodeURIComponent(title)}`
 
   return {
     title,
     description: subtitle,
-    openGraph: {
-      title: title,
-      description: subtitle,
-      url,
-      siteName: "brooknullsh",
-      images: [`${url}/og?title=${title}&subtitle=${subtitle}`],
-    },
+    openGraph: { title: title, description: subtitle, images: [{ url }] },
   }
 }
 

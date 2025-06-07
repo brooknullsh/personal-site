@@ -1,4 +1,6 @@
 import "./root.css"
+import { Analytics } from "@vercel/analytics/next"
+import { SpeedInsights } from "@vercel/speed-insights/next"
 import type { Metadata } from "next"
 import { Inter } from "next/font/google"
 import Link from "next/link"
@@ -8,16 +10,25 @@ const interFont = Inter({
   subsets: ["latin"],
 })
 
-export const metadata: Metadata = {
-  metadataBase: new URL("https://brooknullsh.com"),
-  title: {
-    template: "%s - brooknullsh",
-    default: "Home - brooknullsh",
-  },
-  description: "A place on the internet I can use for my own.",
-}
+const SITE_URL = "https://brooknullsh.com"
+const TITLE = "brooknullsh"
+const SUBTITLE = "A place on the internet I can use for my own."
 
-type Props = Readonly<{ children: React.ReactNode }>
+export const metadata: Metadata = {
+  metadataBase: new URL(SITE_URL),
+  title: {
+    template: `%s - ${TITLE}`,
+    default: `Home - ${TITLE}`,
+  },
+  description: SUBTITLE,
+  openGraph: {
+    title: TITLE,
+    description: SUBTITLE,
+    url: SITE_URL,
+    siteName: TITLE,
+    images: [`${SITE_URL}/og?title=${TITLE}&subtitle=${SUBTITLE}`],
+  },
+}
 
 function Footer() {
   return (
@@ -68,7 +79,9 @@ function Footer() {
   )
 }
 
-export default function RootLayout({ children }: Props) {
+export default function RootLayout({
+  children,
+}: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="en">
       <body
@@ -81,6 +94,8 @@ export default function RootLayout({ children }: Props) {
         </div>
 
         <Footer />
+        <Analytics />
+        <SpeedInsights />
       </body>
     </html>
   )

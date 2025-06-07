@@ -1,4 +1,5 @@
-import { getNotes, relativeDate } from "@/lib"
+import RelativeDate from "@/components/relative-date"
+import { getNotes } from "@/lib"
 import Link from "next/link"
 
 export default async function Root() {
@@ -24,9 +25,7 @@ export default async function Root() {
             href={`/${slug}`}
             title={metadata.title}
           >
-            <p className="text-muted w-32 transition-colors group-hover:text-inherit">
-              {relativeDate(new Date(metadata.published))}
-            </p>
+            <RelativeDate date={new Date(metadata.published)} />
             <p className="flex-1 truncate">{metadata.title}</p>
           </Link>
         ))}

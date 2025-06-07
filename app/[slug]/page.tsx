@@ -22,7 +22,19 @@ export async function generateMetadata({
   }
 
   const { title, subtitle } = noteBySlug.metadata
-  return { title, description: subtitle }
+  const url = "https://brooknullsh.com"
+
+  return {
+    title,
+    description: subtitle,
+    openGraph: {
+      title: title,
+      description: subtitle,
+      url,
+      siteName: "brooknullsh",
+      images: [`${url}/og?title=${title}&subtitle=${subtitle}`],
+    },
+  }
 }
 
 function CodeBlock({

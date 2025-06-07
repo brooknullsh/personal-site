@@ -5,11 +5,10 @@ published: 2025-06-06
 ---
 
 Primarily, JavaScript is a single-threaded and synchronous language but there
-are exceptions to this. Think of the `setInterval()` and `setTimeout()`
-functions as examples of JavaScript utilising asynchronous code around a single
-thread.
+are exceptions to this. Think of creating a timed interval and time out as
+examples of JavaScript utilising asynchronous code around a single thread.
 
-1. Call to `setInterval()` or `setTimeout()` in the code
+1. Call to multi-threaded functionality
 2. Engine offloads the call to the parent context (usually a Web API)
 3. Once the timer has finished, the callback is then placed on the Task Queue
 4. The Event Loop takes the first callback from the TQ, putting it on the
@@ -22,7 +21,7 @@ will defer the callback execution
 ## Web APIs
 
 I mentioned earlier that when the JavaScript engine running in the browser
-encounters a call to `setInterval()` or `setTimeout()` it will pass it to a Web
+encounters a call to some multi-threaded functionality it will pass it to a Web
 API.
 
 These interfaces are implemented by the browser itself within a browser context,
@@ -35,19 +34,19 @@ them themselves.
 Because JavaScript is single-threaded, if it's execution becomes stuck on a
 long-running task, all other processes wait which includes any interactivity.
 
-![Blocked](https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExY3hrNHQ3MGIzYjFtbTcwNTdyZWlqenlmeGhld3JsYTd5dTcyemw0dyZlcD12MV9naWZzX3NlYXJjaCZjdD1n/7chLJeFOr49zrXnS8b/giphy.gif)
-
 ```js
 const handleButtonClick() {
   veryExpensiveFunction();
 }
 ```
 
-Once that button is pressed, the call stack execution is stuck on
-`veryExpensiveFunction()` and more than likely won't be able to even remove the
-active state from the button nor perform any other logic.
+Once that button is pressed, the call stack execution is stuck on said expensive
+function and more than likely won't be able to even remove the active state from
+the button nor perform any other logic.
 
-**That is blocking code.**
+That is blocking code.
+
+![Blocked](https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExY3hrNHQ3MGIzYjFtbTcwNTdyZWlqenlmeGhld3JsYTd5dTcyemw0dyZlcD12MV9naWZzX3NlYXJjaCZjdD1n/7chLJeFOr49zrXnS8b/giphy.gif)
 
 On the other hand, non-blocking code is code that doesn't need to resolve or
 complete before the proceeding lines can be executed.
@@ -62,10 +61,10 @@ setTimeout(() => {
 console.log("Bar");
 ```
 
-Here, the `setTimeout()` call will eventually make it's way back from the Web
-API after a swift 0 second wait and land on the Task Queue. But, calling back to
-the above, the Event Loop will not read from the Task Queue until the Call Stack
-is clear so we see the following:
+Here, the callback will eventually make it's way back from the Web API after a
+swift 0 second wait and land on the Task Queue. But, referring back to the
+above, the Event Loop will not read from the Task Queue until the Call Stack is
+clear so we see the following:
 
 ```txt
 Foo
@@ -75,11 +74,11 @@ Boo
 
 ## Behind The Scenes Of A Promise
 
-Setting an immediately returning callback within a `setTimeout()` is (hopefully)
-a thing of the past because a `Promise` can fit right in it's place. Similar to
-the Task Queue, promises reside on another, the Microtask Queue which has
-priority over the TQ but similarly is only processed by the Event Loop when the
-Call Stack is empty.
+Setting an immediately returning callback within one of these interval or time
+out functions is (hopefully) a thing of the past because a promise can fit right
+in it's place. Similar to the Task Queue, promises reside on another, the
+Microtask Queue which has priority over the TQ but similarly is only processed
+by the Event Loop when the Call Stack is empty.
 
 ```js
 console.log("Foo");
@@ -98,8 +97,8 @@ console.log("Bar");
 ![Pinky Promise](https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExbjRmMnN0NGN5Y3oxbGw5eHZsMTZsN2puanBxMDlhb3A1YXJseDFhaCZlcD12MV9naWZzX3NlYXJjaCZjdD1n/Cu7tfLe1edy3HE7JfC/giphy.gif)
 
 Just like before, there will now be an item on the TQ but the MQ also. Once both
-`console.log()` calls have run and complete, the Event Loop will process all of
-the items in the MQ until then moving on to the TQ.
+logging calls have run and complete, the Event Loop will process all of the
+items in the MQ until then moving on to the TQ.
 
 ```txt
 Foo
@@ -110,16 +109,16 @@ Boo
 
 ### The Await Keyword
 
-The `await` keyword is the trigger for the `Promise` to be placed on the MQ once
-some checks have completed, like:
+Awaiting is the trigger for the promise to be placed on the MQ once some checks
+have completed, like:
 
-1. Execution pause: The `async` function pauses on the `await` line
+1. Execution pause: The asynchronous function pauses on the awaited line
 (non-blocking)
 2. Continue: Due to the above being non-blocking, the synchronous code following
-the `async` function runs as normal
+the asynchronous function runs as normal
 3. Resolution: Waiting on Resolve or Reject
 4. Complete: Event loop picks up the task and returns execution (value or thrown
-error) to the `await` line
+error) to the awaited line
 
 ```js
 async function veryExpensiveFunction() {
@@ -140,7 +139,7 @@ console.log("Bar");
 
 Although there's more code involved, the principle remains the same as the
 previous examples. This time the function is entered and executed up to the
-`await` statement where execution is returned to the synchronous code.
+awaited statement where execution is returned to the synchronous code.
 
 ```txt
 Foo

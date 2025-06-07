@@ -75,7 +75,7 @@
 }
 
 html {
-  @apply antialiased;
+  @apply scroll-smooth antialiased;
 }
 
 body {
@@ -84,7 +84,7 @@ body {
 }
 
 h3 {
-  @apply text-xl font-semibold tracking-tighter;
+  @apply font-semibold tracking-tighter underline underline-offset-4;
 }
 
 ul {
@@ -101,14 +101,6 @@ img {
 
 pre {
   @apply bg-tertiary overflow-x-auto rounded p-4 text-sm;
-}
-
-:not(pre) > code {
-  @apply bg-tertiary rounded p-1 text-sm;
-
-  span {
-    @apply !text-muted;
-  }
 }
 
 pre > code {

@@ -25,8 +25,8 @@ export default async function Root() {
             href={`/${slug}`}
             title={metadata.title}
           >
-            <RelativeDate date={new Date(metadata.published)} />
             <p className="flex-1 truncate">{metadata.title}</p>
+            <RelativeDate date={new Date(metadata.published)} />
           </Link>
         ))}
       </section>

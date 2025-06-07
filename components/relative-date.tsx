@@ -29,7 +29,7 @@ export default function RelativeDate({ date }: { date: Date }) {
   const rtf = new Intl.RelativeTimeFormat("en")
 
   return (
-    <p className="text-muted w-32 transition-colors group-hover:text-inherit">
+    <p className="text-muted transition-colors group-hover:text-inherit">
       {rtf.format(Math.ceil(diffInSeconds / level), keys[closest])}
     </p>
   )

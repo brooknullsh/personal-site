@@ -10,18 +10,14 @@ const interFont = Inter({
   subsets: ["latin"],
 })
 
-const SITE_URL = "https://brooknullsh.com"
-const TITLE = "brooknullsh"
-const SUBTITLE = "A place on the internet I can use for my own."
-
 export const metadata: Metadata = {
-  metadataBase: new URL(SITE_URL),
-  title: { template: `%s - ${TITLE}`, default: `Home - ${TITLE}` },
-  description: SUBTITLE,
+  metadataBase: new URL("https://brooknullsh.com"),
+  title: { template: "%s - brooknullsh", default: "Home - brooknullsh" },
+  description: "A place on the internet I can use for my own.",
   openGraph: {
-    title: TITLE,
-    description: SUBTITLE,
-    images: [{ url: `${SITE_URL}/og?title=${encodeURIComponent(TITLE)}` }],
+    title: "brooknullsh",
+    description: "A place on the internet I can use for my own.",
+    images: [{ url: "/og" }],
   },
 }
 
@@ -52,7 +48,7 @@ function Footer() {
         GitHub
       </Link>
 
-      <Link href="https://github.com/brooknullsh">
+      <Link href="https://x.com/brooknullsh">
         <svg
           className="size-4"
           width="44"

@@ -1,5 +1,6 @@
+import Shortcut from "@/components/shortcut"
 import { getNotes } from "@/lib"
-import { Metadata } from "next"
+import type { Metadata } from "next"
 import { MDXRemote } from "next-mdx-remote/rsc"
 import Link from "next/link"
 import { notFound } from "next/navigation"
@@ -37,7 +38,7 @@ function CodeBlock({
   children,
   ...props
 }: Readonly<{ children: string; className: string }>) {
-  if (props.className && props.className.endsWith("txt")) {
+  if (props.className?.endsWith("txt")) {
     return <code dangerouslySetInnerHTML={{ __html: children }} {...props} />
   }
 
@@ -64,8 +65,9 @@ export default async function Note({
   return (
     <main className="flex flex-grow flex-col gap-12">
       <header className="flex items-center justify-between">
-        <Link className="text-secondary" href="/">
+        <Link className="text-secondary" id="home-btn" href="/">
           &lsaquo; Home
+          <Shortcut target="q" id="home-btn" />
         </Link>
         <p className="text-muted">{publishedDate}</p>
       </header>

@@ -8,7 +8,7 @@ export async function GET(req: NextRequest) {
 
   return new ImageResponse(
     (
-      <div tw="h-full p-4 text-white w-full flex flex-grow flex-col bg-black justify-between">
+      <div tw="h-full p-24 text-white w-full flex flex-grow flex-col bg-black justify-between">
         <header tw="flex items-center justify-between">
           <p>Brook Nash</p>
           <p tw="text-neutral-400">Software Engineer</p>

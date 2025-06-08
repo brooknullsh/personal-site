@@ -1,4 +1,5 @@
 import RelativeDate from "@/components/relative-date"
+import Shortcut from "@/components/shortcut"
 import { getNotes } from "@/lib"
 import Link from "next/link"
 
@@ -18,17 +19,25 @@ export default async function Root() {
       </div>
 
       <section className="flex flex-col gap-6">
-        {notes.map(({ metadata, slug }, index) => (
-          <Link
-            key={index}
-            className="group flex"
-            href={`/${slug}`}
-            title={metadata.title}
-          >
-            <p className="flex-1 truncate">{metadata.title}</p>
-            <RelativeDate date={new Date(metadata.published)} />
-          </Link>
-        ))}
+        {notes.map(({ metadata, slug }, index) => {
+          const keyIdentifier = (index + 1).toString()
+
+          return (
+            <Link
+              key={index}
+              className="group flex"
+              id={keyIdentifier}
+              href={`/${slug}`}
+              title={metadata.title}
+            >
+              <p className="flex-1 truncate">
+                {metadata.title}
+                <Shortcut target={keyIdentifier} id={keyIdentifier} />
+              </p>
+              <RelativeDate date={new Date(metadata.published)} />
+            </Link>
+          )
+        })}
       </section>
     </main>
   )

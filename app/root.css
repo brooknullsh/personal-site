@@ -45,18 +45,9 @@
 
 @utility grid-background {
   background-size: 10px 10px;
-
-  @variant dark {
-    background-image:
-      linear-gradient(to right, #a1a1a110 1px, transparent 1px),
-      linear-gradient(to bottom, #a1a1a110 1px, transparent 1px);
-  }
-
-  @variant not-dark {
-    background-image:
-      linear-gradient(to right, #a1a1a125 1px, transparent 1px),
-      linear-gradient(to bottom, #a1a1a125 1px, transparent 1px);
-  }
+  background-image:
+    linear-gradient(to right, #a1a1a110 1px, transparent 1px),
+    linear-gradient(to bottom, #a1a1a110 1px, transparent 1px);
 }
 
 @theme {
@@ -120,7 +111,7 @@ img {
 }
 
 pre {
-  @apply bg-tertiary overflow-x-auto rounded p-4 text-sm;
+  @apply grid-background border-muted/25 overflow-x-auto rounded border bg-transparent p-4 text-sm;
 }
 
 pre > code {

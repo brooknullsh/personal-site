@@ -23,7 +23,7 @@ export const metadata: Metadata = {
 
 function Footer() {
   return (
-    <footer className="*:text-secondary flex justify-between gap-4 *:flex *:items-center *:gap-4">
+    <footer className="flex justify-between gap-4 *:flex *:items-center *:gap-2">
       <Link href="https://github.com/brooknullsh">
         <svg
           className="size-4"
@@ -47,6 +47,10 @@ function Footer() {
         </svg>
         GitHub
       </Link>
+
+      <div className="relative flex-1">
+        <div className="animate-end-to-end bg-secondary absolute size-[5px] rounded-full"></div>
+      </div>
 
       <Link href="https://x.com/brooknullsh">
         <svg
@@ -79,11 +83,6 @@ export default function RootLayout({
         className={`${interFont.variable} container flex min-h-[100svh] flex-col gap-12 py-6 sm:py-12`}
       >
         {children}
-
-        <div className="relative">
-          <div className="animate-end-to-end bg-secondary absolute size-[5px] rounded-full"></div>
-        </div>
-
         <Footer />
         <Analytics />
         <SpeedInsights />

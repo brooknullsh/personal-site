@@ -1,3 +1,5 @@
+import Box from "@/components/box"
+import Loader from "@/components/loader"
 import RelativeDate from "@/components/relative-date"
 import Shortcut from "@/components/shortcut"
 import { getNotes } from "@/lib"
@@ -8,15 +10,24 @@ export default async function Root() {
 
   return (
     <main className="flex flex-grow flex-col gap-12">
-      <header className="flex items-center justify-between">
-        <h1>Brook Nash</h1>
-        <p className="text-muted">Software Engineer</p>
-      </header>
+      <Box>
+        <header className="flex items-center justify-between p-2">
+          <h1>Brook Nash</h1>
+          <p className="text-muted">Software Engineer</p>
+        </header>
+      </Box>
 
-      <div className="flex flex-col">
-        <h2 className="text-2xl font-bold tracking-tighter">Notes</h2>
-        <p className="text-muted">Learnings, code snippets and less</p>
-      </div>
+      <p className="text-center">
+        I'm a Software Engineer currently working full-time on{" "}
+        <strong>very legacy architecture</strong> in Wales, United Kingdom.
+      </p>
+
+      <Box>
+        <div className="p-2">
+          <h2 className="text-4xl font-bold tracking-tighter">Notes</h2>
+          <p className="text-muted">Learnings, code snippets and less</p>
+        </div>
+      </Box>
 
       <section className="flex flex-col gap-6">
         {notes.map(({ metadata, slug }, index) => {
@@ -25,7 +36,7 @@ export default async function Root() {
           return (
             <Link
               key={index}
-              className="group flex"
+              className="group flex items-center gap-2"
               id={keyIdentifier}
               href={`/${slug}`}
               title={metadata.title}
@@ -34,7 +45,9 @@ export default async function Root() {
                 {metadata.title}
                 <Shortcut target={keyIdentifier} id={keyIdentifier} />
               </p>
-              <RelativeDate date={new Date(metadata.published)} />
+              <Loader>
+                <RelativeDate date={new Date(metadata.published)} />
+              </Loader>
             </Link>
           )
         })}

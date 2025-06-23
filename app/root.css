@@ -8,13 +8,13 @@
   --muted: #a1a1a1;
 
   --sh-class: #6fafbd;
-  --sh-identifier: #d5b778;
+  --sh-identifier: #ad9561;
   --sh-sign: #3f3f3f;
-  --sh-property: #bcbec4;
-  --sh-entity: #d5b778;
+  --sh-property: #9598a3;
+  --sh-entity: #ad9561;
   --sh-jsxliterals: #3f3f3f;
   --sh-string: #6aab73;
-  --sh-keyword: #cf8e6d;
+  --sh-keyword: #ab7255;
   --sh-comment: #7a7e85;
 }
 
@@ -65,12 +65,16 @@
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #000000;
+    --background: #0f0f0f;
     --foreground: #ededed;
     --tertiary: #0a0a0a;
 
+    --sh-identifier: #d5b778;
     --sh-sign: #bcbec4;
+    --sh-property: #bcbec4;
+    --sh-entity: #d5b778;
     --sh-jsxliterals: #bcbec4;
+    --sh-keyword: #cf8e6d;
   }
 }
 
@@ -84,7 +88,7 @@ body {
 }
 
 h3 {
-  @apply font-semibold tracking-tighter underline underline-offset-4;
+  @apply text-lg font-semibold tracking-tighter;
 }
 
 ul {
@@ -116,7 +120,7 @@ pre > code {
 
 article {
   h2 {
-    @apply text-xl font-semibold tracking-tighter;
+    @apply text-2xl font-semibold tracking-tighter;
   }
 
   a {

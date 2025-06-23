@@ -1,7 +1,7 @@
 import { ImageResponse } from "next/og"
 import { NextRequest } from "next/server"
 
-const DEFAULT_TITLE = "A place on the internet I can use for my own."
+const DEFAULT_TITLE = "Hello, World!"
 
 export async function GET(req: NextRequest) {
   const title = new URL(req.url).searchParams.get("title") || DEFAULT_TITLE
@@ -9,7 +9,7 @@ export async function GET(req: NextRequest) {
   return new ImageResponse(
     (
       <div tw="h-full p-24 text-white w-full flex flex-grow flex-col bg-black justify-between">
-        <header tw="flex items-center justify-between">
+        <header tw="flex text-xl items-center justify-between">
           <p>Brook Nash</p>
           <p tw="text-neutral-400">Software Engineer</p>
         </header>
@@ -20,7 +20,7 @@ export async function GET(req: NextRequest) {
           </h2>
         </div>
 
-        <p tw="text-blue-400 flex justify-center">brooknullsh.com</p>
+        <p tw="text-blue-400 flex text-xl justify-center">brooknullsh.com</p>
       </div>
     ),
     { width: 1200, height: 630 },

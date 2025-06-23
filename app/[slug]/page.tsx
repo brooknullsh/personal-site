@@ -1,3 +1,5 @@
+import Box from "@/components/box"
+import Loader from "@/components/loader"
 import Shortcut from "@/components/shortcut"
 import { getNotes } from "@/lib"
 import type { Metadata } from "next"
@@ -64,16 +66,20 @@ export default async function Note({
 
   return (
     <main className="flex flex-grow flex-col gap-12">
-      <header className="flex items-center justify-between">
-        <Link className="text-secondary" id="home-btn" href="/">
-          &lsaquo; Home
-          <Shortcut target="q" id="home-btn" />
-        </Link>
-        <p className="text-muted">{publishedDate}</p>
-      </header>
+      <Box>
+        <header className="flex items-center justify-between p-2">
+          <Link className="text-secondary" id="home-btn" href="/">
+            &lsaquo; Home
+            <Loader>
+              <Shortcut target="q" id="home-btn" />
+            </Loader>
+          </Link>
+          <p className="text-muted">{publishedDate}</p>
+        </header>
+      </Box>
 
       <section className="flex flex-col">
-        <h1 className="text-2xl font-bold tracking-tighter">{title}</h1>
+        <h1 className="text-4xl font-bold tracking-tighter">{title}</h1>
         <p className="text-muted">{subtitle}</p>
       </section>
 

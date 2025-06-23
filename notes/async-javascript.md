@@ -1,7 +1,7 @@
 ---
-title: Awaiting A Return Value
+title: Asynchronous JavaScript
 subtitle: An idiot's overview of the Event Loop, Web APIs and queues in JavaScript.
-published: 2025-06-06
+published: 2025-06-22
 ---
 
 Primarily, JavaScript is a single-threaded and synchronous language but there
@@ -112,13 +112,12 @@ Boo
 Awaiting is the trigger for the promise to be placed on the MQ once some checks
 have completed, like:
 
-1. Execution pause: The asynchronous function pauses on the awaited line
-(non-blocking)
-2. Continue: Due to the above being non-blocking, the synchronous code following
-the asynchronous function runs as normal
-3. Resolution: Waiting on Resolve or Reject
-4. Complete: Event loop picks up the task and returns execution (value or thrown
-error) to the awaited line
+1. The asynchronous function pauses on the awaited line (non-blocking)
+2. Due to the above being non-blocking, the synchronous code following the
+asynchronous function runs as normal
+3. Wait on Resolve or Reject
+4. Event loop picks up the task and returns execution (value or thrown error) to
+the awaited line
 
 ```js
 async function veryExpensiveFunction() {

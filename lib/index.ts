@@ -25,5 +25,9 @@ export async function getNotes() {
     }
   })
 
-  return await Promise.all(notes)
+  return (await Promise.all(notes)).sort(
+    (a, b) =>
+      new Date(b.metadata.published).getTime() -
+      new Date(a.metadata.published).getTime(),
+  )
 }

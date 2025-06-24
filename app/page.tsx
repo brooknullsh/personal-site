@@ -29,14 +29,14 @@ export default async function Root() {
         </div>
       </Box>
 
-      <section className="flex flex-col gap-6">
+      <section className="flex flex-col gap-2">
         {notes.map(({ metadata, slug }, index) => {
           const keyIdentifier = (index + 1).toString()
 
           return (
             <Link
               key={index}
-              className="group flex items-center gap-2"
+              className="hover:border-corners flex items-center gap-2 p-2"
               id={keyIdentifier}
               href={`/${slug}`}
               title={metadata.title}

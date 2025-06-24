@@ -24,7 +24,10 @@ export const metadata: Metadata = {
 function Footer() {
   return (
     <footer className="flex justify-between gap-4 *:flex *:items-center *:gap-2">
-      <Link href="https://github.com/brooknullsh">
+      <Link
+        className="hover:border-corners p-2"
+        href="https://github.com/brooknullsh"
+      >
         <svg
           className="size-4"
           width="44"
@@ -52,7 +55,10 @@ function Footer() {
         <div className="animate-end-to-end bg-secondary absolute size-[5px] rounded-full"></div>
       </div>
 
-      <Link href="https://x.com/brooknullsh">
+      <Link
+        className="hover:border-corners p-2"
+        href="https://x.com/brooknullsh"
+      >
         <svg
           className="size-4"
           width="44"

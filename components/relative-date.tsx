@@ -1,6 +1,6 @@
 "use client"
 
-export default function RelativeDate({ date }: { date: Date }) {
+export default function RelativeDate({ date }: Readonly<{ date: Date }>) {
   const diffInSeconds = Math.round((date.getTime() - Date.now()) / 1000)
 
   const levels = [
@@ -29,7 +29,7 @@ export default function RelativeDate({ date }: { date: Date }) {
   const rtf = new Intl.RelativeTimeFormat("en")
 
   return (
-    <p className="text-muted transition-colors group-hover:text-inherit">
+    <p className="text-muted">
       {rtf.format(Math.ceil(diffInSeconds / level), keys[closest])}
     </p>
   )

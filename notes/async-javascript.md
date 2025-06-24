@@ -36,7 +36,7 @@ long-running task, all other processes wait which includes any interactivity.
 
 ```js
 const handleButtonClick() {
-  veryExpensiveFunction();
+  veryExpensiveFunction()
 }
 ```
 
@@ -52,13 +52,13 @@ On the other hand, non-blocking code is code that doesn't need to resolve or
 complete before the proceeding lines can be executed.
 
 ```js
-console.log("Foo");
+console.log("Foo")
 
 setTimeout(() => {
-  console.log("Boo");
+  console.log("Boo")
 }, 0)
 
-console.log("Bar");
+console.log("Bar")
 ```
 
 Here, the callback will eventually make it's way back from the Web API after a
@@ -81,17 +81,17 @@ Microtask Queue which has priority over the TQ but similarly is only processed
 by the Event Loop when the Call Stack is empty.
 
 ```js
-console.log("Foo");
+console.log("Foo")
 
 setTimeout(() => {
-  console.log("Boo");
+  console.log("Boo")
 }, 0);
 
 Promise.resolve("has resolved").then((value) => {
-  console.log("Far", value);
+  console.log("Far", value)
 });
 
-console.log("Bar");
+console.log("Bar")
 ```
 
 ![Pinky Promise](https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExbjRmMnN0NGN5Y3oxbGw5eHZsMTZsN2puanBxMDlhb3A1YXJseDFhaCZlcD12MV9naWZzX3NlYXJjaCZjdD1n/Cu7tfLe1edy3HE7JfC/giphy.gif)
@@ -121,19 +121,19 @@ the awaited line
 
 ```js
 async function veryExpensiveFunction() {
-  console.log("Boo");
+  console.log("Boo")
   try {
-    const response = await fetch("https://google.com");
-    console.log(response);
+    const response = await fetch("https://google.com")
+    console.log(response)
   } catch (error) {
     /* ... */
   }
-  console.log("Far");
+  console.log("Far")
 }
 
-console.log("Foo");
-veryExpensiveFunction();
-console.log("Bar");
+console.log("Foo")
+veryExpensiveFunction()
+console.log("Bar")
 ```
 
 Although there's more code involved, the principle remains the same as the

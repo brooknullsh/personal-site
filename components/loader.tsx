@@ -2,7 +2,9 @@
 
 import { useLinkStatus } from "next/link"
 
-export default function Loader({ children }: { children: React.ReactNode }) {
+export default function Loader({
+  children,
+}: Readonly<{ children: React.ReactNode }>) {
   const { pending } = useLinkStatus()
 
   return pending ? (

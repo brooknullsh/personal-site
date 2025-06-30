@@ -14,9 +14,9 @@ examples of JavaScript utilising asynchronous code around a single thread.
 4. The Event Loop takes the first callback from the TQ, putting it on the
 Call Stack to be executed
 
-**NOTE:** The Event Loop will take the callback from the queue once the Call
-Stack is empty, meaning long-running synchronous tasks left on the Call Stack
-will defer the callback execution
+The Event Loop will take the callback from the queue once the Call Stack is
+empty, meaning long-running synchronous tasks left on the Call Stack will defer
+the callback execution
 
 ## Web APIs
 
@@ -62,9 +62,9 @@ console.log("Bar")
 ```
 
 Here, the callback will eventually make it's way back from the Web API after a
-swift 0 second wait and land on the Task Queue. But, referring back to the
-above, the Event Loop will not read from the Task Queue until the Call Stack is
-clear so we see the following:
+swift 0 second wait and land on the TQ. But, referring back to the above, the
+Event Loop will not read from the TQ until the Call Stack is clear so we see the
+following:
 
 ```txt
 Foo
@@ -76,9 +76,9 @@ Boo
 
 Setting an immediately returning callback within one of these interval or time
 out functions is (hopefully) a thing of the past because a promise can fit right
-in it's place. Similar to the Task Queue, promises reside on another, the
-Microtask Queue which has priority over the TQ but similarly is only processed
-by the Event Loop when the Call Stack is empty.
+in it's place. Similar to the TQ, promises reside on another, the Microtask
+Queue which has priority over the TQ but similarly is only processed by the
+Event Loop when the Call Stack is empty.
 
 ```js
 console.log("Foo")

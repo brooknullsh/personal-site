@@ -1,7 +1,7 @@
 ---
 title: Rust Memory Model
 subtitle: An idiot's overview of how Rust handles it's memory.
-published: 2025-06-28
+published: 2025-06-30
 ---
 
 Rust's memory model is designed around ownership, borrowing and lifetimes to
@@ -42,13 +42,13 @@ reference, leaving the original owner intact. You are then at the mercy of the
 "Borrow Checker" which is a static analysis tool to ensure all references are
 valid at compile-time.
 
+![Borrowing](https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExZnN3bmwyYXZneDllNDkwMHN4bWQ4cnM1amZmMjNvcWVwNzJzeWpqdyZlcD12MV9naWZzX3NlYXJjaCZjdD1n/xca7LsEzR9M4ByAUCy/giphy.gif)
+
 ### Borrow Checker
 
 Although mainly covered within the context of borrowing, the Borrow Checker also
-covers ownership as an extension of memory initialisation.
-
-Here is an example of a value not living long enough to have a reference to it
-live on elsewhere.
+covers ownership as an extension of memory initialisation. Here is an example of
+a value not living long enough to have a reference to it live on elsewhere.
 
 ```rust
 fn main() {

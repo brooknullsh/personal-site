@@ -18,8 +18,8 @@ export default async function Root() {
       </Box>
 
       <p className="text-center">
-        I'm a Software Engineer currently working full-time on{" "}
-        <strong>very legacy architecture</strong> in Wales, United Kingdom.
+        Currently working on <strong>very legacy architecture</strong> in Wales,
+        United Kingdom.
       </p>
 
       <Box>

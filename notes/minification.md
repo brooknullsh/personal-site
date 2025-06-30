@@ -1,6 +1,6 @@
 ---
 title: Minifying JavaScript For The Browser
-subtitle: Optimising the size of JavaScript files sent to the client.
+subtitle: An idiot's overview of optimising JavaScript files sent to the client.
 published: 2025-06-24
 ---
 

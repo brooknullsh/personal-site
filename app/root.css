@@ -122,11 +122,11 @@ ol {
 }
 
 img {
-  @apply w-full rounded;
+  @apply w-full;
 }
 
 pre {
-  @apply grid-background border-muted/25 overflow-x-auto rounded border bg-transparent p-4 text-sm;
+  @apply grid-background border-muted/25 overflow-x-auto border bg-transparent p-4 text-sm;
 }
 
 pre > code {
@@ -147,5 +147,9 @@ article {
 
   a {
     @apply text-secondary after:content-["_\2197"];
+  }
+
+  blockquote {
+    @apply text-muted text-end;
   }
 }

@@ -37,7 +37,8 @@ owner. That single owner is directly responsible for the resource living or
 dying.
 
 ```rs
-fn main() {
+fn main()
+{
   {
     let foo = String::from("bar");
   }
@@ -53,7 +54,8 @@ the data's lifetime. An example of data having one owner is attempting to use a
 variable after ownership has been reassigned.
 
 ```rs
-fn main() {
+fn main()
+{
   let foo = String::from("bar");
   let bar = foo;
 
@@ -87,13 +89,16 @@ file system once dropped.
 ```rs
 struct Foo;
 
-impl Drop for Foo {
-  fn drop(&mut self) {
+impl Drop for Foo
+{
+  fn drop(&mut self)
+  {
     println!("dropped");
   }
 }
 
-fn main() {
+fn main()
+{
   {
     let foo = Foo;
   }
@@ -120,7 +125,8 @@ longer than said scope, which I read from [MIT's Rust
 book](https://web.mit.edu/rust-lang_v1.25/arch/amd64_ubuntu1404/share/doc/rust/html/book/first-edition/references-and-borrowing.html#borrowing).
 
 ```rs
-fn main() {
+fn main()
+{
   let foo: &i32;
 
   {
@@ -136,8 +142,47 @@ fn main() {
 error[E0597]: `bar` does not live long enough
 ```
 
+## Lifetimes
+
+Lifetimes enable the Rust compiler to check the validity of borrows a.k.a when a
+resource is created, to when it's dropped. Similar to what's mentioned above, a
+borrow is only valid if it's lifetime is less than or equal to it's lender's.
+
+In the case where a resource's lifetime can't be determined by the compiler, it
+can be explicitly specified. Where we may declare a reference lifetime to last
+as long as the function it's returned from, the data it's referencing can't be
+dropped once out of scope.
+
+```rs
+fn foo<'l>() -> &'l String
+{
+  &String::from("bar")
+}
+
+fn main()
+{
+  foo();
+}
+```
+
+```txt
+error[E0515]: cannot return reference to temporary value
+```
+
+To be clear here, it's simple to say that the lifetime of the entire return
+value is attached to the function. While the reference may last that long, the
+data is dropped at the end of the function's scope, and the function itself
+lasts until the end of main's scope.
+
 ## Sources
 
+- [Rust Book: RAII](https://doc.rust-lang.org/rust-by-example/scope/raii.html)
+- [Rust Book:
+  Ownership](https://doc.rust-lang.org/rust-by-example/scope/move.html)
+- [Rust Book:
+  Borrowing](https://doc.rust-lang.org/rust-by-example/scope/borrow.html)
+- [Rust Book:
+  Lifetimes](https://doc.rust-lang.org/rust-by-example/scope/lifetime.html)
 - [Why Discord moved away from garbage
   collection](https://discord.com/blog/why-discord-is-switching-from-go-to-rust)
 - [Comparing Rust and C++

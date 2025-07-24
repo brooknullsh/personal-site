@@ -8,19 +8,22 @@ import Link from "next/link"
 import { notFound } from "next/navigation"
 import { highlight } from "sugar-high"
 
-export async function generateStaticParams() {
+export async function generateStaticParams()
+{
   const notes = await getNotes()
   return notes.map(({ slug }) => ({ slug }))
 }
 
 export async function generateMetadata({
   params,
-}: Readonly<{ params: Promise<{ slug: string }> }>): Promise<Metadata> {
+}: Readonly<{ params: Promise<{ slug: string }> }>): Promise<Metadata>
+{
   const { slug } = await params
   const notes = await getNotes()
 
   const noteBySlug = notes.find((note) => note.slug === slug)
-  if (!noteBySlug) {
+  if (!noteBySlug)
+  {
     notFound()
   }
 
@@ -39,8 +42,10 @@ export async function generateMetadata({
 function CodeBlock({
   children,
   ...props
-}: Readonly<{ children: string; className: string }>) {
-  if (props.className?.endsWith("txt")) {
+}: Readonly<{ children: string; className: string }>)
+{
+  if (props.className?.endsWith("txt"))
+  {
     return <code dangerouslySetInnerHTML={{ __html: children }} {...props} />
   }
 
@@ -50,12 +55,14 @@ function CodeBlock({
 
 export default async function Note({
   params,
-}: Readonly<{ params: Promise<{ slug: string }> }>) {
+}: Readonly<{ params: Promise<{ slug: string }> }>)
+{
   const { slug } = await params
   const notes = await getNotes()
 
   const noteBySlug = notes.find((note) => note.slug === slug)
-  if (!noteBySlug) {
+  if (!noteBySlug)
+  {
     notFound()
   }
 

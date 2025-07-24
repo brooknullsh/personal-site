@@ -1,7 +1,9 @@
 {
-  "semi": false,
   "plugins": [
     "@trivago/prettier-plugin-sort-imports",
-    "prettier-plugin-tailwindcss"
-  ]
+    "prettier-plugin-tailwindcss",
+    "prettier-plugin-brace-style"
+  ],
+  "semi": false,
+  "braceStyle": "allman"
 }

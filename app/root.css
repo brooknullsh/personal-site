@@ -19,7 +19,7 @@
 }
 
 /*
-  TailwindV4 no longer has a "container" class with responsive padding
+  TailwindV4 no longer has a container class with responsive padding
   https://github.com/tailwindlabs/tailwindcss/issues/13129#issuecomment-2474279153
 */
 @utility container {

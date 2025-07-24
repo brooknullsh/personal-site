@@ -5,7 +5,8 @@ import Shortcut from "@/components/shortcut"
 import { getNotes } from "@/lib"
 import Link from "next/link"
 
-export default async function Root() {
+export default async function Root()
+{
   const notes = await getNotes()
 
   return (
@@ -30,7 +31,8 @@ export default async function Root() {
       </Box>
 
       <section className="flex flex-col gap-2">
-        {notes.map(({ metadata, slug }, index) => {
+        {notes.map(({ metadata, slug }, index) =>
+        {
           const keyIdentifier = (index + 1).toString()
 
           return (

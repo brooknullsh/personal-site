@@ -3,7 +3,8 @@ import Loader from "@/components/loader"
 import Shortcut from "@/components/shortcut"
 import Link from "next/link"
 
-export default function NotFound() {
+export default function NotFound()
+{
   return (
     <main className="flex flex-grow flex-col gap-12">
       <Box>

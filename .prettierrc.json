@@ -1,9 +1,10 @@
 {
-  "plugins": [
-    "@trivago/prettier-plugin-sort-imports",
-    "prettier-plugin-tailwindcss",
-    "prettier-plugin-brace-style"
-  ],
-  "semi": false,
-  "braceStyle": "allman"
+    "plugins": [
+        "@trivago/prettier-plugin-sort-imports",
+        "prettier-plugin-tailwindcss",
+        "prettier-plugin-brace-style"
+    ],
+    "tabWidth": 4,
+    "semi": false,
+    "braceStyle": "allman"
 }

@@ -39,11 +39,11 @@ dying.
 ```rs
 fn main()
 {
-  {
-    let foo = String::from("bar");
-  }
+    {
+        let foo = String::from("bar");
+    }
 
-  // "foo" has been released
+    // "foo" has been released
 }
 ```
 
@@ -56,10 +56,10 @@ variable after ownership has been reassigned.
 ```rs
 fn main()
 {
-  let foo = String::from("bar");
-  let bar = foo;
+    let foo = String::from("bar");
+    let bar = foo;
 
-  println!("{foo}");
+    println!("{foo}");
 }
 ```
 
@@ -91,19 +91,19 @@ struct Foo;
 
 impl Drop for Foo
 {
-  fn drop(&mut self)
-  {
-    println!("dropped");
-  }
+    fn drop(&mut self)
+    {
+        println!("dropped");
+    }
 }
 
 fn main()
 {
-  {
-    let foo = Foo;
-  }
+    {
+        let foo = Foo;
+    }
 
-  // "foo" has been dropped
+    // "foo" has been dropped
 }
 ```
 
@@ -127,14 +127,14 @@ book](https://web.mit.edu/rust-lang_v1.25/arch/amd64_ubuntu1404/share/doc/rust/h
 ```rs
 fn main()
 {
-  let foo: &i32;
+    let foo: &i32;
 
-  {
-    let bar = 69;
-    foo = &bar;
-  }
+    {
+        let bar = 69;
+        foo = &bar;
+    }
 
-  println!("{}", foo);
+    println!("{}", foo);
 }
 ```
 
@@ -156,12 +156,12 @@ dropped once out of scope.
 ```rs
 fn foo<'l>() -> &'l String
 {
-  &String::from("bar")
+    &String::from("bar")
 }
 
 fn main()
 {
-  foo();
+    foo();
 }
 ```
 

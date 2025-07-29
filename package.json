@@ -1,32 +1,32 @@
 {
-    "name": "personal-site",
-    "version": "0.1.0",
-    "private": true,
-    "scripts": {
-        "predev": "open http://localhost:3000",
-        "dev": "next dev --turbopack",
-        "build": "next build",
-        "prestart": "open http://localhost:3000",
-        "start": "next start"
-    },
-    "dependencies": {
-        "@vercel/analytics": "^1.5.0",
-        "@vercel/speed-insights": "^1.2.0",
-        "next": "15.3.3",
-        "react": "^19.0.0",
-        "react-dom": "^19.0.0"
-    },
-    "devDependencies": {
-        "@tailwindcss/postcss": "^4",
-        "@trivago/prettier-plugin-sort-imports": "^5.2.2",
-        "@types/node": "^20",
-        "@types/react": "^19",
-        "@types/react-dom": "^19",
-        "next-mdx-remote": "^5.0.0",
-        "prettier-plugin-brace-style": "^0.8.0",
-        "prettier-plugin-tailwindcss": "^0.6.12",
-        "sugar-high": "^0.9.3",
-        "tailwindcss": "^4",
-        "typescript": "^5"
-    }
+  "name": "personal-site",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "predev": "open http://localhost:3000",
+    "dev": "next dev --turbopack",
+    "build": "next build",
+    "prestart": "open http://localhost:3000",
+    "start": "next start"
+  },
+  "dependencies": {
+    "@vercel/analytics": "^1.5.0",
+    "@vercel/speed-insights": "^1.2.0",
+    "next": "15.3.3",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0"
+  },
+  "devDependencies": {
+    "@tailwindcss/postcss": "^4",
+    "@trivago/prettier-plugin-sort-imports": "^5.2.2",
+    "@types/node": "^20",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "next-mdx-remote": "^5.0.0",
+    "prettier-plugin-brace-style": "^0.8.0",
+    "prettier-plugin-tailwindcss": "^0.6.12",
+    "sugar-high": "^0.9.3",
+    "tailwindcss": "^4",
+    "typescript": "^5"
+  }
 }

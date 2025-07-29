@@ -3,8 +3,7 @@ import { NextRequest } from "next/server"
 
 const DEFAULT_TITLE = "Hello, World!"
 
-export async function GET({ url }: NextRequest)
-{
+export async function GET({ url }: NextRequest) {
   const title = new URL(url).searchParams.get("title") || DEFAULT_TITLE
 
   return new ImageResponse(

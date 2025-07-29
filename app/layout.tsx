@@ -21,8 +21,7 @@ export const metadata: Metadata = {
   },
 }
 
-function Footer()
-{
+function Footer() {
   return (
     <footer className="flex justify-between gap-4 *:flex *:items-center *:gap-2">
       <Link
@@ -83,8 +82,7 @@ function Footer()
 
 export default function RootLayout({
   children,
-}: Readonly<{ children: React.ReactNode }>)
-{
+}: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="en">
       <body

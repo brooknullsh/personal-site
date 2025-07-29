@@ -1,7 +1,6 @@
 export default function Box({
   children,
-}: Readonly<{ children: React.ReactNode }>)
-{
+}: Readonly<{ children: React.ReactNode }>) {
   return (
     <div className="border-muted/25 grid-background relative border border-dashed bg-transparent">
       <svg

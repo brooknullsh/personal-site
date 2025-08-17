@@ -3,5 +3,6 @@
     "@trivago/prettier-plugin-sort-imports",
     "prettier-plugin-tailwindcss"
   ],
-  "semi": false
+  "semi": false,
+  "arrowParens": "avoid"
 }

@@ -7,19 +7,19 @@
   --secondary: #51a2ff;
   --muted: #a1a1a1;
 
-  --sh-class: #6fafbd;
-  --sh-identifier: #ad9561;
-  --sh-sign: #3f3f3f;
-  --sh-property: #9598a3;
-  --sh-entity: #ad9561;
-  --sh-jsxliterals: #3f3f3f;
-  --sh-string: #6aab73;
-  --sh-keyword: #ab7255;
-  --sh-comment: #7a7e85;
+  --sh-sign: #a1a6ab;
+  --sh-class: #ff7b72;
+  --sh-entity: #b591db;
+  --sh-string: #86aecf;
+  --sh-comment: #8b949e;
+  --sh-keyword: #ff7b72;
+  --sh-property: #a1a6ab;
+  --sh-identifier: #b591db;
+  --sh-jsxliterals: #a1a6ab;
 }
 
 /*
-  TailwindV4 no longer has a container class with responsive padding
+  TailwindV4 no longer has a container class with responsive padding.
   https://github.com/tailwindlabs/tailwindcss/issues/13129#issuecomment-2474279153
 */
 @utility container {
@@ -88,15 +88,25 @@
 @media (prefers-color-scheme: dark) {
   :root {
     --background: #0f0f0f;
-    --foreground: #ededed;
+    --foreground: #dddddd;
     --tertiary: #0a0a0a;
 
-    --sh-identifier: #d5b778;
-    --sh-sign: #bcbec4;
-    --sh-property: #bcbec4;
-    --sh-entity: #d5b778;
-    --sh-jsxliterals: #bcbec4;
-    --sh-keyword: #cf8e6d;
+    --sh-sign: #e6edf3;
+    --sh-class: #ff7b72;
+    --sh-entity: #d2a8ff;
+    --sh-string: #a5d6ff;
+    --sh-comment: #8b949e;
+    --sh-keyword: #ff7b72;
+    --sh-property: #e6edf3;
+    --sh-identifier: #d2a8ff;
+    --sh-jsxliterals: #e6edf3;
+  }
+
+  strong,
+  h1,
+  h2,
+  h3 {
+    @apply text-white;
   }
 }
 

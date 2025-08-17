@@ -23,7 +23,7 @@ export default function RelativeDate({ date }: Readonly<{ date: Date }>) {
     "year",
   ]
 
-  const closest = levels.findIndex((level) => level > Math.abs(diffInSeconds))
+  const closest = levels.findIndex(level => level > Math.abs(diffInSeconds))
   const level = closest ? levels[closest - 1] : 1
 
   const rtf = new Intl.RelativeTimeFormat("en")

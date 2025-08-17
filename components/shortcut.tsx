@@ -7,9 +7,7 @@ export default function Shortcut({
   id,
 }: Readonly<{ target: string; id: string }>) {
   function handler(event: KeyboardEvent) {
-    if (event.key === target) {
-      document.getElementById(id)?.click()
-    }
+    if (event.key === target) document.getElementById(id)?.click()
   }
 
   useEffect(() => {
@@ -19,7 +17,7 @@ export default function Shortcut({
 
   return (
     <span className="text-muted hidden text-xs md:inline">
-      &nbsp; &lt;{target}&gt; &nbsp;
+      &nbsp; [{target}] &nbsp;
     </span>
   )
 }

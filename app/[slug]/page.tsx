@@ -19,17 +19,15 @@ export async function generateMetadata({
   const { slug } = await params
   const notes = await getNotes()
 
-  const noteBySlug = notes.find((note) => note.slug === slug)
-  if (!noteBySlug) {
-    notFound()
-  }
+  const noteBySlug = notes.find(note => note.slug === slug)
+  if (!noteBySlug) notFound()
 
   const { title, subtitle } = noteBySlug.metadata
   return {
     title,
     description: subtitle,
     openGraph: {
-      title: title,
+      title,
       description: subtitle,
       images: [{ url: `/og?title=${encodeURIComponent(title)}` }],
     },
@@ -54,10 +52,8 @@ export default async function Note({
   const { slug } = await params
   const notes = await getNotes()
 
-  const noteBySlug = notes.find((note) => note.slug === slug)
-  if (!noteBySlug) {
-    notFound()
-  }
+  const noteBySlug = notes.find(note => note.slug === slug)
+  if (!noteBySlug) notFound()
 
   const { title, subtitle, published } = noteBySlug.metadata
   const publishedDate = new Date(published).toLocaleDateString("en-gb", {

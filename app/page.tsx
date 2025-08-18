@@ -22,6 +22,32 @@ export default async function Root() {
         United Kingdom.
       </p>
 
+      <div className="flex justify-center">
+        <svg
+          width="400"
+          height="200"
+          viewBox="190 0 400 200"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            className="stroke-foreground"
+            d="M 343 160 L 238 40 L 538 40 L 538 40 L 493 100"
+            strokeWidth="3"
+            fill="none"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          />
+        </svg>
+      </div>
+
+      <p className="text-muted text-center text-sm">
+        Signature trace from{" "}
+        <a className="text-secondary" href="https://signature.cnrad.dev">
+          cnrad.dev
+        </a>
+        .
+      </p>
+
       <Box>
         <div className="p-2">
           <h2 className="text-4xl font-bold tracking-tighter">Notes</h2>

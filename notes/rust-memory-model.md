@@ -166,17 +166,3 @@ To be clear here, it's simple to say that the lifetime of the entire return
 value is attached to the function. While the reference may last that long, the
 data is dropped at the end of the function's scope, and the function itself
 lasts until the end of main's scope.
-
-## Sources
-
-- [Rust Book: RAII](https://doc.rust-lang.org/rust-by-example/scope/raii.html)
-- [Rust Book:
-  Ownership](https://doc.rust-lang.org/rust-by-example/scope/move.html)
-- [Rust Book:
-  Borrowing](https://doc.rust-lang.org/rust-by-example/scope/borrow.html)
-- [Rust Book:
-  Lifetimes](https://doc.rust-lang.org/rust-by-example/scope/lifetime.html)
-- [Why Discord moved away from garbage
-  collection](https://discord.com/blog/why-discord-is-switching-from-go-to-rust)
-- [Comparing Rust and C++
-  RAII](https://educatedguesswork.org/posts/memory-management-4/)

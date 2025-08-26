@@ -1,11 +1,14 @@
 import Box from "@/components/box"
+import CommitHistory from "@/components/commit-history"
 import Loader from "@/components/loader"
 import Shortcut from "@/components/shortcut"
+import Spinner from "@/components/spinner"
 import { getNotes } from "@/lib"
 import type { Metadata } from "next"
 import { MDXRemote } from "next-mdx-remote/rsc"
 import Link from "next/link"
 import { notFound } from "next/navigation"
+import { Suspense } from "react"
 import { highlight } from "sugar-high"
 
 export async function generateStaticParams() {
@@ -84,6 +87,17 @@ export default async function Note({
           source={noteBySlug.markdown}
           components={{ code: CodeBlock }}
         />
+
+        <h2>History</h2>
+        <Suspense
+          fallback={
+            <p>
+              Finding commits for <strong>{slug}</strong> <Spinner />
+            </p>
+          }
+        >
+          <CommitHistory target={slug} />
+        </Suspense>
       </article>
     </main>
   )

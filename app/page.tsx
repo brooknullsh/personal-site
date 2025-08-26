@@ -22,7 +22,7 @@ export default async function Root() {
         United Kingdom.
       </p>
 
-      <div className="flex justify-center">
+      <div className="flex flex-col items-center justify-center">
         <svg
           width="400"
           height="200"
@@ -38,15 +38,13 @@ export default async function Root() {
             strokeLinejoin="round"
           />
         </svg>
-      </div>
 
-      <p className="text-muted text-center text-sm">
-        Signature trace from{" "}
-        <a className="text-secondary" href="https://signature.cnrad.dev">
-          cnrad.dev
-        </a>
-        .
-      </p>
+        <p className="text-muted text-center text-sm">
+          <a className="text-secondary" href="https://signature.cnrad.dev">
+            cnrad.dev
+          </a>
+        </p>
+      </div>
 
       <Box>
         <div className="p-2">

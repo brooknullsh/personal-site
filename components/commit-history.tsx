@@ -11,10 +11,8 @@ async function fetchCommits(target: string) {
   const json: CommitResponse[] = await response.json()
 
   return json
-    .map(({ commit }) => ({
-      message: commit.message || "unknown commit",
-    }))
-    .filter(({ message }) => targetRegex(target).test(message))
+    .map(({ commit }) => commit.message || "unknown commit")
+    .filter(message => targetRegex(target).test(message))
 }
 
 export default async function CommitHistory({
@@ -25,7 +23,7 @@ export default async function CommitHistory({
   return (
     <ul className="list-none">
       {commits.length ? (
-        commits.map(({ message }) => (
+        commits.map(message => (
           <li key={message} className="relative flex items-center gap-4">
             <span className="absolute size-2 animate-ping rounded-full bg-emerald-400"></span>
             <span className="relative size-2 rounded-full bg-emerald-400"></span>
